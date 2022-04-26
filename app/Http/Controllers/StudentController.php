@@ -87,11 +87,11 @@ class StudentController extends AppBaseController
     }
 
     /**
-     * @param Request $request
+     * @param UpdateStudentRequest $request
      * @param $id
      * @return Application|RedirectResponse|Redirector
      */
-    public function update(Request $request, $id)
+    public function update(UpdateStudentRequest $request, $id)
     {
         $input = $request->all();
 

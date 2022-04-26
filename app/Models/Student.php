@@ -64,7 +64,7 @@ class Student extends Authenticatable implements HasMedia
         'first_name' => 'required',
         'father_name' => 'required',
         'last_name' => 'required',
-        'email' => 'required|email',
+        'email' => 'required|email|unique:students,email',
         'institute_name' => 'required',
         'department' => 'required',
         'semester' => 'required',

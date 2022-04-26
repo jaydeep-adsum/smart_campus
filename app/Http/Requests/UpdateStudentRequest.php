@@ -26,7 +26,7 @@ class UpdateStudentRequest extends FormRequest
     public function rules()
     {
         $rules = Student::$rules;
-//        $rules['email'] = Rule::unique('users')->ignore($id);
+        $rules['email'] = Rule::unique('students')->ignore($this->id);
 
         return $rules;
     }
