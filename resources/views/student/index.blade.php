@@ -28,9 +28,9 @@
         </div>
     </div>
 @endsection
-@push('scripts')
+@section('scripts')
     <script>
         let studentUrl = "{{route('student')}}";
     </script>
     <script src="{{asset('public/assets/js/student/student.js')}}"></script>
-@endpush
+@endsection

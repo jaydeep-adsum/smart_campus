@@ -55,7 +55,7 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
+            width: calc(100% - 260px);
         }
         input[type='file'] {
             display:none;
@@ -82,6 +82,15 @@
             position: sticky;
             width: 100%;
         }
+        .alert{
+            background: #D94B09 !important;
+            border-color: #D94B09 !important;
+            font-weight: bold;
+        }
+        .mandatory{
+            color: #ff0000;
+            font-weight: bold;
+        }
     </style>
     @yield("extra_css")
 </head>
@@ -107,12 +116,12 @@
             <div class="container-fluid px-5">
                 @yield('content')
             </div>
-            <div class="footer bg-white p-3">
-                <div class="text-dark">
-                    <span class="">All Rights Reserved ©2022</span>
-                    <a href="#" target="_blank" class="text-gray-800 text-hover-primary">Smart Campus</a>
-                </div>
-            </div>
+{{--            <div class="footer bg-white p-3">--}}
+{{--                <div class="text-dark">--}}
+{{--                    <span class="">All Rights Reserved ©2022</span>--}}
+{{--                    <a href="#" target="_blank" class="text-gray-800 text-hover-primary">Smart Campus</a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </section>
     </div>
     <aside class="control-sidebar control-sidebar-dark">
@@ -146,9 +155,11 @@
 <script src="{{asset('public/assets/izitoast/js/iziToast.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('public/assets/js/pnotify.custom.min.js')}}"></script>
 <script>
-    let utilsScript = "{{asset('public/assets/js/inttel/js/utils.min.js')}}";
+    $(document).ready(function () {
+        $('.alert').delay(3000).slideUp(300);
+    });
 </script>
-@stack('scripts')
+@yield('scripts')
 {{-- <script src="{{asset('public/vendor/datatables/buttons.server-side.js')}}"></script> --}}
 </body>
 

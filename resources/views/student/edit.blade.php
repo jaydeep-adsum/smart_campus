@@ -1,80 +1,83 @@
 @extends('dashboard')
 @section('title')
-    Add Students
+    Edit Students
 @endsection
 @section('content')
     <div class="row">
+        <div class="col-md-12">
+            @if ($errors->any())
+                <div class="alert alert-danger pb-0 pt-0">
+                    <ul class="j-error-padding list-unstyled p-2 mb-0">
+                        <li>{{ $errors->first() }}</li>
+                    </ul>
+                </div>
+            @endif
         <div class="col-md-12">
             <div class="card card-default">
                 <div class="card-body">
                     {{ Form::model($student, ['route' => ['student.update',$student->id], 'files' => 'true', 'id' => 'addCompanyForm']) }}
                     <div class="row">
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('First Name').':') }}
+                            {{ Form::label(__('First Name').':') }} <span class="mandatory">*</span>
                             {{ Form::text('first_name', null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Father Name').':') }}
+                            {{ Form::label(__('Father Name').':') }} <span class="mandatory">*</span>
                             {{ Form::text('father_name', null, ['class' => 'form-control', 'required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Last Name').':') }}
+                            {{ Form::label(__('Last Name').':') }} <span class="mandatory">*</span>
                             {{ Form::text('last_name', null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Email').':') }}
+                            {{ Form::label(__('Email').':') }} <span class="mandatory">*</span>
                             {{ Form::email('email', null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('City').':') }}
+                            {{ Form::label(__('City').':') }} <span class="mandatory">*</span>
                             {{ Form::text('city', null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('State').':') }}
+                            {{ Form::label(__('State').':') }} <span class="mandatory">*</span>
                             {{ Form::text('state', null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Institute Name').':') }}
+                            {{ Form::label(__('Institute Name').':') }} <span class="mandatory">*</span>
                             {{ Form::text('institute_name', null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Department/Stream').':') }}
+                            {{ Form::label(__('Department/Stream').':') }} <span class="mandatory">*</span>
                             {{ Form::text('department', null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Semester').':') }}
+                            {{ Form::label(__('Semester').':') }} <span class="mandatory">*</span>
                             {{ Form::text('semester', null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('DOB').':') }}
-                            {{ Form::text('dob', null, ['class' => 'form-control','required']) }}
+                            {{ Form::label(__('DOB').':') }} <span class="mandatory">*</span>
+                            {{ Form::text('dob', null, ['class' => 'form-control datepicker','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Student ID').':') }}
+                            {{ Form::label(__('Student ID').':') }} <span class="mandatory">*</span>
                             {{ Form::text('student_id', null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Year').':') }}
-                            {{ Form::text('year', null, ['class' => 'form-control','required']) }}
+                            {{ Form::label(__('Year').':') }} <span class="mandatory">*</span>
+                            {!! Form::selectRange('year', 1900, \Carbon\Carbon::now()->format('Y'),null,['class' => 'form-control','required','id'=>'year']) !!}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{--                            {{ Form::label(__('Mobile No').':' }}--}}
-                            <label for="Mobile No" class="w-100">Mobile No</label>
-                            {{ Form::tel('mobile_no', null, ['class' => 'form-control w-100','required','id'=>'phoneNumber']) }}
-                            {{ Form::hidden('region_code',null,['id'=>'prefix_code']) }}
-                            <br>
-                            <span id="valid-msg" class="hide">✓ &nbsp; Valid</span>
-                            <span id="error-msg" class="hide"></span>
+                            {{ Form::label(__('Mobile No').':') }} <span class="mandatory">*</span>
+                            {{ Form::number('mobile_no', null, ['class' => 'form-control','pattern'=>"[1-9]{1}[0-9]{9}"]) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Emergency Mobile No').':') }}
                             {{ Form::number('emergency_contact', null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Gender').':') }}
+                            {{ Form::label(__('Gender').':') }} <span class="mandatory">*</span>
                             <div class="form-check">
                                 {{ Form::label(__('Male').':') }}
-                                {{Form::radio('gender', 'male', true, ['class' => ''])}}
+                                {{Form::radio('gender', 'male', true, ['class' => 'required'])}}
                                 {{ Form::label(__('Female').':') }}
                                 {{Form::radio('gender', 'female', ['class' => ''])}}
                             </div>
@@ -91,7 +94,7 @@
                             </div>
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Address').':') }}
+                            {{ Form::label(__('Address').':') }} <span class="mandatory">*</span>
                             {{ Form::textarea('address', null, ['class' => 'form-control','required','rows'=>'3']) }}
                         </div>
                         <div class="form-group col-sm-12 pt-4">
@@ -105,4 +108,19 @@
         </div>
     </div>
     </div>
+@endsection
+        @section('scripts')
+            <script>
+                $("#year").select2({
+                    width: '100%',
+                });
+                $('.datepicker').daterangepicker({
+                    singleDatePicker: true,
+                    autoApply: true,
+                    maxDate: new Date(),
+                    locale: {
+                        format: 'YYYY-MM-DD'
+                    }
+                });
+            </script>
 @endsection

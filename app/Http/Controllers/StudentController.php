@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Datatable\StudentDatatable;
+use App\Http\Requests\StudentRequest;
+use App\Http\Requests\UpdateStudentRequest;
 use App\Imports\StudentsImport;
 use App\Mail\loginMail;
 use App\Models\Student;
@@ -53,7 +55,7 @@ class StudentController extends AppBaseController
      * @param Request $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
         $input = $request->all();
         $password = Str::random(8);
