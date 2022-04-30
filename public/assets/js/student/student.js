@@ -45,9 +45,6 @@ $(document).ready(function () {
       name: 'id'
     }]
   });
-  $("#searchbox").keyup(function () {
-    tbl.fnFilter(this.value);
-  });
 });
 /******/ })()
 ;

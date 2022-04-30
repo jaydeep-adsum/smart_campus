@@ -82,14 +82,21 @@
             position: sticky;
             width: 100%;
         }
-        .alert{
+
+        .alert {
             background: #D94B09 !important;
             border-color: #D94B09 !important;
             font-weight: bold;
         }
-        .mandatory{
+
+        .mandatory {
             color: #ff0000;
             font-weight: bold;
+        }
+
+        .btn-default {
+            background-color: #d94b09;
+            color: #fff;
         }
     </style>
     @yield("extra_css")

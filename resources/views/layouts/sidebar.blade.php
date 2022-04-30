@@ -24,6 +24,33 @@
                     <p>Students</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{route('events')}}" class="nav-link {{ Request::is('events*')? 'active1':''}}">
+                    <i class="fa-solid fa-calendar-days nav-icon"></i>
+                    <p>Events</p>
+                </a>
+            </li>
+
+            <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                    <i class="fa-solid fa-book nav-icon"></i>
+                    <p>Library<i class="right fas fa-angle-left"></i></p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('notes')}}" class="nav-link {{ Request::is('notes*')? 'active1':''}}">
+                            <i class="fa-solid fa-clipboard nav-icon"></i>
+                            <p>Notes</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('events')}}" class="nav-link {{ Request::is('text-books*')? 'active1':''}}">
+                            <i class="fa-solid fa-book-open nav-icon"></i>
+                            <p>Text Books</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </nav>
 </div>

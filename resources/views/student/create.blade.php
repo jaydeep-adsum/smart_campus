@@ -97,7 +97,7 @@
                         <div class="form-group col-sm-12 pt-4">
                             {{ Form::submit(__('Save'), ['class' => 'btn btn-primary']) }}
                             <a href="{{ route('student') }}"
-                               class="btn btn-default text-dark">{{__('Cancel')}}</a>
+                               class="btn btn-default">{{__('Cancel')}}</a>
                         </div>
                         {{ Form::close() }}
                     </div>
@@ -108,16 +108,17 @@
 @endsection
 @section('scripts')
     <script>
-    $("#year").select2({
-    width: '100%',
-    });
-    $('.datepicker').daterangepicker({
-        singleDatePicker: true,
-        autoApply: true,
-        maxDate: new Date(),
-        locale: {
-            format: 'YYYY-MM-DD'
-        }
-    });
+        $("#year").select2({
+            width: '100%',
+        });
+        $('.datepicker').daterangepicker({
+            singleDatePicker: true,
+            autoApply: true,
+            startDate: new Date(),
+            maxDate: new Date(),
+            locale: {
+                format: 'YYYY-MM-DD'
+            }
+        });
     </script>
 @endsection

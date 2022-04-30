@@ -15,7 +15,7 @@
         <div class="col-md-12">
             <div class="card card-default">
                 <div class="card-body">
-                    {{ Form::model($student, ['route' => ['student.update',$student->id], 'files' => 'true', 'id' => 'addCompanyForm']) }}
+                    {{ Form::model($student, ['route' => ['student.update',$student->id], 'files' => 'true']) }}
                     <div class="row">
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('First Name').':') }} <span class="mandatory">*</span>
@@ -100,15 +100,15 @@
                         <div class="form-group col-sm-12 pt-4">
                             {{ Form::submit(__('Save'), ['class' => 'btn btn-primary']) }}
                             <a href="{{ route('student') }}"
-                               class="btn btn-default text-dark">{{__('Cancel')}}</a>
+                               class="btn btn-default">{{__('Cancel')}}</a>
                         </div>
-                    {{ Form::close() }}
+                        {{ Form::close() }}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-@endsection
+        </div>
+        @endsection
         @section('scripts')
             <script>
                 $("#year").select2({
@@ -118,6 +118,7 @@
                     singleDatePicker: true,
                     autoApply: true,
                     maxDate: new Date(),
+                    startDate: new Date(),
                     locale: {
                         format: 'YYYY-MM-DD'
                     }

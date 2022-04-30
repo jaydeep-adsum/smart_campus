@@ -27,7 +27,7 @@ mix.babel('node_modules/intl-tel-input/build/js/utils.js',
     'public/assets/js/inttel/js/utils.min.js');
 
 mix.js('resources/assets/js/student/student.js',
-    'public/assets/js/student/student.js').
-js('resources/assets/js/custom/phone-number-country-code.js',
+    'public/assets/js/student/student.js').js('resources/assets/js/events/event.js',
+    'public/assets/js/events/event.js').js('resources/assets/js/custom/phone-number-country-code.js',
     'public/assets/js/custom/phone-number-country-code.js').
 version();
