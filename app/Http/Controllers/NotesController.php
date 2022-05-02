@@ -63,7 +63,7 @@ class NotesController extends AppBaseController
         if ($request->hasFile('pdf') && $request->file('pdf')->isValid()) {
             $notes->addMedia($request->pdf)->toMediaCollection(Note::PDF_PATH);
         }
-        Flash::success('Event created successfully.');
+        Flash::success('Note created successfully.');
 
         return redirect(route('notes'));
     }
