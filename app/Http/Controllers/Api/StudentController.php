@@ -11,6 +11,7 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class StudentController extends AppBaseController
 {
@@ -84,30 +85,41 @@ class StudentController extends AppBaseController
      */
     public function login(Request $request)
     {
-        $credentials = array_values(
-            $this->request->only('email', 'password')
-        );
-
-        $credentials['email'] = $request->email;
-        $credentials['password'] = $request->password;
-
-        if ($student = $this->authenticator->attemptLogin($credentials)) {
-            $update = Student::where('id', $student->id)->update(['device_token' => $request->device_token, 'device_type' => $request->device_type]);
-            $student = Student::find($student->id);
-            $tokenResult = $student->createToken('smart_campus');
-            $token = $tokenResult->token;
-            $token->save();
-            $success['token'] = 'Bearer ' . $tokenResult->accessToken;
-            $success['expires_at'] = Carbon::parse(
-                $tokenResult->token->expires_at
-            )->toDateTimeString();
-            $success['user'] = $student;
-
-            return $this->sendResponse(
-                $success, 'You Have Successfully Logged in to smart campus.'
+        try {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
+            if ($validator->fails()) {
+                return response()->json(['status' => "false", 'data' => "", 'messages' => array(implode(', ', $validator->errors()->all()))]);
+            }
+            $credentials = array_values(
+                $this->request->only('email', 'password')
             );
-        } else {
-            return response()->json(['status' => "false", 'data' => "", 'messages' => array('These credentials do not match our records')]);
+
+            $credentials['email'] = $request->email;
+            $credentials['password'] = $request->password;
+
+            if ($student = $this->authenticator->attemptLogin($credentials)) {
+                $update = Student::where('id', $student->id)->update(['device_token' => $request->device_token, 'device_type' => $request->device_type]);
+                $student = Student::find($student->id);
+                $tokenResult = $student->createToken('smart_campus');
+                $token = $tokenResult->token;
+                $token->save();
+                $success['token'] = 'Bearer ' . $tokenResult->accessToken;
+                $success['expires_at'] = Carbon::parse(
+                    $tokenResult->token->expires_at
+                )->toDateTimeString();
+                $success['user'] = $student;
+
+                return $this->sendResponse(
+                    $success, 'You Have Successfully Logged in to smart campus.'
+                );
+            } else {
+                return response()->json(['status' => "false", 'data' => "", 'messages' => array('These credentials do not match our records')]);
+            }
+        } catch (Exception $e) {
+            return $this->sendErrorResponse($e);
         }
 
     }
@@ -182,7 +194,7 @@ class StudentController extends AppBaseController
             if (!$student) {
                 return $this->sendError('User does not exist');
             }
-            if ($request->password != $request->confirm_password){
+            if ($request->password != $request->confirm_password) {
                 return $this->sendError('Your password and confirmation password do not match');
             }
             $student->password = Hash::make($request->password);

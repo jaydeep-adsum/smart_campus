@@ -98,6 +98,11 @@
             background-color: #d94b09;
             color: #fff;
         }
+
+        .btn-default.hover, .btn-default:active, .btn-default:hover {
+            background-color: #d94b09;
+            color: #fff;
+        }
     </style>
     @yield("extra_css")
 </head>

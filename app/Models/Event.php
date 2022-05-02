@@ -23,6 +23,14 @@ class Event extends Model implements HasMedia
     ];
     protected $appends = ['image_url'];
 
+    public static $rules = [
+        'title' => 'required',
+        'date' => 'required',
+        'location' => 'required',
+        'detail' => 'required',
+        'registration_link' => 'required',
+    ];
+
     public function getImageUrlAttribute()
     {
         /** @var Media $media */
@@ -31,6 +39,6 @@ class Event extends Model implements HasMedia
             return $media->getFullUrl();
         }
 
-        return asset('public/assets/images/no-student.png');
+        return asset('public/assets/images/no-image.png');
     }
 }

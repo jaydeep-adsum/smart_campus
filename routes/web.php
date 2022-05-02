@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\NotesController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
@@ -44,4 +45,9 @@ Route::get('events/{id}/edit', [EventController::class, 'edit'])->name('events.e
 Route::post('events/update/{id}', [EventController::class, 'update'])->name('events.update');
 Route::get('events/{id}/delete', [EventController::class, 'destroy'])->name('events.destroy');
 
-Route::get('notes', [EventController::class, 'index'])->name('notes');
+Route::get('notes', [NotesController::class, 'index'])->name('notes');
+Route::get('notes/create', [NotesController::class, 'create'])->name('notes.create');
+Route::post('notes/store', [NotesController::class, 'store'])->name('notes.store');
+Route::get('notes/{id}/edit', [NotesController::class, 'edit'])->name('notes.edit');
+Route::post('notes/update/{id}', [NotesController::class, 'update'])->name('notes.update');
+Route::get('notes/{id}/delete', [NotesController::class, 'destroy'])->name('notes.destroy');

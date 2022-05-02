@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Datatable\EventsDatatable;
+use App\Http\Requests\event\createEventRequest;
+use App\Http\Requests\event\UpdateEventRequest;
 use App\Models\Event;
 use App\Repositories\EventsRepository;
 use Auth;
 use DataTables;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -45,10 +48,10 @@ class EventController extends AppBaseController
     }
 
     /**
-     * @param Request $request
+     * @param createEventRequest $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function store(Request $request)
+    public function store(createEventRequest $request)
     {
         $input = $request->all();
         $input['created_by'] = Auth::user()->name;
@@ -61,13 +64,22 @@ class EventController extends AppBaseController
         return redirect(route('events'));
     }
 
+    /**
+     * @param $id
+     * @return Application|Factory|View
+     */
     public function edit($id)
     {
         $event = Event::find($id);
         return view('events.edit', compact('event'));
     }
 
-    public function update(Request $request, $id)
+    /**
+     * @param UpdateEventRequest $request
+     * @param $id
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function update(UpdateEventRequest $request, $id)
     {
         $input = $request->all();
 
@@ -81,6 +93,11 @@ class EventController extends AppBaseController
         return redirect(route('events'));
     }
 
+    /**
+     * @param $id
+     * @return Application|RedirectResponse|Redirector
+     * @throws Exception
+     */
     public function destroy($id)
     {
         $event = Event::find($id);

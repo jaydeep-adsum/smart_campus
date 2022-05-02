@@ -22,8 +22,26 @@ $(document).ready(function () {
                 name: 'first_name'
             },
             {
+                data: 'student_id',
+                name: 'student_id'
+            },
+            {
+                data: 'mobile_no',
+                name: 'mobile_no'
+            },
+            {
+                data: function data(row) {
+                    return moment(row.dob, 'YYYY-MM-DD hh:mm:ss').format('Do MMM, YYYY');
+                },
+                name: 'dob'
+            },
+            {
                 data: 'institute_name',
                 name: 'institute_name'
+            },
+            {
+                data: 'department',
+                name: 'department'
             },
             {
                 data: 'year',
@@ -32,10 +50,6 @@ $(document).ready(function () {
             {
                 data: 'semester',
                 name: 'semester'
-            },
-            {
-                data: 'mobile_no',
-                name: 'mobile_no'
             },
             {
                 data: function data(row) {
