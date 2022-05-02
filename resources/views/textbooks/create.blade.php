@@ -1,6 +1,6 @@
 @extends('dashboard')
 @section('title')
-    Edit Note
+    Add Text Book
 @endsection
 @section('content')
     <div class="row">
@@ -14,15 +14,15 @@
             @endif
             <div class="card card-default">
                 <div class="card-body">
-                    {{ Form::model($notes, ['route' => ['notes.update',$notes->id], 'files' => 'true']) }}
+                    {{ Form::open(['route' => 'textbooks.store', 'files' => 'true']) }}
                     <div class="row">
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Title').':') }} <span class="mandatory">*</span>
                             {{ Form::text('title', null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Chapter').':') }} <span class="mandatory">*</span>
-                            {{ Form::text('chapter', null, ['class' => 'form-control','required']) }}
+                            {{ Form::label(__('Written By').':') }} <span class="mandatory">*</span>
+                            {{ Form::text('written_by', null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Year').':') }} <span class="mandatory">*</span>
@@ -46,10 +46,6 @@
                                             {{ Form::file('image') }}
                                         </label>
                                     </div>
-                                    <div class="">
-                                        <img src="{{$notes->image_url}}" width="80px" height="80px"
-                                             class="rounded shadow"/>
-                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     {{ Form::label(__('Pdf').':') }}
@@ -59,20 +55,12 @@
                                             {{ Form::file('pdf') }}
                                         </label>
                                     </div>
-                                    <div class="">
-                                        @if($notes->pdf_url)
-                                            <a title="Download" class="btn edit-btn" href="{{$notes->pdf_url}}"
-                                               download>
-                                                <i class="fa-solid fa-download"></i>
-                                            </a>
-                                        @endif
-                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group col-sm-12 pt-4">
                             {{ Form::submit(__('Save'), ['class' => 'btn btn-primary']) }}
-                            <a href="{{ route('notes') }}"
+                            <a href="{{ route('textbooks') }}"
                                class="btn btn-default">{{__('Cancel')}}</a>
                         </div>
                         {{ Form::close() }}

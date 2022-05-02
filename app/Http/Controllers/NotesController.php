@@ -16,7 +16,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
-class NotesController extends Controller
+class NotesController extends AppBaseController
 {
     /**
      * @param NoteRepository $noteRepository
@@ -43,7 +43,6 @@ class NotesController extends Controller
      */
     public function create()
     {
-
         return view('note.create');
     }
 

@@ -31,7 +31,7 @@
                 </a>
             </li>
 
-            <li class="nav-item has-treeview">
+            <li class="nav-item has-treeview {{ Request::is('notes*','textbooks*')? 'menu-open':''}}">
                 <a href="#" class="nav-link">
                     <i class="fa-solid fa-book nav-icon"></i>
                     <p>Library<i class="right fas fa-angle-left"></i></p>
@@ -44,7 +44,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('events')}}" class="nav-link {{ Request::is('text-books*')? 'active1':''}}">
+                        <a href="{{route('textbooks')}}" class="nav-link {{ Request::is('textbooks*')? 'active1':''}}">
                             <i class="fa-solid fa-book-open nav-icon"></i>
                             <p>Text Books</p>
                         </a>

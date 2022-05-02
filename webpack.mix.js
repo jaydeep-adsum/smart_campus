@@ -32,5 +32,7 @@ mix.js('resources/assets/js/student/student.js',
         'public/assets/js/events/event.js')
     .js('resources/assets/js/notes/note.js',
         'public/assets/js/notes/note.js')
+    .js('resources/assets/js/textbooks/textbook.js',
+        'public/assets/js/textbooks/textbook.js')
     .js('resources/assets/js/custom/phone-number-country-code.js',
         'public/assets/js/custom/phone-number-country-code.js').version();

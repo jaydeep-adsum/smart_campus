@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var tableName = '#noteTbl';
+    var tableName = '#textBookTbl';
     var tbl = $(tableName).DataTable({
         processing: true,
         serverSide: true,
@@ -8,7 +8,7 @@ $(document).ready(function () {
         //     processing: `<img src='${loaderUrl}'>`,
         // },
         ajax: {
-            url: notesUrl
+            url: textBooksUrl
         },
         columnDefs: [
             {
@@ -36,8 +36,8 @@ $(document).ready(function () {
                 name: 'title'
             },
             {
-                data: 'chapter',
-                name: 'chapter'
+                data: 'written_by',
+                name: 'written_by'
             },
             {
                 data: 'year',
@@ -67,7 +67,7 @@ $(document).ready(function () {
             },
             {
                 data: function data(row) {
-                    var url = notesUrl + '/' + row.id;
+                    var url = textBooksUrl + '/' + row.id;
                     return `<a title="Edit" class="btn btn-sm edit-btn" data-id="${row.id}" href="${url}/edit">
             <i class="fa fa-edit"></i>
                 </a>  <a title="Delete" class="btn btn-sm delete-btn" data-id="${row.id}" href="${url}/delete">

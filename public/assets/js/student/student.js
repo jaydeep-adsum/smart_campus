@@ -50,9 +50,9 @@ $(document).ready(function () {
         name: 'created_at'
     }, {
         data: function data(row) {
-        var url = studentUrl + '/' + row.id;
-        return "<a title=\"Edit\" class=\"btn btn-sm edit-btn\" data-id=\"".concat(row.id, "\" href=\"").concat(url, "/edit\">\n            <i class=\"fa fa-edit\"></i>\n                </a>  <a title=\"Delete\" class=\"btn btn-sm delete-btn\" data-id=\"").concat(row.id, "\" href=\"").concat(url, "/delete\">\n           <i class=\"fa-solid fa-trash\"></i>\n                </a>");
-      },
+            var url = studentUrl + '/' + row.id;
+            return "<a title=\"Edit\" class=\"btn btn-sm edit-btn\" data-id=\"".concat(row.id, "\" href=\"").concat(url, "/edit\">\n            <i class=\"fa fa-edit\"></i>\n                </a>  <a title=\"Delete\" class=\"btn btn-sm delete-btn\" data-id=\"").concat(row.id, "\" href=\"").concat(url, "/delete\">\n           <i class=\"fa-solid fa-trash\"></i>\n                </a>");
+        },
       name: 'id'
     }]
   });

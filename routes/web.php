@@ -3,6 +3,7 @@
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\NotesController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TextBookController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -51,3 +52,10 @@ Route::post('notes/store', [NotesController::class, 'store'])->name('notes.store
 Route::get('notes/{id}/edit', [NotesController::class, 'edit'])->name('notes.edit');
 Route::post('notes/update/{id}', [NotesController::class, 'update'])->name('notes.update');
 Route::get('notes/{id}/delete', [NotesController::class, 'destroy'])->name('notes.destroy');
+
+Route::get('textbooks', [TextBookController::class, 'index'])->name('textbooks');
+Route::get('textbooks/create', [TextBookController::class, 'create'])->name('textbooks.create');
+Route::post('textbooks/store', [TextBookController::class, 'store'])->name('textbooks.store');
+Route::get('textbooks/{id}/edit', [TextBookController::class, 'edit'])->name('textbooks.edit');
+Route::post('textbooks/update/{id}', [TextBookController::class, 'update'])->name('textbooks.update');
+Route::get('textbooks/{id}/delete', [TextBookController::class, 'destroy'])->name('textbooks.destroy');
