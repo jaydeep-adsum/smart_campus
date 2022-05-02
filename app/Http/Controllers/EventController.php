@@ -10,9 +10,11 @@ use App\Repositories\EventsRepository;
 use Auth;
 use DataTables;
 use Exception;
+use Flash;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
@@ -60,6 +62,7 @@ class EventController extends AppBaseController
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $event->addMedia($request->image)->toMediaCollection(Event::PATH);
         }
+        Flash::success('Event Created successfully.');
 
         return redirect(route('events'));
     }
@@ -89,21 +92,20 @@ class EventController extends AppBaseController
             $event->clearMediaCollection(Event::PATH);
             $event->addMedia($request->image)->toMediaCollection(Event::PATH);
         }
+        Flash::success('Event updated successfully.');
 
         return redirect(route('events'));
     }
 
     /**
-     * @param $id
-     * @return Application|RedirectResponse|Redirector
-     * @throws Exception
+     * @param Event $event
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(Event $event)
     {
-        $event = Event::find($id);
-        $this->eventsRepository->delete($id);
+        $event->delete();
         $event->media()->delete();
 
-        return redirect(route('events'));
+        return $this->sendSuccess('Event deleted successfully.');
     }
 }

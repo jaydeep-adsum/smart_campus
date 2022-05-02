@@ -11,9 +11,11 @@ use App\Models\Student;
 use App\Repositories\StudentRepository;
 use DataTables;
 use Exception;
+use Flash;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
@@ -72,6 +74,7 @@ class StudentController extends AppBaseController
             ];
             \Mail::to($input['email'])->send(new loginMail($details));
         }
+        Flash::success('Student added successfully.');
 
         return redirect(route('student'));
     }
@@ -101,25 +104,26 @@ class StudentController extends AppBaseController
             $student->clearMediaCollection(Student::PATH);
             $student->addMedia($request->image)->toMediaCollection(Student::PATH);
         }
+        Flash::success('Student updated successfully.');
 
         return redirect(route('student'));
     }
 
     /**
-     * @param $id
-     * @return Application|RedirectResponse|Redirector
-     * @throws Exception
+     * @param Student $student
+     * @return JsonResponse
      */
-    public function destroy($id){
-        $student = Student::find($id);
-        $this->studentRepository->delete($id);
+    public function destroy(Student $student)
+    {
+        $student->delete();
         $student->media()->delete();
 
-        return redirect(route('student'));
+        return $this->sendSuccess('Student deleted successfully.');
     }
 
-    public function import(){
-        Excel::import(new StudentsImport(),request()->file('file'));
+    public function import()
+    {
+        Excel::import(new StudentsImport(), request()->file('file'));
         return back();
     }
 }

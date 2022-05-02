@@ -9,9 +9,11 @@ use App\Models\Note;
 use App\Repositories\NoteRepository;
 use DataTables;
 use Exception;
+use Flash;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
@@ -61,6 +63,7 @@ class NotesController extends AppBaseController
         if ($request->hasFile('pdf') && $request->file('pdf')->isValid()) {
             $notes->addMedia($request->pdf)->toMediaCollection(Note::PDF_PATH);
         }
+        Flash::success('Event created successfully.');
 
         return redirect(route('notes'));
     }
@@ -95,21 +98,20 @@ class NotesController extends AppBaseController
             $notes->clearMediaCollection(Note::PDF_PATH);
             $notes->addMedia($request->pdf)->toMediaCollection(Note::PDF_PATH);
         }
+        Flash::success('Note updated successfully.');
 
         return redirect(route('notes'));
     }
 
     /**
-     * @param $id
-     * @return Application|RedirectResponse|Redirector
-     * @throws Exception
+     * @param Note $note
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(Note $note)
     {
-        $notes = $this->noteRepository->find($id);
-        $this->noteRepository->delete($id);
-        $notes->media()->delete();
+        $note->delete();
+        $note->media()->delete();
 
-        return redirect(route('notes'));
+        return $this->sendSuccess('Note deleted successfully.');
     }
 }

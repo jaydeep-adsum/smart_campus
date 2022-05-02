@@ -126,6 +126,7 @@
         </div>
         <section class="content mt-4">
             <div class="container-fluid px-5">
+                @include('flash::message')
                 @yield('content')
             </div>
 {{--            <div class="footer bg-white p-3">--}}
@@ -166,6 +167,7 @@
 <script src="{{ asset('public/assets/js/sweetalert.min.js') }}"></script>
 <script src="{{asset('public/assets/izitoast/js/iziToast.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('public/assets/js/pnotify.custom.min.js')}}"></script>
+<script src="{{asset('public/assets/js/custom/custom.js')}}"></script>
 <script>
     $(document).ready(function () {
         $('.alert').delay(3000).slideUp(300);

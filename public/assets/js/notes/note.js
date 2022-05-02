@@ -60,10 +60,14 @@
             }, {
                 data: function data(row) {
                     var url = notesUrl + '/' + row.id;
-                    return "<a title=\"Edit\" class=\"btn btn-sm edit-btn\" data-id=\"".concat(row.id, "\" href=\"").concat(url, "/edit\">\n            <i class=\"fa fa-edit\"></i>\n                </a>  <a title=\"Delete\" class=\"btn btn-sm delete-btn\" data-id=\"").concat(row.id, "\" href=\"").concat(url, "/delete\">\n           <i class=\"fa-solid fa-trash\"></i>\n                </a>");
+                    return "<a title=\"Edit\" class=\"btn btn-sm edit-btn\" data-id=\"".concat(row.id, "\" href=\"").concat(url, "/edit\">\n            <i class=\"fa fa-edit\"></i>\n                </a>  <a title=\"Delete\" class=\"btn btn-sm delete-btn\" data-id=\"").concat(row.id, "\" href=\"#\">\n           <i class=\"fa-solid fa-trash\"></i>\n                </a>");
                 },
                 name: 'id'
             }]
+        });
+        $(document).on('click', '.delete-btn', function (event) {
+            var noteId = $(event.currentTarget).attr('data-id');
+            deleteItem(notesUrl + '/' + noteId, tableName, 'Note');
         });
     });
     /******/

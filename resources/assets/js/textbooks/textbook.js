@@ -70,11 +70,15 @@ $(document).ready(function () {
                     var url = textBooksUrl + '/' + row.id;
                     return `<a title="Edit" class="btn btn-sm edit-btn" data-id="${row.id}" href="${url}/edit">
             <i class="fa fa-edit"></i>
-                </a>  <a title="Delete" class="btn btn-sm delete-btn" data-id="${row.id}" href="${url}/delete">
+                </a>  <a title="Delete" class="btn btn-sm delete-btn" data-id="${row.id}" href="#">
            <i class="fa-solid fa-trash"></i>
                 </a>`
                 },
                 name: 'id',
             }]
+    });
+    $(document).on('click', '.delete-btn', function (event) {
+        var textBookId = $(event.currentTarget).attr('data-id');
+        deleteItem(textBooksUrl + '/' + textBookId, tableName, 'Text Book');
     });
 });

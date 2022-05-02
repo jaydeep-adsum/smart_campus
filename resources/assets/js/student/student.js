@@ -4,12 +4,31 @@ $(document).ready(function () {
         processing: true,
         serverSide: true,
         searchDelay: 500,
-        // language: {
-        //     processing: `<img src='${loaderUrl}'>`,
-        // },
+
         ajax: {
             url: studentUrl
         },
+        columnDefs: [
+            {
+                'targets': [1, 2, 3, 8],
+                'className': 'text-center',
+                'width': '10%'
+            },
+            {
+                'targets': [4],
+                'width': '12%'
+            },
+            {
+                'targets': [6],
+                'width': '2%'
+            },
+            {
+                'targets': [9],
+                'className': 'text-center',
+                'orderable': false,
+                'width': '8%'
+            }
+        ],
         columns: [
             {
                 data: function data(row) {
@@ -60,13 +79,17 @@ $(document).ready(function () {
             {
                 data: function data(row) {
                     var url = studentUrl + '/' + row.id;
-                  return `<a title="Edit" class="btn btn-sm edit-btn" data-id="${row.id}" href="${url}/edit">
+                    return `<a title="Edit" class="btn btn-sm edit-btn" data-id="${row.id}" href="${url}/edit">
             <i class="fa fa-edit"></i>
-                </a>  <a title="Delete" class="btn btn-sm delete-btn" data-id="${row.id}" href="${url}/delete">
+                </a>  <a title="Delete" class="btn btn-sm delete-btn text-white" data-id="${row.id}" href="#">
            <i class="fa-solid fa-trash"></i>
                 </a>`
                 },
                 name: 'id',
-        }]
-});
+            }]
+    });
+    $(document).on('click', '.delete-btn', function (event) {
+        var studentId = $(event.currentTarget).attr('data-id');
+        deleteItem(studentUrl + '/' + studentId, tableName, 'Student');
+    });
 });

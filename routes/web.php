@@ -36,7 +36,7 @@ Route::get('student/create', [StudentController::class, 'create'])->name('studen
 Route::post('student/store', [StudentController::class, 'store'])->name('student.store');
 Route::get('student/{id}/edit', [StudentController::class, 'edit'])->name('student.edit');
 Route::post('student/update/{id}', [StudentController::class, 'update'])->name('student.update');
-Route::get('student/{id}/delete', [StudentController::class, 'destroy'])->name('student.destroy');
+Route::delete('student/{student}', [StudentController::class, 'destroy'])->name('student.destroy');
 Route::post('import', [StudentController::class, 'import'])->name('import');
 
 Route::get('events', [EventController::class, 'index'])->name('events');
@@ -44,18 +44,18 @@ Route::get('events/create', [EventController::class, 'create'])->name('events.cr
 Route::post('events/store', [EventController::class, 'store'])->name('events.store');
 Route::get('events/{id}/edit', [EventController::class, 'edit'])->name('events.edit');
 Route::post('events/update/{id}', [EventController::class, 'update'])->name('events.update');
-Route::get('events/{id}/delete', [EventController::class, 'destroy'])->name('events.destroy');
+Route::delete('events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
 
 Route::get('notes', [NotesController::class, 'index'])->name('notes');
 Route::get('notes/create', [NotesController::class, 'create'])->name('notes.create');
 Route::post('notes/store', [NotesController::class, 'store'])->name('notes.store');
 Route::get('notes/{id}/edit', [NotesController::class, 'edit'])->name('notes.edit');
 Route::post('notes/update/{id}', [NotesController::class, 'update'])->name('notes.update');
-Route::get('notes/{id}/delete', [NotesController::class, 'destroy'])->name('notes.destroy');
+Route::delete('notes/{note}', [NotesController::class, 'destroy'])->name('notes.destroy');
 
 Route::get('textbooks', [TextBookController::class, 'index'])->name('textbooks');
 Route::get('textbooks/create', [TextBookController::class, 'create'])->name('textbooks.create');
 Route::post('textbooks/store', [TextBookController::class, 'store'])->name('textbooks.store');
 Route::get('textbooks/{id}/edit', [TextBookController::class, 'edit'])->name('textbooks.edit');
 Route::post('textbooks/update/{id}', [TextBookController::class, 'update'])->name('textbooks.update');
-Route::get('textbooks/{id}/delete', [TextBookController::class, 'destroy'])->name('textbooks.destroy');
+Route::delete('textbooks/{textbook}', [TextBookController::class, 'destroy'])->name('textbooks.destroy');

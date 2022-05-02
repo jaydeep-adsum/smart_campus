@@ -15,21 +15,12 @@ $(document).ready(function () {
                 'targets': [0],
                 'orderable': false
             },
-            //     {
-            //         'targets': [2],
-            //         'width': '15%'
-            //     },
             {
                 'targets': [7],
                 'orderable': false,
                 'className': 'text-center',
                 'width': '9%'
             },
-            //     {
-            //         'targets': [6,7],
-            //         'className': 'text-center',
-            //         'width': '10%'
-            //     }
         ],
         columns: [
             {
@@ -80,11 +71,16 @@ $(document).ready(function () {
                     var url = eventUrl + '/' + row.id;
                     return `<a title="Edit" class="btn btn-sm edit-btn" data-id="${row.id}" href="${url}/edit">
             <i class="fa fa-edit"></i>
-                </a>  <a title="Delete" class="btn btn-sm delete-btn" data-id="${row.id}" href="${url}/delete">
+                </a>  <a title="Delete" class="btn btn-sm delete-btn" data-id="${row.id}" href="#">
            <i class="fa-solid fa-trash"></i>
                 </a>`
                 },
                 name: 'id',
             }]
+    });
+
+    $(document).on('click', '.delete-btn', function (event) {
+        var eventId = $(event.currentTarget).attr('data-id');
+        deleteItem(eventUrl + '/' + eventId, tableName, 'Event');
     });
 });

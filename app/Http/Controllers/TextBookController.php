@@ -9,14 +9,16 @@ use App\Models\TextBook;
 use App\Repositories\TextBookRepository;
 use DataTables;
 use Exception;
+use Flash;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
-class TextBookController extends Controller
+class TextBookController extends AppBaseController
 {
     /**
      * @param TextBookRepository $textBookRepository
@@ -61,6 +63,7 @@ class TextBookController extends Controller
         if ($request->hasFile('pdf') && $request->file('pdf')->isValid()) {
             $textBooks->addMedia($request->pdf)->toMediaCollection(TextBook::PDF_PATH);
         }
+        Flash::success('Text book added successfully.');
 
         return redirect(route('textbooks'));
     }
@@ -95,21 +98,20 @@ class TextBookController extends Controller
             $textBooks->clearMediaCollection(TextBook::PDF_PATH);
             $textBooks->addMedia($request->pdf)->toMediaCollection(TextBook::PDF_PATH);
         }
+        Flash::success('Text book updated successfully.');
 
         return redirect(route('textbooks'));
     }
 
     /**
-     * @param $id
-     * @return Application|RedirectResponse|Redirector
-     * @throws Exception
+     * @param TextBook $textbook
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(TextBook $textbook)
     {
-        $textBooks = $this->textBookRepository->find($id);
-        $this->textBookRepository->delete($id);
-        $textBooks->media()->delete();
+        $textbook->delete();
+        $textbook->media()->delete();
 
-        return redirect(route('textbooks'));
+        return $this->sendSuccess('Text Book deleted successfully.');
     }
 }
