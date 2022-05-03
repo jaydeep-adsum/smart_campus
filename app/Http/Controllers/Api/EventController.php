@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Repositories\EventsRepository;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class EventController extends AppBaseController
@@ -55,15 +56,15 @@ class EventController extends AppBaseController
      *     description="Unexpected error"
      *     ,@OA\JsonContent(ref="#/components/schemas/ErrorResponse")
      *  ),
+     * security={
+     *     {"API-Key": {}}
+     * }
      * )
      */
     /**
-     * It will List all the Order By type
-     *
-     * @param Request $request Request
-     * @param string $parentId Id
-     *
-     * @return JsonResponse JsonResponse
+     * /**
+     * @param Request $request
+     * @return JsonResponse
      */
     public function index(Request $request)
     {
