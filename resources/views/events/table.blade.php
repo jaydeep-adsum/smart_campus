@@ -1,4 +1,4 @@
-<table class="table table-responsive-sm table-bordered" id="eventTbl">
+<table class="table table-bordered" id="eventTbl">
     <thead>
     <tr>
         <th scope="col">{{ __('Image') }}</th>

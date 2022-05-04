@@ -11,7 +11,7 @@
                         <a href="{{route('notes.create')}}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add</a>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     @include('note.table')
                 </div>
             </div>

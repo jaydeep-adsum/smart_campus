@@ -4,31 +4,27 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Controllers\Controller;
-use App\Models\Event;
-use App\Repositories\EventsRepository;
+use App\Repositories\NoteRepository;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class EventController extends AppBaseController
+class NoteController extends AppBaseController
 {
-    /**
-     * @param EventsRepository $eventsRepository
-     */
-    public function __construct(EventsRepository $eventsRepository)
+    public function __construct(NoteRepository $noteRepository)
     {
-        $this->eventsRepository = $eventsRepository;
+        $this->noteRepository = $noteRepository;
     }
 
     /**
-     * Swagger definition for Events
+     * Swagger definition for Notes
      *
      * @OA\Get(
-     *     tags={"Events"},
-     *     path="/events",
-     *     description="Events",
-     *     summary="Events",
-     *     operationId="events",
+     *     tags={"Notes"},
+     *     path="/notes",
+     *     description="Notes",
+     *     summary="Notes",
+     *     operationId="notes",
      * @OA\Parameter(
      *     name="Content-Language",
      *     in="header",
@@ -70,23 +66,23 @@ class EventController extends AppBaseController
     {
         try {
 //            $perPage = $request->page ?? 10;
-            $events = $this->eventsRepository->paginate(10);
+            $notes = $this->noteRepository->paginate(10);
 
-            return $this->sendResponse($events, ('Events Fetch Successfully.'));
-        } catch (\Exception $ex) {
+            return $this->sendResponse($notes, ('Notes fetch successfully.'));
+        } catch (Exception $ex) {
             return $this->sendError($ex);
         }
     }
 
     /**
-     * Swagger defination got one event
+     * Swagger defination got one note
      *
      * @OA\Post(
-     *     tags={"Events"},
-     *     path="/getEvent",
-     *     description="Get Event",
-     *     summary="Get Single Event",
-     *     operationId="getEvent",
+     *     tags={"Notes"},
+     *     path="/getNote",
+     *     description="Get Note",
+     *     summary="Get Single Note",
+     *     operationId="getNote",
      * @OA\Parameter(
      *     name="Content-Language",
      *     in="header",
@@ -99,7 +95,7 @@ class EventController extends AppBaseController
      *     mediaType="multipart/form-data",
      * @OA\JsonContent(
      * @OA\Property(
-     *     property="event_id",
+     *     property="note_id",
      *     type="string"
      *     ),
      *    )
@@ -130,15 +126,15 @@ class EventController extends AppBaseController
      * }
      * )
      */
-    public function getEvent(Request $request)
+    public function getNote(Request $request)
     {
         try {
-            $event = $this->eventsRepository->find($request->event_id);
-            if (!$event){
+            $note = $this->noteRepository->find($request->note_id);
+            if (!$note) {
                 return $this->sendError('Something went wrong');
             }
 
-            return $this->sendResponse($event, ('Event fetch successfully'));
+            return $this->sendResponse($note, ('Note fetch successfully'));
         } catch (Exception $ex) {
             return $this->sendError($ex);
         }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\NoteController;
 use App\Http\Controllers\Api\StudentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,13 +24,16 @@ use Illuminate\Support\Facades\Route;
 Route::namespace('Api')->group(
     function () {
         Route::get('swagger', 'SwaggerController@listItem');
-        Route::post('login', [StudentController::class,'login']);
+        Route::post('login', [StudentController::class, 'login']);
 
-        Route::group(['middleware' => 'auth:api'], function(){
-            Route::post('forget-password', [StudentController::class,'forgetPassword']);
+        Route::group(['middleware' => 'auth:api'], function () {
+            Route::post('forget-password', [StudentController::class, 'forgetPassword']);
 
-            Route::get('events', [EventController::class,'index']);
-            Route::post('getEvent', [EventController::class,'getEvent']);
+            Route::get('events', [EventController::class, 'index']);
+            Route::post('getEvent', [EventController::class, 'getEvent']);
+
+            Route::get('notes', [NoteController::class, 'index']);
+            Route::post('getNote', [NoteController::class, 'getNote']);
         });
     }
 );

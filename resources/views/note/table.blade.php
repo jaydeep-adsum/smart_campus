@@ -1,4 +1,4 @@
-<table class="table table-responsive-sm table-bordered" id="noteTbl">
+<table class="table table-bordered" id="noteTbl">
     <thead>
     <tr>
         <th scope="col">{{ __('Image') }}</th>

@@ -12,7 +12,7 @@
                             Add</a>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     @include('events.table')
                 </div>
             </div>

@@ -1,4 +1,4 @@
-<table class="table table-responsive-sm table-bordered" id="studentTbl">
+<table class="table table-bordered" id="studentTbl">
     <thead>
     <tr>
         <th scope="col">{{ __('First Name') }}</th>
