@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\NoteController;
 use App\Http\Controllers\Api\StudentController;
+use App\Http\Controllers\Api\TextBookController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,9 @@ Route::namespace('Api')->group(
 
             Route::get('notes', [NoteController::class, 'index']);
             Route::post('getNote', [NoteController::class, 'getNote']);
+
+            Route::get('textbooks', [TextBookController::class, 'index']);
+            Route::post('getTextbook', [TextBookController::class, 'getTextbook']);
         });
     }
 );
