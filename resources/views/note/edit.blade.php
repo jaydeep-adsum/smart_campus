@@ -37,7 +37,7 @@
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Description').':') }} <span class="mandatory">*</span>
-                            {{ Form::textarea('description', null, ['class' => 'form-control','required','rows'=>'3']) }}
+                            {{ Form::textarea('description', null, ['class' => 'form-control ckeditor','required','rows'=>'3']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             <div class="row">

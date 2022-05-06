@@ -189,6 +189,7 @@
 <script src="{{asset('public/assets/izitoast/js/iziToast.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('public/assets/js/pnotify.custom.min.js')}}"></script>
 <script src="{{asset('public/assets/js/custom/custom.js')}}"></script>
+<script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
 <script>
     $(document).ready(function () {
         $('.alert').delay(3000).slideUp(300);
