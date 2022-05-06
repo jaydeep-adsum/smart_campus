@@ -1,13 +1,16 @@
-{{--             <a href="#" class="brand-link">--}}
-{{--                <img src="#" class="brand-image center">--}}
-{{--                <p class="brand-text"></p>--}}
+{{--             <a href="{{route('dashboard')}}" class="brand-link">--}}
+{{--                <img src="{{asset('public/logo.png')}}" alt="Smart Campus" class="brand-image center">--}}
+{{--                <p class="brand-text text-white">Smart Campus</p>--}}
 {{--            </a>--}}
-<div class="sidebar-brand">
+
+<div class="sidebar-brand"
+     style="background: #1e4080;border-width: 0px 2px 0px 0px;padding-bottom: 9px;border-style: solid;border-color: #f97b40;">
     <a href="{{route('dashboard')}}" class="text-center">
-        <h5 class="mt-3 brand-text" style="color: #1E4080;">Smart Campus</h5>
+        <img src="{{asset('public/logo.png')}}" alt="Smart Campus" class="nav-logo">
+        {{--        <h5 class="mt-3 brand-text" style="color: #1E4080;">Smart Campus</h5>--}}
     </a>
 </div>
-<div class="sidebar mt-3 campus-sidebar">
+<div class="sidebar campus-sidebar">
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
             data-accordion="false">

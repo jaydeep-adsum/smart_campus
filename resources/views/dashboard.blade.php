@@ -28,7 +28,7 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="{{asset('public/assets/plugins/iCheck/flat/blue.css')}}">
     <!-- iCheck for checkboxes and radio inputs -->
-    <link rel="stylesheet" href="{{asset('public/assets/plugins/iCheck/all.css')}}">
+    <link rel="styles heet" href="{{asset('public/assets/plugins/iCheck/all.css')}}">
     <!-- Morris chart -->
     <link rel="stylesheet" href="{{asset('public/assets/plugins/morris/morris.css')}}">
     <!-- jvectormap -->
@@ -47,37 +47,53 @@
     <link href="{{asset('public/assets/izitoast/css/iziToast.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('public/assets/css/inttel/css/intlTelInput.css') }}">
     <style>
-        .card-head-div{
+        .nav-logo {
+            width: 35%;
+            margin: 0px auto;
+            padding-top: 5px;
+            display: block;
+        }
+
+        .nav-logo-width {
+            width: 80%;
+            padding-top: 20px;
+        }
+
+        .card-head-div {
             display: flex;
             justify-content: end;
         }
-        .main-header{
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: calc(100% - 260px);
-        }
+
+        /*.main-header{*/
+        /*position: fixed;*/
+        /*    top: 0;*/
+        /*    left: 0;*/
+        /*    width: calc(100% - 260px);*/
+        /*}*/
         input[type='file'] {
-            display:none;
+            display: none;
         }
+
         .file-label {
             border: 1px solid #ccc;
             display: inline-block;
             padding: 6px 12px;
             cursor: pointer;
         }
-        .content-wrapper .header-div{
-            top: 57px;
-            position: fixed;
-            z-index: 1;
-        }
-        .content-wrapper>.content {
-            padding: 120px 0rem 0;
-        }
-        .campus-sidebar{
+
+        /*.content-wrapper .header-div{*/
+        /*    top: 57px;*/
+        /*    position: fixed;*/
+        /*    z-index: 1;*/
+        /*}*/
+        /*.content-wrapper>.content {*/
+        /*    padding: 120px 0rem 0;*/
+        /*}*/
+        .campus-sidebar {
             height: 100vh;
         }
-        .footer{
+
+        .footer {
             bottom: 0;
             position: sticky;
             width: 100%;
@@ -119,20 +135,25 @@
     </aside>
 
     <div class="content-wrapper">
-        <div class="content-header p-0">
-            <div class="container-fluid bg-white py-3 header-div">
-                    <h3 class="card-title m-0 p-0 pl-4">@yield('title')</h3>
+        <div class="content-header bg-white pt-3 d-flex justify-content-between">
+            {{--            <div class="container-fluid bg-white pt-3 header-div d-flex justify-content-between">--}}
+            <div>
+                <h3 class="card-title m-0 p-0 pl-4">@yield('title')</h3>
             </div>
+            <div class="mr-2">
+                @yield('header')
+            </div>
+            {{--            </div>--}}
         </div>
         <section class="content mt-4">
             <div class="container-fluid px-5">
                 @include('flash::message')
                 @yield('content')
             </div>
-{{--            <div class="footer bg-white p-3">--}}
-{{--                <div class="text-dark">--}}
-{{--                    <span class="">All Rights Reserved ©2022</span>--}}
-{{--                    <a href="#" target="_blank" class="text-gray-800 text-hover-primary">Smart Campus</a>--}}
+            {{--            <div class="footer bg-white p-3">--}}
+            {{--                <div class="text-dark">--}}
+            {{--                    <span class="">All Rights Reserved ©2022</span>--}}
+            {{--                    <a href="#" target="_blank" class="text-gray-800 text-hover-primary">Smart Campus</a>--}}
 {{--                </div>--}}
 {{--            </div>--}}
         </section>
@@ -171,6 +192,14 @@
 <script>
     $(document).ready(function () {
         $('.alert').delay(3000).slideUp(300);
+        $('.toggle-nav').click(function () {
+            var navClass = $(".nav-logo").hasClass("nav-logo-width");
+            if (navClass) {
+                $(".nav-logo").removeClass("nav-logo-width");
+            } else {
+                $(".nav-logo").addClass("nav-logo-width");
+            }
+        })
     });
 </script>
 @yield('scripts')

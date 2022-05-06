@@ -17,7 +17,7 @@ class CreateTextBooksTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('written_by');
-            $table->string('description');
+            $table->text('description');
             $table->string('year');
             $table->string('stream');
             $table->timestamps();

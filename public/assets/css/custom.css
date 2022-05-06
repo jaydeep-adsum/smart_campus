@@ -3,9 +3,6 @@
     padding: 10px;
     text-align: center;
 }
-.main-sidebar{
-    z-index: 0;
-}
 li.user-header {
     background-color: #fff;
 }

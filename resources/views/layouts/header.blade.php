@@ -1,6 +1,6 @@
 <nav class="main-header navbar navbar-expand navbar-light border-bottom" style="background-color: #1E4080;">
     <!-- Left navbar links -->
-    <ul class="navbar-nav">
+    <ul class="navbar-nav toggle-nav">
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
         </li>

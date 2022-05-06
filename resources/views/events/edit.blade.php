@@ -2,6 +2,10 @@
 @section('title')
     Edit Event
 @endsection
+@section('header')
+    <a href="{{ route('events') }}" class="btn btn-default"><i class="fa-solid fa-arrow-left mr-1"></i>{{__('Back')}}
+    </a>
+@endsection
 @section('content')
     <div class="row">
         <div class="col-md-12">

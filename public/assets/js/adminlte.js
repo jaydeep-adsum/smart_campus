@@ -367,9 +367,6 @@ var PushMenu = function ($) {
       this._element = element;
       this._options = $.extend({}, Default, options);
 
-      if (!$(Selector.OVERLAY).length) {
-        this._addOverlay();
-      }
     }
 
     // Public
