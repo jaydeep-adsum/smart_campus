@@ -42,6 +42,8 @@ Route::namespace('Api')->group(
 
             Route::get('cafeteria', [CafeteriaController::class, 'index']);
             Route::post('getCafeteria', [CafeteriaController::class, 'getCafeteria']);
+            Route::get('categoryWithCafeteria', [CafeteriaController::class, 'getCategoryWithCafeteria']);
+            Route::post('singleCategoryWithCafeteria', [CafeteriaController::class, 'getSingleCategoryWithCafeteria']);
         });
     }
 );

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CafeteriaController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NotesController;
 use App\Http\Controllers\StreamController;
 use App\Http\Controllers\StudentController;
@@ -81,3 +82,10 @@ Route::post('cafeteria/store', [CafeteriaController::class, 'store'])->name('caf
 Route::get('cafeteria/{cafeteria}/edit', [CafeteriaController::class, 'edit'])->name('cafeteria.edit');
 Route::post('cafeteria/update/{id}', [CafeteriaController::class, 'update'])->name('cafeteria.update');
 Route::delete('cafeteria/{cafeteria}', [CafeteriaController::class, 'destroy'])->name('cafeteria.destroy');
+
+Route::get('news', [NewsController::class, 'index'])->name('news');
+Route::get('news/create', [NewsController::class, 'create'])->name('news.create');
+Route::post('news/store', [NewsController::class, 'store'])->name('news.store');
+Route::get('news/{news}/edit', [NewsController::class, 'edit'])->name('news.edit');
+Route::post('news/update/{id}', [NewsController::class, 'update'])->name('news.update');
+Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');

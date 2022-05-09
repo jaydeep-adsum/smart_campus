@@ -72,6 +72,12 @@
                     <p>Cafeteria</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{route('news')}}" class="nav-link {{ Request::is('news*')? 'active1':''}}">
+                    <i class="fa-solid fa-newspaper nav-icon"></i>
+                    <p>News</p>
+                </a>
+            </li>
         </ul>
     </nav>
 </div>

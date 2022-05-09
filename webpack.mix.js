@@ -40,6 +40,8 @@ mix.js('resources/assets/js/student/student.js',
         'public/assets/js/category/category.js')
     .js('resources/assets/js/cafeteria/cafeteria.js',
         'public/assets/js/cafeteria/cafeteria.js')
+    .js('resources/assets/js/news/news.js',
+        'public/assets/js/news/news.js')
     .js('resources/assets/js/custom/custom.js',
         'public/assets/js/custom/custom.js')
     .js('resources/assets/js/custom/phone-number-country-code.js',
