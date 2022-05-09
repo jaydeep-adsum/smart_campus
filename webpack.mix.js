@@ -36,6 +36,10 @@ mix.js('resources/assets/js/student/student.js',
         'public/assets/js/textbooks/textbook.js')
     .js('resources/assets/js/streams/stream.js',
         'public/assets/js/streams/stream.js')
+    .js('resources/assets/js/category/category.js',
+        'public/assets/js/category/category.js')
+    .js('resources/assets/js/cafeteria/cafeteria.js',
+        'public/assets/js/cafeteria/cafeteria.js')
     .js('resources/assets/js/custom/custom.js',
         'public/assets/js/custom/custom.js')
     .js('resources/assets/js/custom/phone-number-country-code.js',

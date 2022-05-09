@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CafeteriaController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\NotesController;
 use App\Http\Controllers\StreamController;
@@ -66,3 +68,16 @@ Route::post('textbooks/store', [TextBookController::class, 'store'])->name('text
 Route::get('textbooks/{id}/edit', [TextBookController::class, 'edit'])->name('textbooks.edit');
 Route::post('textbooks/update/{id}', [TextBookController::class, 'update'])->name('textbooks.update');
 Route::delete('textbooks/{textbook}', [TextBookController::class, 'destroy'])->name('textbooks.destroy');
+
+Route::get('category', [CategoryController::class, 'index'])->name('category');
+Route::post('category/store', [CategoryController::class, 'store'])->name('category.store');
+Route::get('category/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
+Route::post('category/update', [CategoryController::class, 'update'])->name('category.update');
+Route::delete('category/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
+
+Route::get('cafeteria', [CafeteriaController::class, 'index'])->name('cafeteria');
+Route::get('cafeteria/create', [CafeteriaController::class, 'create'])->name('cafeteria.create');
+Route::post('cafeteria/store', [CafeteriaController::class, 'store'])->name('cafeteria.store');
+Route::get('cafeteria/{cafeteria}/edit', [CafeteriaController::class, 'edit'])->name('cafeteria.edit');
+Route::post('cafeteria/update/{id}', [CafeteriaController::class, 'update'])->name('cafeteria.update');
+Route::delete('cafeteria/{cafeteria}', [CafeteriaController::class, 'destroy'])->name('cafeteria.destroy');

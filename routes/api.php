@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CafeteriaController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\NoteController;
 use App\Http\Controllers\Api\StudentController;
@@ -38,6 +39,9 @@ Route::namespace('Api')->group(
 
             Route::get('textbooks', [TextBookController::class, 'index']);
             Route::post('getTextbook', [TextBookController::class, 'getTextbook']);
+
+            Route::get('cafeteria', [CafeteriaController::class, 'index']);
+            Route::post('getCafeteria', [CafeteriaController::class, 'getCafeteria']);
         });
     }
 );

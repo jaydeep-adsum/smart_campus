@@ -60,6 +60,18 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item">
+                <a href="{{route('category')}}" class="nav-link {{ Request::is('category*')? 'active1':''}}">
+                    <i class="fa-solid fa-list nav-icon"></i>
+                    <p>Category</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('cafeteria')}}" class="nav-link {{ Request::is('cafeteria*')? 'active1':''}}">
+                    <i class="fa-solid fa-hotel nav-icon"></i>
+                    <p>Cafeteria</p>
+                </a>
+            </li>
         </ul>
     </nav>
 </div>
