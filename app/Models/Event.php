@@ -28,7 +28,6 @@ class Event extends Model implements HasMedia
         'date' => 'required',
         'location' => 'required',
         'detail' => 'required',
-        'registration_link' => 'required',
     ];
 
     public function getImageUrlAttribute()

@@ -39,7 +39,9 @@
                 data: 'year',
                 name: 'year'
             }, {
-                data: 'stream',
+                data: function data(row) {
+                    return row.stream.name;
+                },
                 name: 'stream'
             }, {
                 data: function data(row) {

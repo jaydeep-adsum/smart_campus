@@ -73,7 +73,7 @@
                             {{ Form::number('mobile_no', null, ['class' => 'form-control','pattern'=>"[1-9]{1}[0-9]{9}"]) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Emergency Mobile No').':') }}
+                            {{ Form::label(__('Emergency Mobile No').':') }}<span class="mandatory">*</span>
                             {{ Form::number('emergency_contact', null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">

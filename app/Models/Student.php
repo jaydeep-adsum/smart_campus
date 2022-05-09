@@ -73,6 +73,7 @@ class Student extends Authenticatable implements HasMedia
         'student_id' => 'required',
         'year' => 'required',
         'mobile_no' => 'required|numeric|digits:10',
+        'emergency_contact' => 'required|numeric|digits:10',
         'address' => 'required',
         'city' => 'required',
         'state' => 'required',

@@ -34,6 +34,8 @@ mix.js('resources/assets/js/student/student.js',
         'public/assets/js/notes/note.js')
     .js('resources/assets/js/textbooks/textbook.js',
         'public/assets/js/textbooks/textbook.js')
+    .js('resources/assets/js/streams/stream.js',
+        'public/assets/js/streams/stream.js')
     .js('resources/assets/js/custom/custom.js',
         'public/assets/js/custom/custom.js')
     .js('resources/assets/js/custom/phone-number-country-code.js',

@@ -19,17 +19,24 @@ class TextBook extends Model implements HasMedia
         'written_by' => 'required',
         'description' => 'required',
         'year' => 'required',
-        'stream' => 'required',
+        'stream_id' => 'required',
     ];
     public $table = 'text_books';
+    protected $appends = ['image_url', 'pdf_url'];
+    protected $with = ['stream'];
     public $fillable = [
         'title',
         'written_by',
         'description',
         'year',
-        'stream',
+        'stream_id',
     ];
-    protected $appends = ['image_url', 'pdf_url'];
+
+    public function stream()
+    {
+        return $this->belongsTo(Stream::class, 'stream_id');
+    }
+
 
     public function getImageUrlAttribute()
     {

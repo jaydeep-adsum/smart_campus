@@ -135,7 +135,7 @@
     </aside>
 
     <div class="content-wrapper">
-        <div class="content-header bg-white pt-3 d-flex justify-content-between">
+        <div class="bg-white py-2 d-flex justify-content-between">
             {{--            <div class="container-fluid bg-white pt-3 header-div d-flex justify-content-between">--}}
             <div>
                 <h3 class="card-title m-0 p-0 pl-4">@yield('title')</h3>

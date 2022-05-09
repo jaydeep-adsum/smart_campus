@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Datatable\TextBooksDatatable;
 use App\Http\Requests\textbook\CreateTextBookRequest;
 use App\Http\Requests\textbook\UpdateTextBookRequest;
+use App\Models\Stream;
 use App\Models\TextBook;
 use App\Repositories\TextBookRepository;
 use DataTables;
@@ -45,7 +46,8 @@ class TextBookController extends AppBaseController
      */
     public function create()
     {
-        return view('textbooks.create');
+        $stream = Stream::pluck('name', 'id');
+        return view('textbooks.create', compact('stream'));
     }
 
     /**
@@ -74,9 +76,10 @@ class TextBookController extends AppBaseController
      */
     public function edit($id)
     {
+        $stream = Stream::pluck('name', 'id');
         $textBooks = $this->textBookRepository->find($id);
 
-        return view('textbooks.edit', compact('textBooks'));
+        return view('textbooks.edit', compact('textBooks', 'stream'));
     }
 
     /**

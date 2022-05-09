@@ -33,7 +33,7 @@
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Stream').':') }} <span class="mandatory">*</span>
-                            {{ Form::text('stream', null, ['class' => 'form-control','required']) }}
+                            {{ Form::select('stream_id', $stream,null, ['class' => 'form-control','required','id'=>'stream']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Description').':') }} <span class="mandatory">*</span>
@@ -42,11 +42,11 @@
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             <div class="row">
                                 <div class="col-md-6">
-                                    {{ Form::label(__('Image').':') }}
+                                    {{ Form::label(__('Image').':') }}<span class="mandatory">*</span>
                                     <div>
                                         <label class='file-label btn btn-primary mr-2'><i
                                                 class="fa-solid fa-image mr-2"></i>Choose Image
-                                            {{ Form::file('image') }}
+                                            {{ Form::file('image',['id'=>'image']) }}
                                         </label>
                                     </div>
                                     <div class="">
@@ -55,16 +55,17 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    {{ Form::label(__('Pdf').':') }}
+                                    {{ Form::label(__('Pdf').':') }}<span class="mandatory">*</span>
                                     <div>
                                         <label class='file-label btn btn-primary mr-2'><i
                                                 class="fa-solid fa-file-pdf mr-2"></i>Choose Pdf
-                                            {{ Form::file('pdf') }}
+                                            {{ Form::file('pdf',['id'=>'pdf']) }}
                                         </label>
                                     </div>
                                     <div class="">
                                         @if($notes->pdf_url)
-                                            <a title="Download" class="btn edit-btn" href="{{$notes->pdf_url}}"
+                                            <a title="Download" id="pdfSrc" class="btn edit-btn"
+                                               href="{{$notes->pdf_url}}"
                                                download>
                                                 <i class="fa-solid fa-download"></i>
                                             </a>
@@ -74,7 +75,7 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-12 pt-4">
-                            {{ Form::submit(__('Save'), ['class' => 'btn btn-primary']) }}
+                            {{ Form::submit(__('Save'), ['class' => 'btn btn-primary saveNote']) }}
                             <a href="{{ route('notes') }}"
                                class="btn btn-default">{{__('Cancel')}}</a>
                         </div>

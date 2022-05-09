@@ -33,6 +33,12 @@
                     <p>Events</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{route('streams')}}" class="nav-link {{ Request::is('streams*')? 'active1':''}}">
+                    <i class="fa-solid fa-laptop-file nav-icon"></i>
+                    <p>Streams</p>
+                </a>
+            </li>
 
             <li class="nav-item has-treeview {{ Request::is('notes*','textbooks*')? 'menu-open':''}}">
                 <a href="#" class="nav-link">

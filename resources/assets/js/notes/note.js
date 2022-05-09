@@ -44,7 +44,9 @@ $(document).ready(function () {
                 name: 'year'
             },
             {
-                data: 'stream',
+                data: function data(row) {
+                    return row.stream.name;
+                },
                 name: 'stream'
             },
             {

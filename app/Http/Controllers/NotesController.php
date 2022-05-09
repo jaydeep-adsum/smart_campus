@@ -6,6 +6,7 @@ use App\Datatable\NotesDatatable;
 use App\Http\Requests\note\CreateNoteRequest;
 use App\Http\Requests\note\UpdateNoteRequest;
 use App\Models\Note;
+use App\Models\Stream;
 use App\Repositories\NoteRepository;
 use DataTables;
 use Exception;
@@ -45,7 +46,8 @@ class NotesController extends AppBaseController
      */
     public function create()
     {
-        return view('note.create');
+        $stream = Stream::pluck('name', 'id');
+        return view('note.create', compact('stream'));
     }
 
     /**
@@ -74,9 +76,10 @@ class NotesController extends AppBaseController
      */
     public function edit($id)
     {
+        $stream = Stream::pluck('name', 'id');
         $notes = $this->noteRepository->find($id);
 
-        return view('note.edit', compact('notes'));
+        return view('note.edit', compact('notes', 'stream'));
     }
 
     /**

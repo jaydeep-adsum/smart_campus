@@ -67,6 +67,21 @@
         });
     }
 
+    window.displaySuccessMessage = function (message) {
+        iziToast.success({
+            title: 'Success',
+            message: message,
+            position: 'topRight'
+        });
+    };
+
+    window.displayErrorMessage = function (message) {
+        iziToast.error({
+            title: 'Error',
+            message: message,
+            position: 'topRight'
+        });
+    };
     /******/
 })()
 ;

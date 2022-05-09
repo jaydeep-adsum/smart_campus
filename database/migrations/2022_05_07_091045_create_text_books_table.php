@@ -19,8 +19,12 @@ class CreateTextBooksTable extends Migration
             $table->string('written_by');
             $table->text('description');
             $table->string('year');
-            $table->string('stream');
+            $table->unsignedInteger('stream_id');
             $table->timestamps();
+
+            $table->foreign('stream_id')->references('id')->on('streams')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

@@ -11,7 +11,7 @@ class NoteRepository extends BaseRepository
         'chapter',
         'description',
         'year',
-        'stream',
+        'stream_id',
     ];
 
     public function getFieldsSearchable()

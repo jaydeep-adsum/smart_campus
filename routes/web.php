@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\NotesController;
+use App\Http\Controllers\StreamController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TextBookController;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,12 @@ Route::post('events/store', [EventController::class, 'store'])->name('events.sto
 Route::get('events/{id}/edit', [EventController::class, 'edit'])->name('events.edit');
 Route::post('events/update/{id}', [EventController::class, 'update'])->name('events.update');
 Route::delete('events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
+
+Route::get('streams', [StreamController::class, 'index'])->name('streams');
+Route::post('streams/store', [StreamController::class, 'store'])->name('streams.store');
+Route::get('streams/{stream}/edit', [StreamController::class, 'edit'])->name('streams.edit');
+Route::post('streams/update', [StreamController::class, 'update'])->name('streams.update');
+Route::delete('streams/{stream}', [StreamController::class, 'destroy'])->name('streams.destroy');
 
 Route::get('notes', [NotesController::class, 'index'])->name('notes');
 Route::get('notes/create', [NotesController::class, 'create'])->name('notes.create');
