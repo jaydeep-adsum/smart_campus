@@ -199,7 +199,7 @@ class CafeteriaController extends AppBaseController
                 return $this->sendError('Something went wrong');
             }
 
-            return $this->sendResponse($category, ('Category with cafeteria fetch successfully'));
+            return $this->sendResponse(['data'=>$category], ('Category with cafeteria fetch successfully'));
         } catch (Exception $ex) {
             return $this->sendError($ex);
         }

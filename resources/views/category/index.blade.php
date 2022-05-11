@@ -3,7 +3,7 @@
     Category
 @endsection
 @section('header')
-    <a href="#" class="btn btn-primary addCategoryModal"><i class="fa-solid fa-plus"></i> Add</a>
+    <a href="{{route('category.create')}}" class="btn btn-primary addCategoryModal"><i class="fa-solid fa-plus"></i> Add</a>
 @endsection
 @section('content')
     <div class="row">
@@ -14,8 +14,6 @@
                 </div>
             </div>
         </div>
-        @include('category.create')
-        @include('category.edit')
     </div>
 @endsection
 @section('scripts')

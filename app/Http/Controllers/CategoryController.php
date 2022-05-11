@@ -6,11 +6,14 @@ use App\Datatable\CategoryDatatable;
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
 use DataTables;
+use Flash;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
 class CategoryController extends AppBaseController
 {
@@ -33,35 +36,53 @@ class CategoryController extends AppBaseController
         return view('category.index');
     }
 
+    public function create()
+    {
+        return view('category.create');
+    }
+
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @return Application|RedirectResponse|Redirector
      */
     public function store(Request $request)
     {
         $category = $this->categoryRepository->create($request->all());
 
-        return $this->sendResponse($category, 'Category saved successfully.');
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $category->addMedia($request->image)->toMediaCollection(Category::PATH);
+        }
+        Flash::success('Category added successfully.');
+
+        return redirect(route('category'));
     }
 
-    /**
-     * @param Category $category
-     * @return JsonResponse
+    /**+
+     * @param $id
+     * @return Application|Factory|View
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        return $this->sendResponse($category, 'Category Retrieved Successfully.');
+        $category = $this->categoryRepository->find($id);
+
+        return view('category.edit', compact('category'));
     }
 
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @param $id
+     * @return Application|RedirectResponse|Redirector
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
-        $this->categoryRepository->update($request->all(), $request->categoryId);
+        $category = $this->categoryRepository->update($request->all(), $id);
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $category->clearMediaCollection(Category::PATH);
+            $category->addMedia($request->image)->toMediaCollection(Category::PATH);
+        }
+        Flash::success('Category updated successfully.');
 
-        return $this->sendSuccess('Category updated successfully.');
+        return redirect(route('category'));
     }
 
     /**
