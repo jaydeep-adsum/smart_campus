@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CafeteriaController;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\NoteController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\TextBookController;
@@ -44,6 +45,9 @@ Route::namespace('Api')->group(
             Route::post('getCafeteria', [CafeteriaController::class, 'getCafeteria']);
             Route::get('categoryWithCafeteria', [CafeteriaController::class, 'getCategoryWithCafeteria']);
             Route::post('singleCategoryWithCafeteria', [CafeteriaController::class, 'getSingleCategoryWithCafeteria']);
+
+            Route::get('news', [NewsController::class, 'index']);
+            Route::post('getNews', [NewsController::class, 'getNews']);
         });
     }
 );

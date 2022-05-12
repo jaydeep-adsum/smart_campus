@@ -14,6 +14,8 @@ class EventsRepository extends BaseRepository
         'date',
         'location',
         'detail',
+        'from',
+        'to',
         'registration_link',
         'created_by',
     ];

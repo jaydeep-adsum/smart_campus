@@ -18,6 +18,8 @@ class Event extends Model implements HasMedia
         'date',
         'location',
         'detail',
+        'from',
+        'to',
         'registration_link',
         'created_by',
     ];
@@ -28,6 +30,8 @@ class Event extends Model implements HasMedia
         'date' => 'required',
         'location' => 'required',
         'detail' => 'required',
+        'from' => 'required',
+        'to' => 'required',
     ];
 
     public function getImageUrlAttribute()

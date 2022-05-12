@@ -118,6 +118,7 @@
         $('.datepicker').daterangepicker({
             singleDatePicker: true,
             autoApply: true,
+            showDropdowns: true,
             startDate: new Date(),
             maxDate: new Date(),
             locale: {

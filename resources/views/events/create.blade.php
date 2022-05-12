@@ -29,8 +29,24 @@
                             {{ Form::text('date', null, ['class' => 'form-control datepicker','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                            {{ Form::label(__('From').':') }} <span class="mandatory">*</span>
+                            {{ Form::text('from', null, ['class' => 'form-control timepicker','required']) }}
+                        </div>
+                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                            {{ Form::label(__('To').':') }} <span class="mandatory">*</span>
+                            {{ Form::text('to', null, ['class' => 'form-control timepicker','required']) }}
+                        </div>
+                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Location').':') }} <span class="mandatory">*</span>
                             {{ Form::text('location', null, ['class' => 'form-control','required']) }}
+                        </div>
+                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                            {{ Form::label(__('Registration Link').':') }}
+                            {{ Form::text('registration_link', null, ['class' => 'form-control']) }}
+                        </div>
+                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                            {{ Form::label(__('Detail').':') }} <span class="mandatory">*</span>
+                            {{ Form::textarea('detail', null, ['class' => 'form-control ckeditor','required','rows'=>'3']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Image').':') }}
@@ -40,14 +56,6 @@
                                     {{ Form::file('image') }}
                                 </label>
                             </div>
-                        </div>
-                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Detail').':') }} <span class="mandatory">*</span>
-                            {{ Form::textarea('detail', null, ['class' => 'form-control ckeditor','required','rows'=>'3']) }}
-                        </div>
-                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Registration Link').':') }}
-                            {{ Form::text('registration_link', null, ['class' => 'form-control']) }}
                         </div>
                         <div class="form-group col-sm-12 pt-4">
                             {{ Form::submit(__('Save'), ['class' => 'btn btn-primary']) }}
@@ -66,14 +74,19 @@
         $('.datepicker').daterangepicker({
             singleDatePicker: true,
             showDropdowns: true,
-            autoUpdateInput: true,
-            timePicker: true,
-            timePicker24Hour: true,
+            autoApply: true,
             startDate: new Date(),
             minDate: new Date(),
             locale: {
-                format: 'YYYY-MM-DD hh:mm'
+                format: 'YYYY-MM-DD'
             }
         });
+        $('.timepicker').timepicker({
+                timeFormat: 'h:mm p',
+                interval: 10,
+                dynamic: true,
+                dropdown: true,
+                scrollbar: true
+            });
     </script>
 @endsection

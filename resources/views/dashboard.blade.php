@@ -48,6 +48,7 @@
     <link rel="stylesheet" href="{{ asset('public/assets/css/style.css')}}">
     <link href="{{asset('public/assets/izitoast/css/iziToast.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('public/assets/css/inttel/css/intlTelInput.css') }}">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <style>
         .nav-logo {
             width: 35%;
@@ -192,6 +193,8 @@
 <script type="text/javascript" src="{{ asset('public/assets/js/pnotify.custom.min.js')}}"></script>
 <script src="{{asset('public/assets/js/custom/custom.js')}}"></script>
 <script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js">
+</script>
 <script>
     $(document).ready(function () {
         $('.alert').delay(3000).slideUp(300);
