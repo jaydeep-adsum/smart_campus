@@ -11,7 +11,7 @@
                 <div class="alert alert-danger d-none" id="streamValidationErrorsBox"></div>
                 <div class="row">
                     <div class="form-group col-sm-12">
-                        {{ Form::label('stream',__('Stream').':') }}<span class="text-danger">*</span>
+                        {{ Form::label('stream',__('Stream').':') }}<span class="mandatory">*</span>
                         {{ Form::text('name', null, ['class' => 'form-control','required','id'=>'stream']) }}
                     </div>
                 </div>

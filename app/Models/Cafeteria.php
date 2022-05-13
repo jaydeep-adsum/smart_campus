@@ -23,6 +23,13 @@ class Cafeteria extends Model implements HasMedia
     protected $appends = ['image_url'];
     protected $with = ['category'];
 
+    public static $rules = [
+        'name' => 'required',
+        'price' => 'required',
+        'category_id' => 'required',
+        'image' => 'required',
+    ];
+
     /**
      * @return BelongsTo
      */

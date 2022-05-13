@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Datatable\NewsDatatable;
+use App\Http\Requests\news\CreateNewsRequest;
+use App\Http\Requests\news\UpdateNewsRequest;
 use App\Models\News;
 use App\Repositories\NewsRepository;
 use DataTables;
@@ -49,7 +51,7 @@ class NewsController extends AppBaseController
      * @param Request $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function store(Request $request)
+    public function store(CreateNewsRequest $request)
     {
         $news = $this->newsRepository->create($request->all());
 
@@ -77,7 +79,7 @@ class NewsController extends AppBaseController
      * @param $id
      * @return Application|RedirectResponse|Redirector
      */
-    public function update(Request $request, $id)
+    public function update(UpdateNewsRequest $request, $id)
     {
         $news = $this->newsRepository->update($request->all(), $id);
 

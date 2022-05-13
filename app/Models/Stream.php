@@ -9,8 +9,14 @@ class Stream extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
     public $table = 'streams';
 
+    /**
+     * @var string[]
+     */
     public $fillable = [
         'name'
     ];

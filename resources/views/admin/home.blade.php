@@ -51,6 +51,50 @@
                     </a>
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="card bg-info">
+                    <a href="{{route('streams')}}">
+                        <div class="card-body py-4 px-4">
+                            <span style="font-size: 40px;"><i class="fa-solid fa-laptop-file"></i></span>
+                            <h2 class="fw">{{$data['streamCount']?$data['streamCount']:0}}</h2>
+                            <p>Stream</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-dark">
+                    <a href="{{route('cafeteria')}}">
+                        <div class="card-body py-4 px-4">
+                            <span style="font-size: 40px;"><i class="fa-solid fa-hotel"></i></span>
+                            <h2 class="fw">{{$data['cafeteriaCount']?$data['cafeteriaCount']:0}}</h2>
+                            <p>Cafeteria</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-success">
+                    <a href="{{route('news')}}">
+                        <div class="card-body py-4 px-4">
+                            <span style="font-size: 40px;"><i class="fa-solid fa-newspaper"></i></span>
+                            <h2 class="fw">{{$data['newsCount']?$data['newsCount']:0}}</h2>
+                            <p>News</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-warning">
+                    <a href="{{route('fellowship')}}">
+                        <div class="card-body py-4 px-4">
+                            <span style="font-size: 40px;"><i class="fa-solid fa-people-arrows-left-right"></i></span>
+                            <h2 class="fw">{{$data['fellowshipCount']?$data['fellowshipCount']:0}}</h2>
+                            <p>Fellowship</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
     {{--                </div>--}}

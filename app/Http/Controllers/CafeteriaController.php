@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Datatable\CafeteriaDatatable;
+use App\Http\Requests\cafeteria\CreateCafeteriaRequest;
+use App\Http\Requests\cafeteria\UpdateCafeteriaRequest;
 use App\Models\Cafeteria;
 use App\Models\Category;
 use App\Repositories\CafeteriaRepository;
@@ -51,7 +53,7 @@ class CafeteriaController extends AppBaseController
      * @param Request $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function store(Request $request)
+    public function store(CreateCafeteriaRequest $request)
     {
         $cafeteria = $this->cafeteriaRepository->create($request->all());
 
@@ -81,7 +83,7 @@ class CafeteriaController extends AppBaseController
      * @param $id
      * @return Application|RedirectResponse|Redirector
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCafeteriaRequest $request, $id)
     {
         $input = $request->all();
 

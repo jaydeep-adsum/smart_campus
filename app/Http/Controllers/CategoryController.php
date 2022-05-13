@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Datatable\CategoryDatatable;
+use App\Http\Requests\category\CreateCategoryRequest;
+use App\Http\Requests\category\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
 use DataTables;
@@ -42,10 +44,10 @@ class CategoryController extends AppBaseController
     }
 
     /**
-     * @param Request $request
+     * @param CreateCategoryRequest $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function store(Request $request)
+    public function store(CreateCategoryRequest $request)
     {
         $category = $this->categoryRepository->create($request->all());
 
@@ -69,11 +71,11 @@ class CategoryController extends AppBaseController
     }
 
     /**
-     * @param Request $request
+     * @param UpdateCategoryRequest $request
      * @param $id
      * @return Application|RedirectResponse|Redirector
      */
-    public function update(Request $request,$id)
+    public function update(UpdateCategoryRequest $request,$id)
     {
         $category = $this->categoryRepository->update($request->all(), $id);
         if ($request->hasFile('image') && $request->file('image')->isValid()) {

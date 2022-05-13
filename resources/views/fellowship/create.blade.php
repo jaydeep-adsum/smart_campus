@@ -29,11 +29,11 @@
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Start Date').':') }} <span class="mandatory">*</span>
-                            {{ Form::text('start_date', null, ['class' => 'form-control datepicker','required']) }}
+                            {{ Form::text('start_date', null, ['class' => 'form-control','required','id'=>'start_date']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('End Date').':') }} <span class="mandatory">*</span>
-                            {{ Form::text('end_date', null, ['class' => 'form-control datepicker','required']) }}
+                            {{ Form::text('end_date', null, ['class' => 'form-control','required','id'=>'end_date','disabled']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Description').':') }} <span class="mandatory">*</span>
@@ -53,7 +53,7 @@
 @endsection
 @section('scripts')
     <script>
-        $('.datepicker').daterangepicker({
+        $('#start_date').daterangepicker({
             singleDatePicker: true,
             autoApply: true,
             showDropdowns: true,
@@ -61,6 +61,17 @@
             locale: {
                 format: 'YYYY-MM-DD'
             }
+        }, function(start) {
+            $('#end_date').removeAttr('disabled');
+            $('#end_date').daterangepicker({
+                singleDatePicker: true,
+                autoApply: true,
+                showDropdowns: true,
+                minDate:start,
+                locale: {
+                    format: 'YYYY-MM-DD'
+                }
+            })
         });
     </script>
 @endsection

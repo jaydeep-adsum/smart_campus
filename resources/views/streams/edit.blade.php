@@ -12,7 +12,7 @@
                 {{ Form::hidden('streamId',null,['id'=>'streamId']) }}
                 <div class="row">
                     <div class="form-group col-sm-12">
-                        {{ Form::label('stream',__('Stream').':') }}<span class="text-danger">*</span>
+                        {{ Form::label('stream',__('Stream').':') }}<span class="mandatory">*</span>
                         {{ Form::text('name', null, ['class' => 'form-control','required','id'=>'editStream']) }}
                     </div>
                 </div>

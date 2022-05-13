@@ -3,18 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Datatable\FellowshipDatatable;
+use App\Http\Requests\fellowship\CreateFellowshipRequest;
+use App\Http\Requests\fellowship\UpdateFellowshipRequest;
 use App\Models\Fellowship;
 use App\Repositories\FellowshipRepository;
 use DataTables;
 use Flash;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
 class FellowshipController extends AppBaseController
 {
+    /**
+     * FellowshipController constructor.
+     * @param FellowshipRepository $fellowshipRepository
+     */
     public function __construct(FellowshipRepository $fellowshipRepository)
     {
         $this->fellowshipRepository = $fellowshipRepository;
     }
+
+    /**
+     * @param Request $request
+     * @return Application|Factory|View
+     */
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -23,11 +40,19 @@ class FellowshipController extends AppBaseController
         return view('fellowship.index');
     }
 
+    /**
+     * @return Application|Factory|View
+     */
     public function create()
     {
         return view('fellowship.create');
     }
-    public function store(Request $request)
+
+    /**
+     * @param CreateFellowshipRequest $request
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function store(CreateFellowshipRequest $request)
     {
         $this->fellowshipRepository->create($request->all());
 
@@ -35,6 +60,11 @@ class FellowshipController extends AppBaseController
 
         return redirect(route('fellowship'));
     }
+
+    /**
+     * @param $id
+     * @return Application|Factory|View
+     */
     public function edit($id)
     {
         $fellowship = $this->fellowshipRepository->find($id);
@@ -42,7 +72,12 @@ class FellowshipController extends AppBaseController
         return view('fellowship.edit', compact('fellowship'));
     }
 
-    public function update(Request $request, $id)
+    /**
+     * @param UpdateFellowshipRequest $request
+     * @param $id
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function update(UpdateFellowshipRequest $request, $id)
     {
 
         $fellowship = $this->fellowshipRepository->update($request->all(), $id);
@@ -52,6 +87,10 @@ class FellowshipController extends AppBaseController
         return redirect(route('fellowship'));
     }
 
+    /**
+     * @param Fellowship $fellowship
+     * @return JsonResponse
+     */
     public function destroy(Fellowship $fellowship)
     {
         $fellowship->delete();

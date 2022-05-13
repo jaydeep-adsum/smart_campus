@@ -40,6 +40,10 @@ $(document).ready(function () {
     });
     $(document).on('submit', '#addStreamForm', function (e) {
         e.preventDefault();
+        if ($('#stream').val()=="") {
+            displayErrorMessage('Stream Name field is required.');
+            return false;
+        }
         $.ajax({
             url: streamSaveUrl,
             type: 'POST',
@@ -80,6 +84,10 @@ $(document).ready(function () {
 
     $(document).on('submit', '#editStreamForm', function (e) {
         e.preventDefault();
+        if ($('#editStream').val()=="") {
+            displayErrorMessage('Stream Name field is required.');
+            return false;
+        }
         $.ajax({
             url: streamUrl + '/update',
             type: 'POST',

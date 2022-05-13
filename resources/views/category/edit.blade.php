@@ -20,11 +20,11 @@
                 <div class="card-body">
                     {{ Form::model($category,['route' => ['category.update',$category->id], 'files' => 'true']) }}
                     <div class="form-group col-sm-6">
-                        {{ Form::label('category',__('Category').':') }}<span class="text-danger">*</span>
+                        {{ Form::label('category',__('Category').':') }}<span class="mandatory">*</span>
                         {{ Form::text('name', null, ['class' => 'form-control','required','id'=>'category']) }}
                     </div>
                     <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                        {{ Form::label(__('Image').':') }}
+                        {{ Form::label(__('Image').':') }}<span class="mandatory">*</span>
                         <div>
                             <label class='file-label btn btn-primary mr-2'><i
                                     class="fa-solid fa-image mr-2"></i>Choose Image

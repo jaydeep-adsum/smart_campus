@@ -20,6 +20,12 @@ class News extends Model implements HasMedia
     ];
     protected $appends = ['image_url'];
 
+    public static $rules = [
+        'title' => 'required',
+        'description' => 'required',
+        'image' => 'required',
+    ];
+
     public function getImageUrlAttribute()
     {
         /** @var Media $media */

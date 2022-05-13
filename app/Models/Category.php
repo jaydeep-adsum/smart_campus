@@ -28,9 +28,10 @@ class Category extends Model implements HasMedia
 
     protected $appends = ['image_url'];
 
-    /**
-     * @var string[]
-     */
+    public static $rules = [
+        'name' => 'required',
+        'image' => 'required',
+    ];
 
     /**
      * @return HasMany
