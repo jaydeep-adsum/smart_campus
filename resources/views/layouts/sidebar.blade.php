@@ -22,6 +22,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{route('institute')}}" class="nav-link {{ Request::is('institute*')? 'active1':''}}">
+                    <i class="fa-solid fa-building nav-icon"></i>
+                    <p>Institute</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{route('student')}}" class="nav-link {{ Request::is('student*')? 'active1':''}}">
                     <i class="fa-solid fa-users nav-icon"></i>
                     <p>Students</p>

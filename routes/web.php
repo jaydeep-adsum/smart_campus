@@ -4,6 +4,7 @@ use App\Http\Controllers\CafeteriaController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FellowshipController;
+use App\Http\Controllers\InstituteController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NotesController;
 use App\Http\Controllers\StreamController;
@@ -36,6 +37,12 @@ require __DIR__.'/auth.php';
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+
+    Route::get('institute', [InstituteController::class, 'index'])->name('institute');
+    Route::post('institute/store', [InstituteController::class, 'store'])->name('institute.store');
+    Route::get('institute/{institute}/edit', [InstituteController::class, 'edit'])->name('institute.edit');
+    Route::post('institute/update', [InstituteController::class, 'update'])->name('institute.update');
+    Route::delete('institute/{institute}', [InstituteController::class, 'destroy'])->name('institute.destroy');
 
     Route::get('student', [StudentController::class, 'index'])->name('student');
     Route::get('student/create', [StudentController::class, 'create'])->name('student.create');
