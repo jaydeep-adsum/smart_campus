@@ -78,6 +78,12 @@
                     <p>News</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{route('fellowship')}}" class="nav-link {{ Request::is('fellowship*')? 'active1':''}}">
+                    <i class="fa-solid fa-people-arrows-left-right nav-icon"></i>
+                    <p>Fellowship</p>
+                </a>
+            </li>
         </ul>
     </nav>
 </div>

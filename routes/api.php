@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CafeteriaController;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\FellowshipController;
 use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\NoteController;
 use App\Http\Controllers\Api\StudentController;
@@ -48,6 +49,9 @@ Route::namespace('Api')->group(
 
             Route::get('news', [NewsController::class, 'index']);
             Route::post('getNews', [NewsController::class, 'getNews']);
+
+            Route::get('fellowship', [FellowshipController::class, 'index']);
+            Route::post('getFellowship', [FellowshipController::class, 'getFellowship']);
         });
     }
 );

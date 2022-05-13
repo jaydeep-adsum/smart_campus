@@ -671,11 +671,17 @@ select {
 .ml-1 {
   margin-left: 0.25rem;
 }
-.ml-auto {
-  margin-left: auto;
+.mr-1 {
+  margin-right: 0.25rem;
+}
+.mb-0 {
+  margin-bottom: 0px;
 }
 .mr-2 {
   margin-right: 0.5rem;
+}
+.ml-auto {
+  margin-left: auto;
 }
 .ml-2 {
   margin-left: 0.5rem;
@@ -695,17 +701,11 @@ select {
 .-mt-px {
   margin-top: -1px;
 }
-.mb-0 {
-  margin-bottom: 0px;
-}
 .mb-4 {
   margin-bottom: 1rem;
 }
 .mt-1 {
   margin-top: 0.25rem;
-}
-.mr-1 {
-  margin-right: 0.25rem;
 }
 .mt-6 {
   margin-top: 1.5rem;
@@ -933,6 +933,9 @@ select {
 .fill-current {
   fill: currentColor;
 }
+.p-2 {
+  padding: 0.5rem;
+}
 .p-6 {
   padding: 1.5rem;
 }
@@ -941,9 +944,6 @@ select {
 }
 .p-3 {
   padding: 0.75rem;
-}
-.p-2 {
-  padding: 0.5rem;
 }
 .px-4 {
   padding-left: 1rem;
@@ -981,23 +981,23 @@ select {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
-.pt-8 {
-  padding-top: 2rem;
+.pb-0 {
+  padding-bottom: 0px;
+}
+.pt-0 {
+  padding-top: 0px;
 }
 .pt-4 {
   padding-top: 1rem;
+}
+.pt-8 {
+  padding-top: 2rem;
 }
 .pl-4 {
   padding-left: 1rem;
 }
 .pt-3 {
   padding-top: 0.75rem;
-}
-.pb-0 {
-  padding-bottom: 0px;
-}
-.pt-0 {
-  padding-top: 0px;
 }
 .pt-6 {
   padding-top: 1.5rem;
