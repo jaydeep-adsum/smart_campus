@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\FellowshipController;
 use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\NoteController;
+use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\TextBookController;
 use Illuminate\Http\Request;
@@ -52,6 +53,9 @@ Route::namespace('Api')->group(
 
             Route::get('fellowship', [FellowshipController::class, 'index']);
             Route::post('getFellowship', [FellowshipController::class, 'getFellowship']);
+
+            Route::get('questions', [QuestionController::class, 'index']);
+            Route::post('getQuestion', [QuestionController::class, 'getQuestion']);
         });
     }
 );

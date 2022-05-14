@@ -7,6 +7,7 @@ use App\Http\Controllers\FellowshipController;
 use App\Http\Controllers\InstituteController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NotesController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\StreamController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TextBookController;
@@ -106,4 +107,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('fellowship/{fellowship}/edit', [FellowshipController::class, 'edit'])->name('fellowship.edit');
     Route::post('fellowship/update/{id}', [FellowshipController::class, 'update'])->name('fellowship.update');
     Route::delete('fellowship/{fellowship}', [FellowshipController::class, 'destroy'])->name('fellowship.destroy');
+
+    Route::get('question', [QuestionController::class, 'index'])->name('question');
+    Route::post('question/store',[QuestionController::class,'store'])->name('question.store');
+    Route::get('question/{question}/edit', [QuestionController::class, 'edit'])->name('question.edit');
+    Route::post('question/update', [QuestionController::class, 'update'])->name('question.update');
+    Route::delete('question/{question}', [QuestionController::class, 'destroy'])->name('question.destroy');
 });

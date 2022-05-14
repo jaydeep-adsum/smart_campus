@@ -78,6 +78,32 @@
                     <p>Cafeteria</p>
                 </a>
             </li>
+            <li class="nav-item has-treeview {{ Request::is('question*','textbooks*')? 'menu-open':''}}">
+                <a href="#" class="nav-link">
+                    <i class="fa-solid fa-handshake nav-icon"></i>
+                    <p>Placement<i class="right fas fa-angle-left"></i></p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('question')}}" class="nav-link {{ Request::is('question*')? 'active1':''}}">
+                            <i class="fas fa-question-circle nav-icon"></i>
+                            <p>Questions & Responses</p>
+                        </a>
+                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route('textbooks')}}" class="nav-link {{ Request::is('textbooks*')? 'active1':''}}">--}}
+{{--                            <i class="fas fa-star nav-icon"></i>--}}
+{{--                            <p>Opportunities</p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route('textbooks')}}" class="nav-link {{ Request::is('textbooks*')? 'active1':''}}">--}}
+{{--                            <i class="fa-solid fa-lightbulb nav-icon"></i>--}}
+{{--                            <p>Interview</p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+                </ul>
+            </li>
             <li class="nav-item">
                 <a href="{{route('news')}}" class="nav-link {{ Request::is('news*')? 'active1':''}}">
                     <i class="fa-solid fa-newspaper nav-icon"></i>
