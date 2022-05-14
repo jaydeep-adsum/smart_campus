@@ -78,7 +78,7 @@
                     <p>Cafeteria</p>
                 </a>
             </li>
-            <li class="nav-item has-treeview {{ Request::is('question*','opportunity*')? 'menu-open':''}}">
+            <li class="nav-item has-treeview {{ Request::is('question*','opportunity*','interview*')? 'menu-open':''}}">
                 <a href="#" class="nav-link">
                     <i class="fa-solid fa-handshake nav-icon"></i>
                     <p>Placement<i class="right fas fa-angle-left"></i></p>
@@ -96,12 +96,12 @@
                             <p>Opportunities</p>
                         </a>
                     </li>
-{{--                    <li class="nav-item">--}}
-{{--                        <a href="{{route('textbooks')}}" class="nav-link {{ Request::is('textbooks*')? 'active1':''}}">--}}
-{{--                            <i class="fa-solid fa-lightbulb nav-icon"></i>--}}
-{{--                            <p>Interview</p>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
+                    <li class="nav-item">
+                        <a href="{{route('interview')}}" class="nav-link {{ Request::is('interview*')? 'active1':''}}">
+                            <i class="fa-solid fa-lightbulb nav-icon"></i>
+                            <p>Interview Tips</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item">

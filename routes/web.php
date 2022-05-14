@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FellowshipController;
 use App\Http\Controllers\InstituteController;
+use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NotesController;
 use App\Http\Controllers\OpportunityController;
@@ -121,4 +122,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('opportunity/{opportunity}/edit',[OpportunityController::class,'edit'])->name('opportunity.edit');
     Route::post('opportunity/update/{id}', [OpportunityController::class, 'update'])->name('opportunity.update');
     Route::delete('opportunity/{opportunity}', [OpportunityController::class, 'destroy'])->name('opportunity.destroy');
+
+    Route::get('interview', [InterviewController::class, 'index'])->name('interview');
+    Route::post('interview/store',[InterviewController::class,'store'])->name('interview.store');
+    Route::get('interview/{interview}/edit', [InterviewController::class, 'edit'])->name('interview.edit');
+    Route::post('interview/update', [InterviewController::class, 'update'])->name('interview.update');
+    Route::delete('interview/{interview}', [InterviewController::class, 'destroy'])->name('interview.destroy');
 });

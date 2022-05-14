@@ -4,26 +4,31 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Controllers\Controller;
-use App\Repositories\QuestionRepository;
+use App\Repositories\InterviewRepository;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class QuestionController extends AppBaseController
+class InterviewController extends AppBaseController
 {
-    public function __construct(QuestionRepository $questionRepository){
-        $this->questionRepository = $questionRepository;
+    /**
+     * InterviewController constructor.
+     * @param InterviewRepository $interviewRepository
+     */
+    public function __construct(InterviewRepository $interviewRepository)
+    {
+        $this->interviewRepository = $interviewRepository;
     }
 
     /**
-     * Swagger definition for Questions
+     * Swagger definition for Interview
      *
      * @OA\Get(
-     *     tags={"Questions"},
-     *     path="/questions",
-     *     description="Questions",
-     *     summary="Questions",
-     *     operationId="questions",
+     *     tags={"Interview"},
+     *     path="/interview",
+     *     description="Interview",
+     *     summary="Interview",
+     *     operationId="interview",
      * @OA\Parameter(
      *     name="Content-Language",
      *     in="header",
@@ -63,23 +68,23 @@ class QuestionController extends AppBaseController
     public function index(Request $request)
     {
         try {
-            $question = $this->questionRepository->paginate(10);
+            $interview = $this->interviewRepository->paginate(10);
 
-            return $this->sendResponse($question, ('Questions fetch successfully.'));
+            return $this->sendResponse($interview, ('Interview fetch successfully.'));
         } catch (Exception $ex) {
             return $this->sendError($ex);
         }
     }
 
     /**
-     * Swagger defination got one Question
+     * Swagger defination got one Interview
      *
      * @OA\Post(
-     *     tags={"Questions"},
-     *     path="/getQuestion",
-     *     description="Get Question",
-     *     summary="Get Single Question",
-     *     operationId="getQuestion",
+     *     tags={"Interview"},
+     *     path="/getInterview",
+     *     description="Get Interview",
+     *     summary="Get Single Interview",
+     *     operationId="getInterview",
      * @OA\Parameter(
      *     name="Content-Language",
      *     in="header",
@@ -92,7 +97,7 @@ class QuestionController extends AppBaseController
      *     mediaType="multipart/form-data",
      * @OA\JsonContent(
      * @OA\Property(
-     *     property="question_id",
+     *     property="interview_id",
      *     type="string"
      *     ),
      *    )
@@ -123,15 +128,15 @@ class QuestionController extends AppBaseController
      * }
      * )
      */
-    public function getQuestion(Request $request)
+    public function getInterview(Request $request)
     {
         try {
-            $question = $this->questionRepository->find($request->question_id);
-            if (!$question) {
+            $interview = $this->interviewRepository->find($request->interview_id);
+            if (!$interview) {
                 return $this->sendError('Something went wrong');
             }
 
-            return $this->sendResponse($question, ('Question fetch successfully'));
+            return $this->sendResponse($interview, ('Interview fetch successfully'));
         } catch (Exception $ex) {
             return $this->sendError($ex);
         }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\CafeteriaController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\FellowshipController;
+use App\Http\Controllers\Api\InterviewController;
 use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\NoteController;
 use App\Http\Controllers\Api\OpportunityController;
@@ -60,6 +61,9 @@ Route::namespace('Api')->group(
 
             Route::get('opportunity', [OpportunityController::class, 'index']);
             Route::post('getOpportunity', [OpportunityController::class, 'getOpportunity']);
+
+            Route::get('interview', [InterviewController::class, 'index']);
+            Route::post('getInterview', [InterviewController::class, 'getInterview']);
         });
     }
 );
