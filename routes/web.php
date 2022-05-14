@@ -7,6 +7,7 @@ use App\Http\Controllers\FellowshipController;
 use App\Http\Controllers\InstituteController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NotesController;
+use App\Http\Controllers\OpportunityController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\StreamController;
 use App\Http\Controllers\StudentController;
@@ -113,4 +114,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('question/{question}/edit', [QuestionController::class, 'edit'])->name('question.edit');
     Route::post('question/update', [QuestionController::class, 'update'])->name('question.update');
     Route::delete('question/{question}', [QuestionController::class, 'destroy'])->name('question.destroy');
+
+    Route::get('opportunity', [OpportunityController::class, 'index'])->name('opportunity');
+    Route::get('opportunity/create', [OpportunityController::class, 'create'])->name('opportunity.create');
+    Route::post('opportunity/store', [OpportunityController::class, 'store'])->name('opportunity.store');
+    Route::get('opportunity/{opportunity}/edit',[OpportunityController::class,'edit'])->name('opportunity.edit');
+    Route::post('opportunity/update/{id}', [OpportunityController::class, 'update'])->name('opportunity.update');
+    Route::delete('opportunity/{opportunity}', [OpportunityController::class, 'destroy'])->name('opportunity.destroy');
 });

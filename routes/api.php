@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\FellowshipController;
 use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\NoteController;
+use App\Http\Controllers\Api\OpportunityController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\TextBookController;
@@ -56,6 +57,9 @@ Route::namespace('Api')->group(
 
             Route::get('questions', [QuestionController::class, 'index']);
             Route::post('getQuestion', [QuestionController::class, 'getQuestion']);
+
+            Route::get('opportunity', [OpportunityController::class, 'index']);
+            Route::post('getOpportunity', [OpportunityController::class, 'getOpportunity']);
         });
     }
 );

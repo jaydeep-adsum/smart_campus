@@ -16,8 +16,8 @@ class CreateFellowshipsTable extends Migration
         Schema::create('fellowships', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->text('description');
             $table->string('web_url');
             $table->timestamps();

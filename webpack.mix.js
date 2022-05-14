@@ -48,6 +48,8 @@ mix.js('resources/assets/js/student/student.js',
         'public/assets/js/institute/institute.js')
     .js('resources/assets/js/question/question.js',
         'public/assets/js/question/question.js')
+    .js('resources/assets/js/opportunity/opportunity.js',
+        'public/assets/js/opportunity/opportunity.js')
     .js('resources/assets/js/custom/custom.js',
         'public/assets/js/custom/custom.js')
     .js('resources/assets/js/custom/phone-number-country-code.js',
