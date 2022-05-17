@@ -5,7 +5,7 @@
         <th scope="col">{{ __('Title') }}</th>
         <th scope="col">{{ __('Chapter') }}</th>
         <th scope="col">{{ __('Year') }}</th>
-        <th scope="col">{{ __('Stream') }}</th>
+        <th scope="col">{{ __('Department') }}</th>
         <th scope="col">{{ __('PDF') }}</th>
         <th scope="col">{{ __('Created At') }}</th>
         <th scope="col">{{ __('Action') }}</th>

@@ -13,8 +13,8 @@ class NoteRepository extends BaseRepository
         'title',
         'chapter',
         'description',
-        'year',
-        'stream_id',
+        'year_id',
+        'department_id',
     ];
 
     /**

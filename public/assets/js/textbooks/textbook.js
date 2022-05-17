@@ -35,13 +35,15 @@ $(document).ready(function () {
       data: 'written_by',
       name: 'written_by'
     }, {
-      data: 'year',
-      name: 'year'
+      data: function data(row) {
+        return row.year.year;
+      },
+      name: 'year_id'
     }, {
       data: function data(row) {
-        return row.stream.name;
+        return row.department.department;
       },
-      name: 'stream'
+      name: 'department_id'
     }, {
       data: function data(row) {
         var pdf = 'N/A';

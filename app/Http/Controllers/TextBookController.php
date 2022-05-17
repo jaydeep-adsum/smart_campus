@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Datatable\TextBooksDatatable;
 use App\Http\Requests\textbook\CreateTextBookRequest;
 use App\Http\Requests\textbook\UpdateTextBookRequest;
+use App\Models\Department;
 use App\Models\Stream;
 use App\Models\TextBook;
+use App\Models\Year;
 use App\Repositories\TextBookRepository;
 use DataTables;
 use Exception;
@@ -46,8 +48,9 @@ class TextBookController extends AppBaseController
      */
     public function create()
     {
-        $stream = Stream::pluck('name', 'id');
-        return view('textbooks.create', compact('stream'));
+        $department = Department::pluck('department', 'id');
+        $year = Year::pluck('year', 'id');
+        return view('textbooks.create', compact('department','year'));
     }
 
     /**
@@ -76,10 +79,11 @@ class TextBookController extends AppBaseController
      */
     public function edit($id)
     {
-        $stream = Stream::pluck('name', 'id');
+        $department = Department::pluck('department', 'id');
+        $year = Year::pluck('year', 'id');
         $textBooks = $this->textBookRepository->find($id);
 
-        return view('textbooks.edit', compact('textBooks', 'stream'));
+        return view('textbooks.edit', compact('textBooks', 'department','year'));
     }
 
     /**

@@ -10,8 +10,8 @@ class TextBookRepository extends BaseRepository
         'title',
         'written_by',
         'description',
-        'year',
-        'stream',
+        'year_id',
+        'department_id',
     ];
 
     public function getFieldsSearchable()

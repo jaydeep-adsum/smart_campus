@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Datatable\NotesDatatable;
 use App\Http\Requests\note\CreateNoteRequest;
 use App\Http\Requests\note\UpdateNoteRequest;
+use App\Models\Department;
 use App\Models\Note;
 use App\Models\Stream;
+use App\Models\Year;
 use App\Repositories\NoteRepository;
 use DataTables;
 use Exception;
@@ -46,8 +48,9 @@ class NotesController extends AppBaseController
      */
     public function create()
     {
-        $stream = Stream::pluck('name', 'id');
-        return view('note.create', compact('stream'));
+        $department = Department::pluck('department', 'id');
+        $year = Year::pluck('year', 'id');
+        return view('note.create', compact('department','year'));
     }
 
     /**
@@ -76,10 +79,11 @@ class NotesController extends AppBaseController
      */
     public function edit($id)
     {
-        $stream = Stream::pluck('name', 'id');
+        $department = Department::pluck('department', 'id');
+        $year = Year::pluck('year', 'id');
         $notes = $this->noteRepository->find($id);
 
-        return view('note.edit', compact('notes', 'stream'));
+        return view('note.edit', compact('notes', 'department','year'));
     }
 
     /**

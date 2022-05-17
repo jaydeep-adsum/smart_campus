@@ -40,14 +40,16 @@ $(document).ready(function () {
                 name: 'chapter'
             },
             {
-                data: 'year',
-                name: 'year'
+                data: function data(row) {
+                    return row.year.year;
+                },
+                name: 'year_id'
             },
             {
                 data: function data(row) {
-                    return row.stream.name;
+                    return row.department.department;
                 },
-                name: 'stream'
+                name: 'department_id'
             },
             {
                 data: function data(row) {

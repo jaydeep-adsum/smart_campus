@@ -29,11 +29,11 @@
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Year').':') }} <span class="mandatory">*</span>
-                            {!! Form::selectRange('year', 1900, \Carbon\Carbon::now()->format('Y'),null,['class' => 'form-control','required','id'=>'year']) !!}
-                        </div>
+                            {{ Form::select('year_id', $year,null, ['class' => 'form-control','required','id'=>'year']) }}
+                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Stream').':') }} <span class="mandatory">*</span>
-                            {{ Form::select('stream_id', $stream,null, ['class' => 'form-control','required','id'=>'stream']) }}
+                            {{ Form::label(__('Department').':') }} <span class="mandatory">*</span>
+                            {{ Form::select('department_id', $department,null, ['class' => 'form-control','required','id'=>'department']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Description').':') }} <span class="mandatory">*</span>
@@ -94,7 +94,7 @@
                 }
             });
         });
-        $("#year,#stream").select2({
+        $("#year,#department").select2({
             width: '100%',
         });
     </script>

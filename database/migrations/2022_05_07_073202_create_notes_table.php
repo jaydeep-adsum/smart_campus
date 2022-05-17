@@ -18,11 +18,14 @@ class CreateNotesTable extends Migration
             $table->string('title');
             $table->string('chapter');
             $table->text('description');
-            $table->string('year');
-            $table->unsignedInteger('stream_id');
+            $table->unsignedInteger('year_id');
+            $table->unsignedInteger('department_id');
             $table->timestamps();
 
-            $table->foreign('stream_id')->references('id')->on('streams')
+            $table->foreign('department_id')->references('id')->on('departments')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('year_id')->references('id')->on('years')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });

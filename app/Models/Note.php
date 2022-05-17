@@ -25,7 +25,7 @@ class Note extends Model implements HasMedia
      * @var string[]
      */
     protected $appends = ['image_url', 'pdf_url'];
-    protected $with = ['stream'];
+    protected $with = ['department','year'];
 
     /**
      * @var string[]
@@ -34,8 +34,8 @@ class Note extends Model implements HasMedia
         'title',
         'chapter',
         'description',
-        'year',
-        'stream_id',
+        'year_id',
+        'department_id',
     ];
 
     /**
@@ -45,16 +45,24 @@ class Note extends Model implements HasMedia
         'title' => 'required',
         'chapter' => 'required',
         'description' => 'required',
-        'year' => 'required',
-        'stream_id' => 'required',
+        'year_id' => 'required',
+        'department_id' => 'required',
     ];
 
     /**
      * @return BelongsTo
      */
-    public function stream()
+    public function department()
     {
-        return $this->belongsTo(Stream::class, 'stream_id');
+        return $this->belongsTo(Department::class, 'department_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function year()
+    {
+        return $this->belongsTo(Year::class, 'year_id');
     }
 
     /**
