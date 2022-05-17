@@ -65,12 +65,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('events/update/{id}', [EventController::class, 'update'])->name('events.update');
     Route::delete('events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
 
-//    Route::get('streams', [StreamController::class, 'index'])->name('streams');
-//    Route::post('streams/store', [StreamController::class, 'store'])->name('streams.store');
-//    Route::get('streams/{stream}/edit', [StreamController::class, 'edit'])->name('streams.edit');
-//    Route::post('streams/update', [StreamController::class, 'update'])->name('streams.update');
-//    Route::delete('streams/{stream}', [StreamController::class, 'destroy'])->name('streams.destroy');
-
     Route::get('notes', [NotesController::class, 'index'])->name('notes');
     Route::get('notes/create', [NotesController::class, 'create'])->name('notes.create');
     Route::post('notes/store', [NotesController::class, 'store'])->name('notes.store');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cafeteria;
+use App\Models\Department;
 use App\Models\Event;
 use App\Models\Fellowship;
 use App\Models\News;
@@ -20,7 +21,7 @@ class DashboardController extends Controller
         $data['eventCount'] = Event::all()->count();
         $data['noteCount'] = Note::all()->count();
         $data['textBookCount'] = TextBook::all()->count();
-        $data['streamCount'] = Stream::all()->count();
+        $data['departmentCount'] = Department::all()->count();
         $data['cafeteriaCount'] = Cafeteria::all()->count();
         $data['newsCount'] = News::all()->count();
         $data['fellowshipCount'] = Fellowship::all()->count();
