@@ -20,13 +20,13 @@ class CreateStudentsTable extends Migration
             $table->string('last_name');
             $table->string('email');
             $table->string('password');
-            $table->string('institute_name');
-            $table->string('department');
-            $table->string('semester');
+            $table->unsignedInteger('institute_id');
+            $table->unsignedInteger('department_id');
+            $table->unsignedInteger('semester_id');
             $table->date('dob');
             $table->enum('gender',['male','female']);
             $table->string('student_id');
-            $table->string('year');
+            $table->unsignedInteger('year_id');
             $table->string('mobile_no');
             $table->string('emergency_contact');
             $table->string('address');
@@ -36,6 +36,22 @@ class CreateStudentsTable extends Migration
             $table->string('device_token')->nullable();
             $table->string('device_type')->nullable();
             $table->timestamps();
+
+            $table->foreign('semester_id')->references('id')->on('semesters')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('year_id')->references('id')->on('years')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('institute_id')->references('id')->on('institutes')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('department_id')->references('id')->on('departments')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

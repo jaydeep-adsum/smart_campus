@@ -24,7 +24,6 @@ $(document).ready(function () {
             },
             {
                 data: function data(row) {
-                    var url = questionUrl + '/' + row.id;
                     return `<a title="Edit" class="btn btn-sm edit-btn" data-id="${row.id}" href="#">
             <i class="fa fa-edit"></i>
                 </a>  <a title="Delete" class="btn btn-sm delete-btn" data-id="${row.id}" href="#">
@@ -120,6 +119,7 @@ $(document).ready(function () {
     });
 
     $('#addQuestionModal').on('hidden.bs.modal', function () {
+        CKEDITOR.instances['response'].setData('');
         $('#addQuestionForm')[0].reset();
     });
 

@@ -120,6 +120,7 @@ $(document).ready(function () {
     });
 
     $('#addInterviewModal').on('hidden.bs.modal', function () {
+        CKEDITOR.instances['answer'].setData('');
         $('#addInterviewForm')[0].reset();
     });
 

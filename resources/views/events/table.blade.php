@@ -5,7 +5,7 @@
         <th scope="col">{{ __('Title') }}</th>
         <th scope="col">{{ __('Event Date') }}</th>
         <th scope="col">{{ __('Location') }}</th>
-        <th scope="col">{{ __('Detail') }}</th>
+{{--        <th scope="col">{{ __('Detail') }}</th>--}}
         {{--        <th scope="col">{{ //__('Registration Link') }}</th>--}}
         <th scope="col">{{ __('Created By') }}</th>
         <th scope="col">{{ __('Created At') }}</th>

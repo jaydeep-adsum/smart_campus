@@ -138,10 +138,10 @@
     </aside>
 
     <div class="content-wrapper">
-        <div class="bg-white py-2 d-flex justify-content-between">
+        <div class="bg-white py-2 d-sm-flex justify-content-between">
             {{--            <div class="container-fluid bg-white pt-3 header-div d-flex justify-content-between">--}}
             <div>
-                <h3 class="card-title m-0 p-0 pl-4">@yield('title')</h3>
+                <h3 class="card-title m-0 pl-4" style="padding-top: 5px;">@yield('title')</h3>
             </div>
             <div class="mr-2">
                 @yield('header')

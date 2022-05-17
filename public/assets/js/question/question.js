@@ -25,7 +25,6 @@ $(document).ready(function () {
       name: 'created_at'
     }, {
       data: function data(row) {
-        var url = questionUrl + '/' + row.id;
         return "<a title=\"Edit\" class=\"btn btn-sm edit-btn\" data-id=\"".concat(row.id, "\" href=\"#\">\n            <i class=\"fa fa-edit\"></i>\n                </a>  <a title=\"Delete\" class=\"btn btn-sm delete-btn\" data-id=\"").concat(row.id, "\" href=\"#\">\n           <i class=\"fa-solid fa-trash\"></i>\n                </a>");
       },
       name: 'id'
@@ -120,6 +119,7 @@ $(document).ready(function () {
     deleteItem(questionUrl + '/' + questionId, tableName, 'Question');
   });
   $('#addQuestionModal').on('hidden.bs.modal', function () {
+    CKEDITOR.instances['response'].setData('');
     $('#addQuestionForm')[0].reset();
   });
 });

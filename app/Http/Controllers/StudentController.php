@@ -7,7 +7,11 @@ use App\Http\Requests\StudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Imports\StudentsImport;
 use App\Mail\loginMail;
+use App\Models\Department;
+use App\Models\Institute;
+use App\Models\Semester;
 use App\Models\Student;
+use App\Models\Year;
 use App\Repositories\StudentRepository;
 use DataTables;
 use Exception;
@@ -25,6 +29,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends AppBaseController
 {
+    /**
+     * @var StudentRepository
+     */
+    private $studentRepository;
+
     /**
      * @param StudentRepository $studentRepository
      */
@@ -50,7 +59,11 @@ class StudentController extends AppBaseController
      */
     public function create()
     {
-        return view('student.create');
+        $institute = Institute::pluck('institute','id');
+        $department = Department::pluck('department','id');
+        $semester = Semester::pluck('semester','id');
+        $year = Year::pluck('year','id');
+        return view('student.create',compact('institute','department','semester','year'));
     }
 
     /**
@@ -85,8 +98,12 @@ class StudentController extends AppBaseController
      */
     public function edit($id)
     {
+        $institute = Institute::pluck('institute','id');
+        $department = Department::pluck('department','id');
+        $semester = Semester::pluck('semester','id');
+        $year = Year::pluck('year','id');
         $student = Student::find($id);
-        return view('student.edit', compact('student'));
+        return view('student.edit', compact('student','institute','department','semester','year'));
     }
 
     /**

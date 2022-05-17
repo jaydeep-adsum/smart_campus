@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CafeteriaController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FellowshipController;
 use App\Http\Controllers\InstituteController;
@@ -10,9 +11,11 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NotesController;
 use App\Http\Controllers\OpportunityController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\StreamController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TextBookController;
+use App\Http\Controllers\YearController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -128,4 +131,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('interview/{interview}/edit', [InterviewController::class, 'edit'])->name('interview.edit');
     Route::post('interview/update', [InterviewController::class, 'update'])->name('interview.update');
     Route::delete('interview/{interview}', [InterviewController::class, 'destroy'])->name('interview.destroy');
+
+    Route::resource('semester', SemesterController::class);
+    Route::resource('department', DepartmentController::class);
+
+    Route::resource('year', YearController::class);
 });

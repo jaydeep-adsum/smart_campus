@@ -120,6 +120,7 @@ $(document).ready(function () {
     deleteItem(interviewUrl + '/' + interviewId, tableName, 'Interview');
   });
   $('#addInterviewModal').on('hidden.bs.modal', function () {
+    CKEDITOR.instances['answer'].setData('');
     $('#addInterviewForm')[0].reset();
   });
 });

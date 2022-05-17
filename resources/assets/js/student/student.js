@@ -55,19 +55,27 @@ $(document).ready(function () {
                 name: 'dob'
             },
             {
-                data: 'institute_name',
+                data: function data(row) {
+                    return row.institute.institute;
+                },
                 name: 'institute_name'
             },
             {
-                data: 'department',
+                data: function data(row) {
+                    return row.department.department;
+                },
                 name: 'department'
             },
             {
-                data: 'year',
+                data: function data(row) {
+                    return row.year.year;
+                },
                 name: 'year'
             },
             {
-                data: 'semester',
+                data: function data(row) {
+                    return row.semester.semester;
+                },
                 name: 'semester'
             },
             {

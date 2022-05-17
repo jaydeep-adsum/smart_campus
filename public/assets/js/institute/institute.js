@@ -25,7 +25,6 @@ $(document).ready(function () {
       name: 'created_at'
     }, {
       data: function data(row) {
-        var url = instituteUrl + '/' + row.id;
         return "<a title=\"Edit\" class=\"btn btn-sm edit-btn\" data-id=\"".concat(row.id, "\" href=\"#\">\n            <i class=\"fa fa-edit\"></i>\n                </a>  <a title=\"Delete\" class=\"btn btn-sm delete-btn\" data-id=\"").concat(row.id, "\" href=\"#\">\n           <i class=\"fa-solid fa-trash\"></i>\n                </a>");
       },
       name: 'id'

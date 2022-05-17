@@ -69,7 +69,7 @@
             timePicker: true,
             timePicker24Hour: true,
             startDate: new Date(),
-            maxDate: new Date(),
+            minDate: new Date(),
             locale: {
                 format: 'YYYY-MM-DD H:mm'
             }

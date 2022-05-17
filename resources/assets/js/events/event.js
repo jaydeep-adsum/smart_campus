@@ -16,7 +16,7 @@ $(document).ready(function () {
                 'orderable': false
             },
             {
-                'targets': [7],
+                'targets': [6],
                 'orderable': false,
                 'className': 'text-center',
                 'width': '9%'
@@ -46,10 +46,10 @@ $(document).ready(function () {
                 data: 'location',
                 name: 'location'
             },
-            {
-                data: 'detail',
-                name: 'detail'
-            },
+            // {
+            //     data: 'detail',
+            //     name: 'detail'
+            // },
             // {
             //     data: function data(row) {
             //         return `<div class=""><a href="${row.registration_link}" target="_blank">${row.registration_link}</a></div>`;

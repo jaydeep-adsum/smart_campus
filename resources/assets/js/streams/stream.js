@@ -24,7 +24,6 @@ $(document).ready(function () {
             },
             {
                 data: function data(row) {
-                    var url = streamUrl + '/' + row.id;
                     return `<a title="Edit" class="btn btn-sm edit-btn" data-id="${row.id}" href="#">
             <i class="fa fa-edit"></i>
                 </a>  <a title="Delete" class="btn btn-sm delete-btn" data-id="${row.id}" href="#">

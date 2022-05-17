@@ -47,15 +47,19 @@
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Institute Name').':') }} <span class="mandatory">*</span>
-                            {{ Form::text('institute_name', null, ['class' => 'form-control','required']) }}
+                            {{ Form::select('institute_id', $institute,null, ['class' => 'form-control','required','id'=>'institute_id']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Department/Stream').':') }} <span class="mandatory">*</span>
-                            {{ Form::text('department', null, ['class' => 'form-control','required']) }}
+                            {{ Form::select('department_id', $department,null, ['class' => 'form-control','required','id'=>'department_id']) }}
+                        </div>
+                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                            {{ Form::label(__('Year').':') }} <span class="mandatory">*</span>
+                            {{ Form::select('year_id', $year,null, ['class' => 'form-control','required','id'=>'year']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Semester').':') }} <span class="mandatory">*</span>
-                            {{ Form::text('semester', null, ['class' => 'form-control','required']) }}
+                            {{ Form::select('semester_id', $semester,null, ['class' => 'form-control','required','id'=>'semester_id']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('DOB').':') }} <span class="mandatory">*</span>
@@ -66,16 +70,14 @@
                             {{ Form::text('student_id', null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Year').':') }} <span class="mandatory">*</span>
-                            {!! Form::selectRange('year', 1900, \Carbon\Carbon::now()->format('Y'),null,['class' => 'form-control','required','id'=>'year']) !!}
-                        </div>
-                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Mobile No').':') }} <span class="mandatory">*</span>
-                            {{ Form::number('mobile_no', null, ['class' => 'form-control','pattern'=>"[1-9]{1}[0-9]{9}"]) }}
+                            {{ Form::number('mobile_no', null, ['class' => 'form-control','pattern'=>"[1-9]{1}[0-9]{9}",'id'=>'mobile_no']) }}
+                            <span class="mandatory" id="mobile_error"></span>
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Emergency Mobile No').':') }}<span class="mandatory">*</span>
-                            {{ Form::number('emergency_contact', null, ['class' => 'form-control','required']) }}
+                            {{ Form::number('emergency_contact', null, ['class' => 'form-control','required','id'=>'emergency_contact']) }}
+                            <span class="mandatory" id="contact_error"></span>
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Gender').':') }} <span class="mandatory">*</span>
@@ -102,7 +104,7 @@
                             {{ Form::textarea('address', null, ['class' => 'form-control','required','rows'=>'3']) }}
                         </div>
                         <div class="form-group col-sm-12 pt-4">
-                            {{ Form::submit(__('Save'), ['class' => 'btn btn-primary']) }}
+                            {{ Form::submit(__('Save'), ['class' => 'btn btn-primary save-btn']) }}
                             <a href="{{ route('student') }}"
                                class="btn btn-default">{{__('Cancel')}}</a>
                         </div>
@@ -115,7 +117,7 @@
         @endsection
         @section('scripts')
             <script>
-                $("#year").select2({
+                $("#year,#institute_id,#semester_id,#department_id").select2({
                     width: '100%',
                 });
                 $('.datepicker').daterangepicker({
@@ -125,6 +127,24 @@
                     startDate: new Date(),
                     locale: {
                         format: 'YYYY-MM-DD'
+                    }
+                });
+                $('#emergency_contact').on('input', function() {
+                    if ($(this).val()!=$('#mobile_no').val()){
+                        $('.save-btn').prop('disabled', false);
+                        $('#contact_error').text('');
+                    } else{
+                        $('.save-btn').prop('disabled', true);
+                        $('#contact_error').text('Insert Valid emergency contact, your emergency contact same as mobile no.');
+                    }
+                });
+                $('#mobile_no').on('input', function() {
+                    if ($(this).val()!=$('#emergency_contact').val()){
+                        $('.save-btn').prop('disabled', false);
+                        $('#mobile_error').text('');
+                    } else{
+                        $('.save-btn').prop('disabled', true);
+                        $('#mobile_error').text('Insert Valid mobile no, your mobile no same as emergency contact.');
                     }
                 });
             </script>

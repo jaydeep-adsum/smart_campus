@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -20,6 +21,7 @@ class Student extends Authenticatable implements HasMedia
      * @var string[]
      */
     protected $appends = ['image_url'];
+    protected $with = ['institute','semester','department','year'];
 
     /**
      * @var string
@@ -35,13 +37,13 @@ class Student extends Authenticatable implements HasMedia
         'last_name',
         'email',
         'password',
-        'institute_name',
-        'department',
-        'semester',
+        'institute_id',
+        'department_id',
+        'semester_id',
         'dob',
         'gender',
         'student_id',
-        'year',
+        'year_id',
         'mobile_no',
         'emergency_contact',
         'address',
@@ -65,13 +67,13 @@ class Student extends Authenticatable implements HasMedia
         'father_name' => 'required',
         'last_name' => 'required',
         'email' => 'required|email|unique:students,email',
-        'institute_name' => 'required',
-        'department' => 'required',
-        'semester' => 'required',
+        'institute_id' => 'required',
+        'department_id' => 'required',
+        'semester_id' => 'required',
         'dob' => 'required|date',
         'gender' => 'required',
         'student_id' => 'required',
-        'year' => 'required',
+        'year_id' => 'required',
         'mobile_no' => 'required|numeric|digits:10',
         'emergency_contact' => 'required|numeric|digits:10',
         'address' => 'required',
@@ -96,5 +98,25 @@ class Student extends Authenticatable implements HasMedia
         }
 
         return asset('public/assets/images/no-student.png');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function institute()
+    {
+        return $this->belongsTo(Institute::class, 'institute_id');
+    }
+    public function semester()
+    {
+        return $this->belongsTo(Semester::class, 'semester_id');
+    }
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
+    }
+    public function year()
+    {
+        return $this->belongsTo(Year::class, 'year_id');
     }
 }
