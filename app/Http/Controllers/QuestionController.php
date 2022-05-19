@@ -29,10 +29,9 @@ class QuestionController extends AppBaseController
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            return Datatables::of((new QuestionDatatable())->get())->make(true);
-        }
-        return view('question.index');
+        $behaviour = Question::where('category','Behaviour')->get();
+        $motivational = Question::where('category','Motivational')->get();
+        return view('question.index',compact('behaviour','motivational'));
     }
 
     /**

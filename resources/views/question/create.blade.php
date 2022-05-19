@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="form-group col-sm-12">
                         {{ Form::label('category',__('Category').':') }}<span class="mandatory">*</span>
-                        {{ Form::text('category', null, ['class' => 'form-control','required','id'=>'category']) }}
+                        {{ Form::select('category', ['Motivational'=>'Motivational','Behaviour'=>'Behaviour'],null, ['class' => 'form-control','required','id'=>'department_id']) }}
                     </div>
                     <div class="form-group col-sm-12">
                         {{ Form::label(__('Response').':') }} <span class="mandatory">*</span>

@@ -198,7 +198,7 @@ class StudentController extends AppBaseController
                 return $this->sendError('Your password and confirmation password do not match');
             }
             $student->password = Hash::make($request->password);
-            $student->is_active = 1;
+            $student->is_active = '1';
             $student->save();
 
             return $this->sendResponse($student->toArray(), ('Your password changed successfully'));

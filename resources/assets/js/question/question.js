@@ -55,7 +55,7 @@ $(document).ready(function () {
                 if (result.success) {
                     displaySuccessMessage(result.message);
                     $('#addQuestionModal').modal('hide');
-                    $(tableName).DataTable().ajax.reload(null, false);
+                    $("#response-div").load(" #response-div > *");
                 }
             },
             error: function (result) {
@@ -104,7 +104,7 @@ $(document).ready(function () {
                 if (result.success) {
                     displaySuccessMessage(result.message);
                     $('#editQuestionModal').modal('hide');
-                    $(tableName).DataTable().ajax.reload(null, false);
+                    $("#response-div").load(" #response-div > *");
                 }
             },
             error: function (result) {
@@ -115,7 +115,49 @@ $(document).ready(function () {
 
     $(document).on('click', '.delete-btn', function (event) {
         var questionId = $(event.currentTarget).attr('data-id');
-        deleteItem(questionUrl + '/' + questionId, tableName, 'Question');
+        swal({
+                title: 'Delete !',
+                text: 'Are You Sure Want To Delete "Response" ?',
+                type: 'warning',
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+                confirmButtonColor: '#1e4080',
+                cancelButtonColor: '#d94b09',
+                cancelButtonText: 'No',
+                confirmButtonText: 'Yes',
+            },
+            function () {
+                $.ajax({
+                    url: questionUrl+'/' + questionId,
+                    type: 'DELETE',
+                    dataType: 'json',
+                    success: function (obj) {
+                        if (obj.success) {
+                            $("#response-div").load(" #response-div > *");
+                        }
+                        swal({
+                            title: 'Deleted !',
+                            text: 'Response Has Been Deleted',
+                            type: 'success',
+                            confirmButtonColor: '#1e4080',
+                            timer: 1000,
+                        });
+                        if (callFunction) {
+                            eval(callFunction);
+                        }
+                    },
+                    error: function (data) {
+                        swal({
+                            title: '',
+                            text: data.responseJSON.message,
+                            type: 'error',
+                            confirmButtonColor: '#1e4080',
+                            timer: 5000,
+                        });
+                    },
+                });
+            });
     });
 
     $('#addQuestionModal').on('hidden.bs.modal', function () {

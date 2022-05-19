@@ -3,8 +3,7 @@
     <tr>
         <th scope="col">{{ __('Id') }}</th>
         <th scope="col">{{ __('category') }}</th>
-        <th scope="col">{{ __('Created At') }}</th>
-        <th scope="col">{{ __('Action') }}</th>
+        <th scope="col">{{ __('Add Response') }}</th>
     </tr>
     </thead>
     <tbody>
