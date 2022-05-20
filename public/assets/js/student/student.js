@@ -33,22 +33,22 @@ $(document).ready(function () {
       data: function data(row) {
         return row.institute.institute;
       },
-      name: 'institute_name'
+      name: 'institute_id'
     }, {
       data: function data(row) {
         return row.department.department;
       },
-      name: 'department'
+      name: 'department_id'
     }, {
       data: function data(row) {
         return row.year.year;
       },
-      name: 'year'
+      name: 'year_id'
     }, {
       data: function data(row) {
         return row.semester.semester;
       },
-      name: 'semester'
+      name: 'semester_id'
     }, {
       data: function data(row) {
         var url = studentUrl + '/' + row.id;

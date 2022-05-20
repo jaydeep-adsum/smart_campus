@@ -7,23 +7,31 @@
 @endsection
 @section('extra_css')
     <style>
-        .response-body{
-            height: 6rem;
+        .response-body {
+            height: 4.5rem;
             overflow: hidden;
         }
-        .res-card{
+
+        .res-card {
             transition: all ease 0.5s;
         }
+
         .res-card:hover {
             transform: translateY(-5px);
             box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.5);
         }
-        .action-btn{
+
+        .action-btn {
             display: none;
         }
-        .res-card:hover .action-btn{
+
+        .res-card:hover .action-btn {
             display: block;
             transition: all ease 0.5s;
+        }
+
+        .border-danger {
+            border-color: #d94b09 !important;
         }
     </style>
 @endsection
@@ -35,32 +43,35 @@
                     <div class="row" id="response-div">
                         <div class="col-md-6">
                             <div class="card p-2 border-left border-danger">
-                                    <span class="text-bold text-primary" style="font-size: 25px">{{__('Motivational')}}</span>
+                                <span class="text-bold text-primary"
+                                      style="font-size: 25px">{{__('Motivational')}}</span>
                             </div>
-                                @foreach($motivational as $motive)
+                            @foreach($motivational as $motive)
                                 <div class="card rounded shadow border-bottom border-danger res-card">
-                                  <div class="row">
-                                      <div class="col-md-10">
-                                    <div class="card-body response-body">
-                                    {!! $motive->response !!}
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="card-body response-body">
+                                                {!! $motive->response !!}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="action-btn mt-2">
+                                                <a title="Edit" class="btn btn-sm edit-btn" data-id="{{$motive->id}}"
+                                                   href="#">
+                                                    <i class="fa fa-edit"></i>
+                                                </a> <a title="Delete" class="btn btn-sm delete-btn"
+                                                        data-id="{{$motive->id}}" href="#">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
-                                      </div>
-                                      <div class="col-md-2">
-                                      <div class="action-btn mt-2">
-                                          <a title="Edit" class="btn btn-sm edit-btn" data-id="{{$motive->id}}" href="#">
-                                              <i class="fa fa-edit"></i>
-                                          </a>  <a title="Delete" class="btn btn-sm delete-btn" data-id="{{$motive->id}}" href="#">
-                                              <i class="fa-solid fa-trash"></i>
-                                          </a>
-                                      </div>
-                                      </div>
                                 </div>
-                                </div>
-                                @endforeach
+                            @endforeach
                         </div>
                         <div class="col-md-6">
                             <div class="card p-2 border-left border-danger">
-                                    <span class="text-bold text-primary" style="font-size: 25px">{{__('Behaviour')}}</span>
+                                <span class="text-bold text-primary" style="font-size: 25px">{{__('Behaviour')}}</span>
                             </div>
                             @foreach($behaviour as $data)
                                 <div class="card rounded shadow border-bottom border-danger res-card">
@@ -72,9 +83,11 @@
                                         </div>
                                         <div class="col-md-2">
                                             <div class="action-btn mt-2">
-                                                <a title="Edit" class="btn btn-sm edit-btn" data-id="{{$data->id}}" href="#">
+                                                <a title="Edit" class="btn btn-sm edit-btn" data-id="{{$data->id}}"
+                                                   href="#">
                                                     <i class="fa fa-edit"></i>
-                                                </a>  <a title="Delete" class="btn btn-sm delete-btn" data-id="{{$data->id}}" href="#">
+                                                </a> <a title="Delete" class="btn btn-sm delete-btn"
+                                                        data-id="{{$data->id}}" href="#">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             </div>
