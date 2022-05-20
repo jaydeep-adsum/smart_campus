@@ -8,7 +8,7 @@
 @section('extra_css')
     <style>
         .response-body{
-            height: 5rem;
+            height: 6rem;
             overflow: hidden;
         }
         .res-card{

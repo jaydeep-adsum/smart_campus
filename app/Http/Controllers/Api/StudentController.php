@@ -91,7 +91,7 @@ class StudentController extends AppBaseController
                 'password' => 'required',
             ]);
             if ($validator->fails()) {
-                return response()->json(['status' => "false", 'data' => "", 'messages' => implode(', ', $validator->errors()->all())]);
+                return response()->json(['status' => "false", 'data' => "", 'message' => implode(', ', $validator->errors()->all())]);
             }
             $credentials = array_values(
                 $this->request->only('email', 'password')
@@ -116,7 +116,7 @@ class StudentController extends AppBaseController
                     $success, 'You Have Successfully Logged in to smart campus.'
                 );
             } else {
-                return response()->json(['status' => "false", 'data' => "", 'messages' => 'These credentials do not match our records']);
+                return response()->json(['status' => "false", 'data' => "", 'message' => 'These credentials do not match our records']);
             }
         } catch (Exception $e) {
             return $this->sendErrorResponse($e);
