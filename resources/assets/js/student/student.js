@@ -10,20 +10,7 @@ $(document).ready(function () {
         },
         columnDefs: [
             {
-                'targets': [1, 2, 3, 8],
-                'className': 'text-center',
-                'width': '10%'
-            },
-            {
-                'targets': [4],
-                'width': '12%'
-            },
-            {
-                'targets': [6],
-                'width': '2%'
-            },
-            {
-                'targets': [9],
+                'targets': [7],
                 'className': 'text-center',
                 'orderable': false,
                 'width': '8%'
@@ -50,12 +37,6 @@ $(document).ready(function () {
             },
             {
                 data: function data(row) {
-                    return moment(row.dob, 'YYYY-MM-DD hh:mm:ss').format('Do MMM, YYYY');
-                },
-                name: 'dob'
-            },
-            {
-                data: function data(row) {
                     return row.institute.institute;
                 },
                 name: 'institute_name'
@@ -77,12 +58,6 @@ $(document).ready(function () {
                     return row.semester.semester;
                 },
                 name: 'semester'
-            },
-            {
-                data: function data(row) {
-                    return moment(row.created_at, 'YYYY-MM-DD hh:mm:ss').format('Do MMM, YYYY');
-                },
-                name: 'created_at'
             },
             {
                 data: function data(row) {

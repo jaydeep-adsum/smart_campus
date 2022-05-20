@@ -11,15 +11,12 @@ $(document).ready(function () {
             url: cafeteriaUrl
         },
         columnDefs: [
-            // {
-            //     'targets': [0],
-            //     'orderable': false
-            // },
-            // {
-            //     'targets': [6, 7],
-            //     'className': 'text-center',
-            //     'width': '10%'
-            // }
+            {
+                'targets': [5],
+                'className': 'text-center',
+                'orderable': false,
+                'width': '8%'
+            }
         ],
         columns: [
             {

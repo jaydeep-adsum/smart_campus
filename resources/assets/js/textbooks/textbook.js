@@ -16,9 +16,10 @@ $(document).ready(function () {
                 'orderable': false
             },
             {
-                'targets': [6, 7],
+                'targets': [7],
                 'className': 'text-center',
-                'width': '10%'
+                'orderable': false,
+                'width': '8%'
             }
         ],
         columns: [

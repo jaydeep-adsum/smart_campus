@@ -10,6 +10,13 @@ $(document).ready(function () {
         ajax: {
             url: newsUrl
         },
+        columnDefs: [
+            {
+                'targets': [3],
+                'orderable': false,
+                'width': '8%'
+            },
+        ],
         columns: [
             {
                 data: function data(row) {

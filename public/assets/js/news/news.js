@@ -15,6 +15,11 @@ $(document).ready(function () {
     ajax: {
       url: newsUrl
     },
+    columnDefs: [{
+      'targets': [3],
+      'orderable': false,
+      'width': '8%'
+    }],
     columns: [{
       data: function data(row) {
         return "<div class=\"d-flex align-items-center\">\n                            <div class=\"mr-2\">\n                        <div class=\"\"><img src=\"".concat(row.image_url, "\" alt=\"\" class=\"user-img rounded-circle\" height=\"30px\" width=\"30px\"></div></div>\n                        </div>");

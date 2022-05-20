@@ -9,6 +9,7 @@ use App\Models\Student;
 use App\Repositories\StudentRepository;
 use Auth;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -90,8 +91,9 @@ class StudentController extends AppBaseController
                 'email' => 'required|email',
                 'password' => 'required',
             ]);
+            $error = (object)[];
             if ($validator->fails()) {
-                return response()->json(['status' => "false", 'data' => "", 'message' => implode(', ', $validator->errors()->all())]);
+                return response()->json(['status' => "false", 'data' => $error, 'message' => implode(', ', $validator->errors()->all())]);
             }
             $credentials = array_values(
                 $this->request->only('email', 'password')
@@ -116,10 +118,10 @@ class StudentController extends AppBaseController
                     $success, 'You Have Successfully Logged in to smart campus.'
                 );
             } else {
-                return response()->json(['status' => "false", 'data' => "", 'message' => 'These credentials do not match our records']);
+                return response()->json(['success' => false, 'data' => $error, 'message' => 'These credentials do not match our records']);
             }
         } catch (Exception $e) {
-            return $this->sendErrorResponse($e);
+            return $this->sendError($e);
         }
 
     }

@@ -7,6 +7,13 @@ $(document).ready(function () {
         ajax: {
             url: instituteUrl
         },
+        columnDefs: [
+            {
+                'targets': [3],
+                'orderable': false,
+                'width': '8%'
+            },
+        ],
         columns: [
             {
                 data: 'id',

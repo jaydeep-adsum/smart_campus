@@ -10,6 +10,13 @@ $(document).ready(function () {
         ajax: {
             url: fellowshipUrl
         },
+        columnDefs: [
+            {
+                'targets': [5],
+                'orderable': false,
+                'width': '8%'
+            },
+        ],
         columns: [
             {
                 data: 'name',

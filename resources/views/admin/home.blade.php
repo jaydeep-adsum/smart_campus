@@ -55,7 +55,7 @@
                 <div class="card bg-info">
                     <a href="{{route('department.index')}}">
                         <div class="card-body py-4 px-4">
-                            <span style="font-size: 40px;"><i class="fa-solid fa-laptop-file"></i></span>
+                            <span style="font-size: 40px;"> <i class="fa-solid fa-list-check"></i></span>
                             <h2 class="fw">{{$data['departmentCount']?$data['departmentCount']:0}}</h2>
                             <p>Department</p>
                         </div>
