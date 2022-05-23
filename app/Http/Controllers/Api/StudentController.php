@@ -10,6 +10,7 @@ use App\Repositories\StudentRepository;
 use Auth;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -209,5 +210,64 @@ class StudentController extends AppBaseController
         }
     }
 
+    /**
+     * Swagger definition for Students
+     *
+     * @OA\Get(
+     *     tags={"Students"},
+     *     path="/students",
+     *     description="Students",
+     *     summary="Students",
+     *     operationId="students",
+     * @OA\Parameter(
+     *     name="Content-Language",
+     *     in="header",
+     *     description="Content-Language",
+     *     required=false,@OA\Schema(type="string")
+     *     ),
+     * @OA\Response(
+     *     response=200,
+     *     description="Succuess response"
+     *     ,@OA\JsonContent(ref="#/components/schemas/SuccessResponse")
+     *     ),
+     * @OA\Response(
+     *     response="400",
+     *     description="Validation error"
+     *     ,@OA\JsonContent(ref="#/components/schemas/ErrorResponse")
+     * ),
+     * @OA\Response(
+     *     response="401",
+     *     description="Not Authorized Invalid or missing Authorization header"
+     *     ,@OA\JsonContent
+     *     (ref="#/components/schemas/ErrorResponse")
+     * ),
+     * @OA\Response(
+     *     response=500,
+     *     description="Unexpected error"
+     *     ,@OA\JsonContent(ref="#/components/schemas/ErrorResponse")
+     *  ),
+     * security={
+     *     {"API-Key": {}}
+     * }
+     * )
+     */
+    /**
+     * @return JsonResponse
+     */
+    public function getStudents()
+    {
+        try {
+            $user = Auth::user();
+            if (!$user) {
+                return $this->sendError('Unauthorized');
+            }
+            $search = ['department_id' => $user->department_id, 'year_id' => $user->year_id,'institute_id'=>$user->institute_id,'semester_id'=>$user->semester_id];
+            $student = $this->studentRepository->all($search);
 
+            return $this->sendResponse($student, ('Students retrieved successfully'));
+        } catch (Exception $ex) {
+            return $this->sendError($ex);
+        }
+
+    }
 }

@@ -35,6 +35,7 @@ Route::namespace('Api')->group(
 
         Route::group(['middleware' => 'auth:api'], function () {
             Route::post('forget-password', [StudentController::class, 'forgetPassword']);
+            Route::get('students', [StudentController::class, 'getStudents']);
 
             Route::get('events', [EventController::class, 'index']);
             Route::post('getEvent', [EventController::class, 'getEvent']);
