@@ -57,6 +57,14 @@ class StudentController extends AppBaseController
      *     property="password",
      *     type="string"
      *     ),
+     * @OA\Property(
+     *     property="device_token",
+     *     type="string"
+     *     ),
+     * @OA\Property(
+     *     property="device_type",
+     *     type="string"
+     *     ),
      *    )
      *   ),
      *  ),
@@ -104,7 +112,7 @@ class StudentController extends AppBaseController
             $credentials['password'] = $request->password;
 
             if ($student = $this->authenticator->attemptLogin($credentials)) {
-                $update = Student::where('id', $student->id)->update(['device_token' => $request->device_token, 'device_type' => $request->device_type]);
+                Student::where('id', $student->id)->update(['device_token' => $request->device_token, 'device_type' => $request->device_type]);
                 $student = Student::find($student->id);
                 $tokenResult = $student->createToken('smart_campus');
                 $token = $tokenResult->token;
@@ -261,8 +269,7 @@ class StudentController extends AppBaseController
             if (!$user) {
                 return $this->sendError('Unauthorized');
             }
-            $search = ['department_id' => $user->department_id, 'year_id' => $user->year_id,'institute_id'=>$user->institute_id,'semester_id'=>$user->semester_id];
-            $student = $this->studentRepository->all($search);
+            $student = Student::where('department_id',$user->department_id)->where('year_id',$user->year_id)->where('institute_id',$user->institute_id)->where('semester_id',$user->semester_id)->get();
 
             return $this->sendResponse($student, ('Students retrieved successfully'));
         } catch (Exception $ex) {
