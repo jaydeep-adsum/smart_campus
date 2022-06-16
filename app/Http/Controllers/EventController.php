@@ -57,7 +57,8 @@ class EventController extends AppBaseController
     {
         $input = $request->all();
         $input['created_by'] = Auth::user()->name;
-
+        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $input['institute_id'] = $institute_id;
         $event = $this->eventsRepository->create($input);
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $event->addMedia($request->image)->toMediaCollection(Event::PATH);

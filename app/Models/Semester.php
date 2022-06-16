@@ -12,6 +12,6 @@ class Semester extends Model
     public $table = 'semesters';
 
     public $fillable = [
-      'semester',
+      'semester','institute_id',
     ];
 }

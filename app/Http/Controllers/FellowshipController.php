@@ -7,6 +7,7 @@ use App\Http\Requests\fellowship\CreateFellowshipRequest;
 use App\Http\Requests\fellowship\UpdateFellowshipRequest;
 use App\Models\Fellowship;
 use App\Repositories\FellowshipRepository;
+use Auth;
 use DataTables;
 use Flash;
 use Illuminate\Contracts\Foundation\Application;
@@ -54,7 +55,10 @@ class FellowshipController extends AppBaseController
      */
     public function store(CreateFellowshipRequest $request)
     {
-        $this->fellowshipRepository->create($request->all());
+        $input = $request->all();
+        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $input['institute_id'] = $institute_id;
+        $this->fellowshipRepository->create($input);
 
         Flash::success('Fellowship created successfully.');
 

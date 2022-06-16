@@ -58,6 +58,8 @@ mix.js('resources/assets/js/student/student.js',
         'public/assets/js/year/year.js')
     .js('resources/assets/js/department/department.js',
         'public/assets/js/department/department.js')
+    .js('resources/assets/js/attendance/attendance.js',
+        'public/assets/js/attendance/attendance.js')
     .js('resources/assets/js/custom/custom.js',
         'public/assets/js/custom/custom.js')
     .js('resources/assets/js/custom/phone-number-country-code.js',

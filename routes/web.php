@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CafeteriaController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DepartmentController;
@@ -45,10 +46,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
     Route::get('institute', [InstituteController::class, 'index'])->name('institute');
+    Route::get('institute/create', [InstituteController::class, 'create'])->name('institute.create');
     Route::post('institute/store', [InstituteController::class, 'store'])->name('institute.store');
     Route::get('institute/{institute}/edit', [InstituteController::class, 'edit'])->name('institute.edit');
     Route::post('institute/update', [InstituteController::class, 'update'])->name('institute.update');
     Route::delete('institute/{institute}', [InstituteController::class, 'destroy'])->name('institute.destroy');
+
+    Route::get('attendance', [AttendanceController::class, 'index'])->name('attendance');
+    Route::get('attendance/create', [AttendanceController::class, 'create'])->name('attendance.create');
+    Route::post('attendance/store', [AttendanceController::class, 'store'])->name('attendance.store');
+    Route::post('attendance/setSession', [AttendanceController::class, 'setSession'])->name('attendance.setSession');
 
     Route::get('student', [StudentController::class, 'index'])->name('student');
     Route::get('student/create', [StudentController::class, 'create'])->name('student.create');

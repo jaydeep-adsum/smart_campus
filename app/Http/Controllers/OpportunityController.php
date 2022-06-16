@@ -7,6 +7,7 @@ use App\Http\Requests\opportunity\CreateOpportunityRequest;
 use App\Http\Requests\opportunity\UpdateOpportunityRequest;
 use App\Models\Opportunity;
 use App\Repositories\OpportunityRepository;
+use Auth;
 use DataTables;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -54,7 +55,10 @@ class OpportunityController extends AppBaseController
      */
     public function store(CreateOpportunityRequest $request)
     {
-        $opportunity = $this->opportunityRepository->create($request->all());
+        $input = $request->all();
+        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $input['institute_id'] = $institute_id;
+        $opportunity = $this->opportunityRepository->create($input);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $opportunity->addMedia($request->image)->toMediaCollection(Opportunity::PATH);

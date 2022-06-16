@@ -14,5 +14,6 @@ class Question extends Model
     public $fillable = [
         'category',
         'response',
+        'institute_id',
     ];
 }

@@ -987,11 +987,11 @@ select {
 .pt-4 {
   padding-top: 1rem;
 }
-.pt-8 {
-  padding-top: 2rem;
-}
 .pt-2 {
   padding-top: 0.5rem;
+}
+.pt-8 {
+  padding-top: 2rem;
 }
 .pl-4 {
   padding-left: 1rem;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Datatable\DepartmentDatatable;
 use App\Repositories\DepartmentRepository;
+use Auth;
 use DataTables;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
@@ -54,7 +55,10 @@ class DepartmentController extends AppBaseController
      */
     public function store(Request $request)
     {
-        $department = $this->departmentRepository->create($request->all());
+        $input = $request->all();
+        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $input['institute_id'] = $institute_id;
+        $department = $this->departmentRepository->create($input);
 
         return $this->sendResponse($department, 'Department saved successfully.');
     }

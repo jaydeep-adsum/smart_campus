@@ -18,6 +18,6 @@ class Department extends Model
      * @var string[]
      */
     public $fillable = [
-      'department',
+      'department','institute_id',
     ];
 }

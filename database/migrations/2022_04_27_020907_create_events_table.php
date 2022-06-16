@@ -20,8 +20,13 @@ class CreateEventsTable extends Migration
             $table->string('location');
             $table->text('detail');
             $table->string('registration_link');
+            $table->unsignedInteger('institute_id')->nullable();
             $table->string('created_by');
             $table->timestamps();
+
+            $table->foreign('institute_id')->references('id')->on('institutes')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

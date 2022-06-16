@@ -12,6 +12,6 @@ class Year extends Model
     public $table = 'years';
 
     public $fillable = [
-        'year',
+        'year','institute_id',
     ];
 }

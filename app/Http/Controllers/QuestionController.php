@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Datatable\QuestionDatatable;
 use App\Models\Question;
 use App\Repositories\QuestionRepository;
+use Auth;
 use DataTables;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -40,7 +41,10 @@ class QuestionController extends AppBaseController
      */
     public function store(Request $request)
     {
-        $question = $this->questionRepository->create($request->all());
+        $input = $request->all();
+        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $input['institute_id'] = $institute_id;
+        $question = $this->questionRepository->create($input);
 
         return $this->sendResponse($question, 'Question saved successfully.');
     }

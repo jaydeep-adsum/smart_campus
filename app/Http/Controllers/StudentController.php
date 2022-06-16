@@ -13,6 +13,7 @@ use App\Models\Semester;
 use App\Models\Student;
 use App\Models\Year;
 use App\Repositories\StudentRepository;
+use Auth;
 use DataTables;
 use Exception;
 use Flash;
@@ -74,7 +75,9 @@ class StudentController extends AppBaseController
     {
         $input = $request->all();
         $password = Str::random(8);
+        $institute_id = Auth::user()->institute->id;
         $input['password'] = Hash::make($password);
+        $input['institute_id'] = $request->institute_id?$request->institute_id:$institute_id;
         $student = $this->studentRepository->create($input);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {

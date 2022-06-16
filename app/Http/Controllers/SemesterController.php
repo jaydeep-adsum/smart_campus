@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Datatable\SemesterDatatable;
 use App\Repositories\SemesterRepository;
+use Auth;
 use DataTables;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
@@ -50,7 +51,10 @@ class SemesterController extends AppBaseController
      */
     public function store(Request $request)
     {
-        $semester = $this->semesterRepository->create($request->all());
+        $input = $request->all();
+        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $input['institute_id'] = $institute_id;
+        $semester = $this->semesterRepository->create($input);
 
         return $this->sendResponse($semester, 'Semester saved successfully.');
     }

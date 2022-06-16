@@ -3,6 +3,7 @@
 namespace App\Datatable;
 
 use App\Models\Department;
+use Auth;
 
 class DepartmentDatatable
 {
@@ -10,6 +11,9 @@ class DepartmentDatatable
     {
         /** @var Department $query */
         $query = Department::query()->select('departments.*');
+        if (Auth::user()->role==1) {
+            $query->where('institute_id', Auth::user()->institute->id);
+        }
 
         return $query;
     }

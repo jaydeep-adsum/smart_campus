@@ -17,7 +17,12 @@ class CreateInterviewsTable extends Migration
             $table->id();
             $table->string('question');
             $table->text('answer');
+            $table->unsignedInteger('institute_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('institute_id')->references('id')->on('institutes')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

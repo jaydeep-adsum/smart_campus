@@ -20,5 +20,6 @@ class Interview extends Model
     public $fillable = [
         'question',
         'answer',
+        'institute_id',
     ];
 }

@@ -17,6 +17,7 @@ class Fellowship extends Model
         'end_date',
         'description',
         'web_url',
+        'institute_id',
     ];
 
     public static $rules = [

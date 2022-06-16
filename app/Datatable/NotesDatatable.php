@@ -3,6 +3,7 @@
 namespace App\Datatable;
 
 use App\Models\Note;
+use Auth;
 
 class NotesDatatable
 {
@@ -10,6 +11,9 @@ class NotesDatatable
     {
         /** @var Note $query */
         $query = Note::query()->select('notes.*');
+        if (Auth::user()->role==1) {
+            $query->where('institute_id', Auth::user()->institute->id);
+        }
 
         return $query;
     }

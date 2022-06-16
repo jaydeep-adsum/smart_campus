@@ -17,6 +17,7 @@ class News extends Model implements HasMedia
     public $fillable = [
         'title',
         'description',
+        'institute_id',
     ];
     protected $appends = ['image_url'];
 

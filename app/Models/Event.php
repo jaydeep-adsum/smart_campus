@@ -22,6 +22,7 @@ class Event extends Model implements HasMedia
         'to',
         'registration_link',
         'created_by',
+        'institute_id',
     ];
     protected $appends = ['image_url'];
 

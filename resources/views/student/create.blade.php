@@ -44,10 +44,12 @@
                             {{ Form::label(__('State').':') }} <span class="mandatory">*</span>
                             {{ Form::text('state', null, ['class' => 'form-control','required']) }}
                         </div>
+                        @if(Auth::user()->role==0)
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Institute Name').':') }} <span class="mandatory">*</span>
                             {{ Form::select('institute_id', $institute,null, ['class' => 'form-control','required','id'=>'institute_id']) }}
                         </div>
+                        @endif
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Department/Stream').':') }} <span class="mandatory">*</span>
                             {{ Form::select('department_id', $department,null, ['class' => 'form-control','required','id'=>'department_id']) }}
@@ -79,6 +81,10 @@
                             <span class="mandatory" id="contact_error"></span>
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                            {{ Form::label(__('Address').':') }} <span class="mandatory">*</span>
+                            {{ Form::textarea('address', null, ['class' => 'form-control','required','rows'=>'3']) }}
+                        </div>
+                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Gender').':') }} <span class="mandatory">*</span>
                             <div class="form-check">
                                 {{ Form::label(__('Male').':') }}
@@ -91,14 +97,10 @@
                             {{ Form::label(__('Image').':') }}
                             <div>
                                 <label class='file-label btn btn-primary mr-2'><i
-                                        class="fa-solid fa-image mr-2"></i></i>Choose Image
+                                        class="fa-solid fa-image mr-2"></i>Choose Image
                                     {{ Form::file('image') }}
                                 </label>
                             </div>
-                        </div>
-                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Address').':') }} <span class="mandatory">*</span>
-                            {{ Form::textarea('address', null, ['class' => 'form-control','required','rows'=>'3']) }}
                         </div>
                         <div class="form-group col-sm-12 pt-4">
                             {{ Form::submit(__('Save'), ['class' => 'btn btn-primary save-btn']) }}

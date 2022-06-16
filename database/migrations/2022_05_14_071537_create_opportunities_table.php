@@ -20,7 +20,12 @@ class CreateOpportunitiesTable extends Migration
             $table->string('location');
             $table->string('criteria');
             $table->string('overview');
+            $table->unsignedInteger('institute_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('institute_id')->references('id')->on('institutes')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

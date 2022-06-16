@@ -18,9 +18,14 @@ class CreateCafeteriasTable extends Migration
             $table->string('name');
             $table->string('price');
             $table->unsignedInteger('category_id');
+            $table->unsignedInteger('institute_id')->nullable();
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('institute_id')->references('id')->on('institutes')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });

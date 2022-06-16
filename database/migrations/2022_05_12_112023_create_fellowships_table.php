@@ -20,7 +20,12 @@ class CreateFellowshipsTable extends Migration
             $table->date('end_date');
             $table->text('description');
             $table->string('web_url');
+            $table->unsignedInteger('institute_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('institute_id')->references('id')->on('institutes')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

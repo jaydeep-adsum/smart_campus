@@ -3,6 +3,7 @@
 namespace App\Datatable;
 
 use App\Models\Year;
+use Auth;
 
 class YearDatatable
 {
@@ -10,7 +11,9 @@ class YearDatatable
     {
         /** @var Year $query */
         $query = Year::query()->select('years.*');
-
+        if (Auth::user()->role==1) {
+            $query->where('institute_id', Auth::user()->institute->id);
+        }
         return $query;
     }
 }

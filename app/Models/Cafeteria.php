@@ -19,6 +19,7 @@ class Cafeteria extends Model implements HasMedia
         'name',
         'price',
         'category_id',
+        'institute_id',
     ];
     protected $appends = ['image_url'];
     protected $with = ['category'];

@@ -17,7 +17,12 @@ class CreateQuestionsTable extends Migration
             $table->id();
             $table->string('category');
             $table->text('response');
+            $table->unsignedInteger('institute_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('institute_id')->references('id')->on('institutes')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

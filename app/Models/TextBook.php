@@ -51,6 +51,7 @@ class TextBook extends Model implements HasMedia
         'description',
         'year_id',
         'department_id',
+        'institute_id',
     ];
 
     /**

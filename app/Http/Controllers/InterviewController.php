@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Datatable\InterviewDatatable;
 use App\Models\Interview;
 use App\Repositories\InterviewRepository;
+use Auth;
 use DataTables;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -40,7 +41,10 @@ class InterviewController extends AppBaseController
      */
     public function store(Request $request)
     {
-        $interview = $this->interviewRepository->create($request->all());
+        $input = $request->all();
+        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $input['institute_id'] = $institute_id;
+        $interview = $this->interviewRepository->create($input);
 
         return $this->sendResponse($interview, 'Interview saved successfully.');
     }

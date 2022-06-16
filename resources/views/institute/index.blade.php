@@ -3,7 +3,7 @@
     Institute
 @endsection
 @section('header')
-    <a href="#" class="btn btn-primary addInstituteModal"><i class="fa-solid fa-plus"></i> Add</a>
+    <a href="{{route('institute.create')}}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add</a>
 @endsection
 @section('content')
     <div class="row">
@@ -14,14 +14,11 @@
                 </div>
             </div>
         </div>
-        @include('institute.create')
-        @include('institute.edit')
     </div>
 @endsection
 @section('scripts')
     <script>
         let instituteUrl = "{{route('institute')}}";
-        let instituteSaveUrl = "{{ route('institute.store') }}";
     </script>
     <script src="{{asset('public/assets/js/institute/institute.js')}}"></script>
 @endsection

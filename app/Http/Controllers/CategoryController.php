@@ -7,6 +7,7 @@ use App\Http\Requests\category\CreateCategoryRequest;
 use App\Http\Requests\category\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
+use Auth;
 use DataTables;
 use Flash;
 use Illuminate\Contracts\Foundation\Application;
@@ -49,7 +50,10 @@ class CategoryController extends AppBaseController
      */
     public function store(CreateCategoryRequest $request)
     {
-        $category = $this->categoryRepository->create($request->all());
+        $input = $request->all();
+        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $input['institute_id'] = $institute_id;
+        $category = $this->categoryRepository->create($input);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $category->addMedia($request->image)->toMediaCollection(Category::PATH);

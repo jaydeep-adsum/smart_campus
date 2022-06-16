@@ -3,6 +3,7 @@
 namespace App\Datatable;
 
 use App\Models\Student;
+use Auth;
 
 class StudentDatatable
 {
@@ -10,6 +11,10 @@ class StudentDatatable
     {
         /** @var Student $query */
         $query = Student::query()->select('students.*');
+
+        if (Auth::user()->role==1) {
+            $query->where('institute_id', Auth::user()->institute->id);
+        }
 
         return $query;
     }

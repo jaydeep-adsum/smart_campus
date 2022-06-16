@@ -28,6 +28,7 @@ class Opportunity extends Model implements HasMedia
         'location',
         'criteria',
         'overview',
+        'institute_id',
     ];
 
     /**

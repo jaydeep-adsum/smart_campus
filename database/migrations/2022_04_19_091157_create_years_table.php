@@ -16,7 +16,12 @@ class CreateYearsTable extends Migration
         Schema::create('years', function (Blueprint $table) {
             $table->increments('id');
             $table->string('year');
+            $table->unsignedInteger('institute_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('institute_id')->references('id')->on('institutes')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

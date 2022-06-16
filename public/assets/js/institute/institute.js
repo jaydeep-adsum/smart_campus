@@ -35,85 +35,9 @@ $(document).ready(function () {
       name: 'id'
     }]
   });
-  $(document).on('click', '.addInstituteModal', function () {
-    $('#addInstituteModal').appendTo('body').modal('show');
-  });
-  $(document).on('submit', '#addInstituteForm', function (e) {
-    e.preventDefault();
-
-    if ($('#institute').val() == "") {
-      displayErrorMessage('Institute Name field is required.');
-      return false;
-    }
-
-    $.ajax({
-      url: instituteSaveUrl,
-      type: 'POST',
-      data: $(this).serialize(),
-      success: function success(result) {
-        if (result.success) {
-          displaySuccessMessage(result.message);
-          $('#addInstituteModal').modal('hide');
-          $(tableName).DataTable().ajax.reload(null, false);
-        }
-      },
-      error: function error(result) {
-        displayErrorMessage(result.responseJSON.message);
-      }
-    });
-  });
-  $(document).on('click', '.edit-btn', function (event) {
-    var instituteId = $(event.currentTarget).attr('data-id');
-    renderData(instituteId);
-  });
-
-  window.renderData = function (id) {
-    $.ajax({
-      url: instituteUrl + '/' + id + '/edit',
-      type: 'GET',
-      success: function success(result) {
-        if (result.success) {
-          $('#editInstitute').val(result.data.institute);
-          $('#instituteId').val(result.data.id);
-          $('#editInstituteModal').appendTo('body').modal('show');
-        }
-      },
-      error: function error(result) {
-        displayErrorMessage(result.responseJSON.message);
-      }
-    });
-  };
-
-  $(document).on('submit', '#editInstituteForm', function (e) {
-    e.preventDefault();
-
-    if ($('#editInstitute').val() == "") {
-      displayErrorMessage('Institute field is required.');
-      return false;
-    }
-
-    $.ajax({
-      url: instituteUrl + '/update',
-      type: 'POST',
-      data: $(this).serialize(),
-      success: function success(result) {
-        if (result.success) {
-          displaySuccessMessage(result.message);
-          $('#editInstituteModal').modal('hide');
-          $(tableName).DataTable().ajax.reload(null, false);
-        }
-      },
-      error: function error(result) {
-        displayErrorMessage(result.responseJSON.message);
-      }
-    });
-  });
   $(document).on('click', '.delete-btn', function (event) {
     var instituteId = $(event.currentTarget).attr('data-id');
     deleteItem(instituteUrl + '/' + instituteId, tableName, 'Institute');
-  });
-  $('#addInstituteModal').on('hidden.bs.modal', function () {
-    $('#addInstituteForm')[0].reset();
   });
 });
 /******/ })()

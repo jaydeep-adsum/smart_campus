@@ -21,12 +21,14 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="{{route('institute')}}" class="nav-link {{ Request::is('institute*')? 'active1':''}}">
-                    <i class="fa-solid fa-building nav-icon"></i>
-                    <p>Institute</p>
-                </a>
-            </li>
+            @if(Auth::user()->role==0)
+                <li class="nav-item">
+                    <a href="{{route('institute')}}" class="nav-link {{ Request::is('institute*')? 'active1':''}}">
+                        <i class="fa-solid fa-building nav-icon"></i>
+                        <p>Institute</p>
+                    </a>
+                </li>
+            @endif
             <li class="nav-item has-treeview {{ Request::is('year*','semester*','department*')? 'menu-open':''}}">
                 <a href="#" class="nav-link">
                     <i class="fa-solid fa-user-graduate nav-icon"></i>
@@ -40,13 +42,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('semester.index')}}" class="nav-link {{ Request::is('semester*')? 'active1':''}}">
+                        <a href="{{route('semester.index')}}"
+                           class="nav-link {{ Request::is('semester*')? 'active1':''}}">
                             <i class="fas fa-graduation-cap nav-icon"></i>
                             <p>Semester</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('department.index')}}" class="nav-link {{ Request::is('department*')? 'active1':''}}">
+                        <a href="{{route('department.index')}}"
+                           class="nav-link {{ Request::is('department*')? 'active1':''}}">
                             <i class="fa-solid fa-list-check nav-icon"></i>
                             <p>Department</p>
                         </a>
@@ -65,12 +69,12 @@
                     <p>Events</p>
                 </a>
             </li>
-{{--            <li class="nav-item">--}}
-{{--                <a href="{{route('streams')}}" class="nav-link {{ Request::is('streams*')? 'active1':''}}">--}}
-{{--                    <i class="fa-solid fa-laptop-file nav-icon"></i>--}}
-{{--                    <p>Streams</p>--}}
-{{--                </a>--}}
-{{--            </li>--}}
+            {{--            <li class="nav-item">--}}
+            {{--                <a href="{{route('streams')}}" class="nav-link {{ Request::is('streams*')? 'active1':''}}">--}}
+            {{--                    <i class="fa-solid fa-laptop-file nav-icon"></i>--}}
+            {{--                    <p>Streams</p>--}}
+            {{--                </a>--}}
+            {{--            </li>--}}
 
             <li class="nav-item has-treeview {{ Request::is('notes*','textbooks*')? 'menu-open':''}}">
                 <a href="#" class="nav-link">
@@ -117,7 +121,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('opportunity')}}" class="nav-link {{ Request::is('opportunity*')? 'active1':''}}">
+                        <a href="{{route('opportunity')}}"
+                           class="nav-link {{ Request::is('opportunity*')? 'active1':''}}">
                             <i class="fas fa-star nav-icon"></i>
                             <p>Opportunities</p>
                         </a>
@@ -142,6 +147,14 @@
                     <p>Fellowship</p>
                 </a>
             </li>
+            @if(Auth::user()->role==1)
+                <li class="nav-item">
+                    <a href="{{route('attendance')}}" class="nav-link {{ Request::is('attendance*')? 'active1':''}}">
+                        <i class="fa-solid fa-clipboard-user nav-icon"></i>
+                        <p>Attendance</p>
+                    </a>
+                </li>
+            @endif
         </ul>
     </nav>
 </div>

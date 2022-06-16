@@ -23,7 +23,7 @@ class Category extends Model implements HasMedia
      * @var string[]
      */
     public $fillable = [
-        'name'
+        'name','institute_id',
     ];
 
     protected $appends = ['image_url'];

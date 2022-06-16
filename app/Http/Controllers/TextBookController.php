@@ -10,6 +10,7 @@ use App\Models\Stream;
 use App\Models\TextBook;
 use App\Models\Year;
 use App\Repositories\TextBookRepository;
+use Auth;
 use DataTables;
 use Exception;
 use Flash;
@@ -60,6 +61,8 @@ class TextBookController extends AppBaseController
     public function store(CreateTextBookRequest $request)
     {
         $input = $request->all();
+        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $input['institute_id'] = $institute_id;
         $textBooks = $this->textBookRepository->create($input);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {

@@ -8,6 +8,7 @@ use App\Http\Requests\cafeteria\UpdateCafeteriaRequest;
 use App\Models\Cafeteria;
 use App\Models\Category;
 use App\Repositories\CafeteriaRepository;
+use Auth;
 use DataTables;
 use Flash;
 use Illuminate\Contracts\Foundation\Application;
@@ -55,7 +56,10 @@ class CafeteriaController extends AppBaseController
      */
     public function store(CreateCafeteriaRequest $request)
     {
-        $cafeteria = $this->cafeteriaRepository->create($request->all());
+        $input = $request->all();
+        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $input['institute_id'] = $institute_id;
+        $cafeteria = $this->cafeteriaRepository->create($input);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $cafeteria->addMedia($request->image)->toMediaCollection(Cafeteria::PATH);

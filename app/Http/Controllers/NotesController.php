@@ -10,6 +10,7 @@ use App\Models\Note;
 use App\Models\Stream;
 use App\Models\Year;
 use App\Repositories\NoteRepository;
+use Auth;
 use DataTables;
 use Exception;
 use Flash;
@@ -60,6 +61,8 @@ class NotesController extends AppBaseController
     public function store(CreateNoteRequest $request)
     {
         $input = $request->all();
+        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $input['institute_id'] = $institute_id;
         $notes = $this->noteRepository->create($input);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {

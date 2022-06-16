@@ -6,6 +6,7 @@ use App\Datatable\InstituteDatatable;
 use App\Models\Institute;
 use App\Repositories\InstituteRepository;
 use DataTables;
+use Flash;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -13,6 +14,11 @@ use Illuminate\Http\Request;
 
 class InstituteController extends AppBaseController
 {
+    /**
+     * @var InstituteRepository
+     */
+    private $instituteRepository;
+
     /**
      * InstituteController constructor.
      * @param InstituteRepository $instituteRepository
@@ -33,11 +39,18 @@ class InstituteController extends AppBaseController
         return view('institute.index');
     }
 
+    public function create()
+    {
+        return view('institute.create');
+    }
+
     public function store(Request $request)
     {
-        $institute = $this->instituteRepository->create($request->all());
+        $institute = $this->instituteRepository->store($request->all());
 
-        return $this->sendResponse($institute, 'Institute saved successfully.');
+        Flash::success('Institute saved successfully.');
+
+        return redirect(route('institute'));
     }
 
     public function edit(Institute $institute)
