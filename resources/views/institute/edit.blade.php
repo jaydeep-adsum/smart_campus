@@ -1,6 +1,6 @@
 @extends('dashboard')
 @section('title')
-    Add Institute
+    Edit Institute
 @endsection
 @section('header')
     <a href="{{ route('institute') }}" class="btn btn-default"><i class="fa-solid fa-arrow-left mr-1"></i>{{__('Back')}}
