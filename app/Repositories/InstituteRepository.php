@@ -28,6 +28,10 @@ class InstituteRepository extends BaseRepository
         return Institute::class;
     }
 
+    /**
+     * @param $input
+     * @return bool
+     */
     public function store($input)
     {
         try {
@@ -45,6 +49,38 @@ class InstituteRepository extends BaseRepository
 
             $user = User::create($userInput);
             $institute->update(['user_id' => $user->id]);
+
+            DB::commit();
+
+            return true;
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            throw new UnprocessableEntityHttpException($e->getMessage());
+        }
+    }
+
+    /**
+     * @param $input
+     * @param $id
+     * @return bool
+     */
+    public function updateInstitute($input,$id)
+    {
+        try {
+            DB::beginTransaction();
+            $institute = $this->update(Arr::only($input, (new Institute())->getFillable()),$id);
+
+            if ((isset($input['image']))) {
+                $institute->clearMediaCollection(Institute::PATH);
+                $institute->addMedia($input['image'])->toMediaCollection(Institute::PATH);
+            }
+            // Create User
+            $userInput['name'] = $input['name'];
+            $userInput['email'] = $input['email'];
+
+            $user = User::find($institute->user_id);
+            $user->update($userInput);
 
             DB::commit();
 

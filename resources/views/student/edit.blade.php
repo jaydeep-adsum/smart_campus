@@ -87,7 +87,7 @@
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Image').':') }}
                             <div>
-                                <label class='file-label btn btn-primary mr-2'><i class="fa-solid fa-image mr-2"></i></i>Choose Image
+                                <label class='file-label btn btn-primary mr-2'><i class="fa-solid fa-image mr-2"></i>Choose Image
                                     {{ Form::file('image') }}
                                 </label>
                             </div>

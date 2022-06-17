@@ -53,15 +53,19 @@ class InstituteController extends AppBaseController
         return redirect(route('institute'));
     }
 
-    public function edit(Institute $institute)
+    public function edit($id)
     {
-        return $this->sendResponse($institute, 'Institute Retrieved Successfully.');
-    }
-    public function update(Request $request)
-    {
-        $this->instituteRepository->update($request->all(), $request->instituteId);
+        $institute = Institute::with('user')->first();
 
-        return $this->sendSuccess('Institute updated successfully.');
+        return view('institute.edit',compact('institute'));
+    }
+    public function update(Request $request,$id)
+    {
+        $this->instituteRepository->updateInstitute($request->all(), $id);
+
+        Flash::success('Institute updated successfully.');
+
+        return redirect(route('institute'));
     }
     public function destroy(Institute $institute)
     {

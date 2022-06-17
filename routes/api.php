@@ -33,7 +33,7 @@ Route::namespace('Api')->group(
     function () {
         Route::get('swagger', 'SwaggerController@listItem');
         Route::post('login', [StudentController::class, 'login']);
-        Route::get('attendance', [AttendanceController::class, 'index']);
+
         Route::group(['middleware' => 'auth:api'], function () {
             Route::post('forget-password', [StudentController::class, 'forgetPassword']);
             Route::get('students', [StudentController::class, 'getStudents']);
@@ -67,7 +67,7 @@ Route::namespace('Api')->group(
             Route::get('interview', [InterviewController::class, 'index']);
             Route::post('getInterview', [InterviewController::class, 'getInterview']);
 
-
+            Route::get('attendance', [AttendanceController::class, 'index']);
         });
     }
 );

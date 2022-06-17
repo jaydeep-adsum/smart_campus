@@ -31,7 +31,8 @@ $(document).ready(function () {
             },
             {
                 data: function data(row) {
-                    return `<a title="Edit" class="btn btn-sm edit-btn" data-id="${row.id}" href="#">
+                    var url = instituteUrl + '/' + row.id;
+                    return `<a title="Edit" class="btn btn-sm edit-btn" data-id="${row.id}" href="${url}/edit">
             <i class="fa fa-edit"></i>
                 </a>  <a title="Delete" class="btn btn-sm delete-btn" data-id="${row.id}" href="#">
            <i class="fa-solid fa-trash"></i>

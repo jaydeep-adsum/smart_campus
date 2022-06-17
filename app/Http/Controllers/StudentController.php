@@ -75,7 +75,7 @@ class StudentController extends AppBaseController
     {
         $input = $request->all();
         $password = Str::random(8);
-        $institute_id = Auth::user()->institute->id;
+        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
         $input['password'] = Hash::make($password);
         $input['institute_id'] = $request->institute_id?$request->institute_id:$institute_id;
         $student = $this->studentRepository->create($input);

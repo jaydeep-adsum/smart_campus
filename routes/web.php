@@ -44,12 +44,13 @@ require __DIR__.'/auth.php';
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::post('changePassword', [DashboardController::class,'changePassword'])->name('changePassword');
 
     Route::get('institute', [InstituteController::class, 'index'])->name('institute');
     Route::get('institute/create', [InstituteController::class, 'create'])->name('institute.create');
     Route::post('institute/store', [InstituteController::class, 'store'])->name('institute.store');
     Route::get('institute/{institute}/edit', [InstituteController::class, 'edit'])->name('institute.edit');
-    Route::post('institute/update', [InstituteController::class, 'update'])->name('institute.update');
+    Route::post('institute/update/{id}', [InstituteController::class, 'update'])->name('institute.update');
     Route::delete('institute/{institute}', [InstituteController::class, 'destroy'])->name('institute.destroy');
 
     Route::get('attendance', [AttendanceController::class, 'index'])->name('attendance');

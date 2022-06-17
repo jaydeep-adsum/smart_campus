@@ -35,4 +35,10 @@ class Institute extends Model implements HasMedia
 
         return asset('public/assets/images/no-image.png');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

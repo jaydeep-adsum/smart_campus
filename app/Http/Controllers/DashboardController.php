@@ -11,7 +11,10 @@ use App\Models\Note;
 use App\Models\Stream;
 use App\Models\Student;
 use App\Models\TextBook;
+use App\Models\User;
 use Auth;
+use Hash;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -38,5 +41,38 @@ class DashboardController extends Controller
             $data['fellowshipCount'] = Fellowship::all()->count();
         }
         return view('admin.home', compact('data'));
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function changePassword(Request $request): JsonResponse
+    {
+        $user = User::where('id',Auth::user()->id)->first();
+
+        if(Hash::check($request->old_password, $user->password))
+        {
+            if($request->new_password == $request->confirm_password)
+            {
+                $user->password = Hash::make($request->new_password);
+                $user->save();
+                $data['status'] = 1;
+                $data['messages'] = 'Your password changed successfully';
+                return response()->json($data);
+            }
+            else
+            {
+                $data['status'] = 0;
+                $data['messages'] = 'The password confirmation does not match.';
+                return response()->json($data);
+            }
+        }
+        else
+        {
+            $data['status'] = 0;
+            $data['messages'] = 'The old password does not match.';
+            return response()->json($data);
+        }
     }
 }
