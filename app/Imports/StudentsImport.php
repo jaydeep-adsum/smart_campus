@@ -8,6 +8,7 @@ use App\Models\Institute;
 use App\Models\Semester;
 use App\Models\Student;
 use App\Models\Year;
+use Auth;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -34,7 +35,11 @@ class StudentsImport implements ToCollection, WithHeadingRow
                 if(!$institute) {
                     $institute = Institute::create(['institute' => $row['previous_college_school']]);
                 }
-                $institute_id = $institute->id;
+                if(Auth::check()&&Auth::user()->role==1){
+                  $institute_id = Auth::user()->institute->id;
+                } else {
+                  $institute_id = $institute->id;
+                }
                 if(!$department) {
                     $department = Department::create([
                         'department' => $row['stream_department'],

@@ -55,7 +55,7 @@ class InstituteController extends AppBaseController
 
     public function edit($id)
     {
-        $institute = Institute::with('user')->first();
+        $institute = Institute::with('user')->where('id',$id)->first();
 
         return view('institute.edit',compact('institute'));
     }

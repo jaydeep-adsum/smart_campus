@@ -45,7 +45,7 @@ class InstituteRepository extends BaseRepository
             $userInput['name'] = $input['name'];
             $userInput['email'] = $input['email'];
             $userInput['password'] = Hash::make($input['password']);
-            $userInput['role'] ='1';
+            $userInput['role'] = '1';
 
             $user = User::create($userInput);
             $institute->update(['user_id' => $user->id]);
@@ -65,11 +65,11 @@ class InstituteRepository extends BaseRepository
      * @param $id
      * @return bool
      */
-    public function updateInstitute($input,$id)
+    public function updateInstitute($input, $id)
     {
         try {
             DB::beginTransaction();
-            $institute = $this->update(Arr::only($input, (new Institute())->getFillable()),$id);
+            $institute = $this->update(Arr::only($input, (new Institute())->getFillable()), $id);
 
             if ((isset($input['image']))) {
                 $institute->clearMediaCollection(Institute::PATH);
@@ -78,9 +78,15 @@ class InstituteRepository extends BaseRepository
             // Create User
             $userInput['name'] = $input['name'];
             $userInput['email'] = $input['email'];
-
-            $user = User::find($institute->user_id);
-            $user->update($userInput);
+            if ($institute->user_id) {
+                $user = User::find($institute->user_id);
+                $user->update($userInput);
+            } else {
+                $userInput['password'] = Hash::make($input['password']);
+                $userInput['role'] = '1';
+                $user = User::create($userInput);
+                $institute->update(['user_id' => $user->id]);
+            }
 
             DB::commit();
 

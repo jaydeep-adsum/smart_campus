@@ -32,6 +32,12 @@
                             {{ Form::label(__('Email').':') }} <span class="mandatory">*</span>
                             {{ Form::email('email', $institute->user?$institute->user->email:null, ['class' => 'form-control','required']) }}
                         </div>
+                        @if(!$institute->user)
+                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                            {{ Form::label(__('Password').':') }} <span class="mandatory">*</span>
+                            {{ Form::text('password', null, ['class' => 'form-control','required']) }}
+                        </div>
+                        @endif
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Image').':') }}
                             <div>
