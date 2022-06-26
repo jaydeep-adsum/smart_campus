@@ -14,4 +14,10 @@ class Year extends Model
     public $fillable = [
         'year','institute_id',
     ];
+    protected $with = ['institute'];
+
+    public function institute()
+    {
+        return $this->belongsTo(Institute::class, 'institute_id');
+    }
 }

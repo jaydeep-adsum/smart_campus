@@ -14,6 +14,12 @@
                         {{ Form::label('year',__('Year').':') }}<span class="mandatory">*</span>
                         {{ Form::text('year', null, ['class' => 'form-control','required','id'=>'editYear']) }}
                     </div>
+                    @if(Auth::user()->role==0)
+                        <div class="form-group col-sm-12">
+                            {{ Form::label(__('Institute Name').':') }} <span class="mandatory">*</span>
+                            {{ Form::select('institute_id', $institute,null, ['class' => 'form-control','required','id'=>'edit_institute_id']) }}
+                        </div>
+                    @endif
                 </div>
                 <div class="text-right">
                     {{ Form::button(__('Save'), ['type'=>'submit','class' => 'btn btn-primary','id'=>'editYearBtnSave']) }}

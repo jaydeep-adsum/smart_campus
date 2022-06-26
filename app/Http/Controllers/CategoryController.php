@@ -6,6 +6,7 @@ use App\Datatable\CategoryDatatable;
 use App\Http\Requests\category\CreateCategoryRequest;
 use App\Http\Requests\category\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Models\Institute;
 use App\Repositories\CategoryRepository;
 use Auth;
 use DataTables;
@@ -41,7 +42,8 @@ class CategoryController extends AppBaseController
 
     public function create()
     {
-        return view('category.create');
+        $institute = Institute::pluck('institute','id');
+        return view('category.create',compact('institute'));
     }
 
     /**
@@ -51,7 +53,7 @@ class CategoryController extends AppBaseController
     public function store(CreateCategoryRequest $request)
     {
         $input = $request->all();
-        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
         $input['institute_id'] = $institute_id;
         $category = $this->categoryRepository->create($input);
 
@@ -70,8 +72,9 @@ class CategoryController extends AppBaseController
     public function edit($id)
     {
         $category = $this->categoryRepository->find($id);
+        $institute = Institute::pluck('institute','id');
 
-        return view('category.edit', compact('category'));
+        return view('category.edit', compact('category','institute'));
     }
 
     /**
@@ -81,7 +84,10 @@ class CategoryController extends AppBaseController
      */
     public function update(UpdateCategoryRequest $request,$id)
     {
-        $category = $this->categoryRepository->update($request->all(), $id);
+        $input = $request->all();
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
+        $input['institute_id'] = $institute_id;
+        $category = $this->categoryRepository->update($input, $id);
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $category->clearMediaCollection(Category::PATH);
             $category->addMedia($request->image)->toMediaCollection(Category::PATH);

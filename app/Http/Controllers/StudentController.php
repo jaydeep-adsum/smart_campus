@@ -60,10 +60,16 @@ class StudentController extends AppBaseController
      */
     public function create()
     {
-        $institute = Institute::pluck('institute','id');
-        $department = Department::pluck('department','id');
-        $semester = Semester::pluck('semester','id');
-        $year = Year::pluck('year','id');
+        $institute = Institute::pluck('institute', 'id');
+        if(Auth::user()->role==1) {
+            $department = Department::where('institute_id', Auth::user()->institute->id)->pluck('department', 'id');
+            $semester = Semester::where('institute_id', Auth::user()->institute->id)->pluck('semester', 'id');
+            $year = Year::where('institute_id', Auth::user()->institute->id)->pluck('year', 'id');
+        } else {
+            $department = Department::pluck('department', 'id');
+            $semester = Semester::pluck('semester', 'id');
+            $year = Year::pluck('year', 'id');
+        }
         return view('student.create',compact('institute','department','semester','year'));
     }
 
@@ -102,10 +108,17 @@ class StudentController extends AppBaseController
     public function edit($id)
     {
         $institute = Institute::pluck('institute','id');
-        $department = Department::pluck('department','id');
-        $semester = Semester::pluck('semester','id');
-        $year = Year::pluck('year','id');
+        if(Auth::user()->role==1) {
+            $department = Department::where('institute_id', Auth::user()->institute->id)->pluck('department', 'id');
+            $semester = Semester::where('institute_id', Auth::user()->institute->id)->pluck('semester', 'id');
+            $year = Year::where('institute_id', Auth::user()->institute->id)->pluck('year', 'id');
+        } else {
+            $department = Department::pluck('department', 'id');
+            $semester = Semester::pluck('semester', 'id');
+            $year = Year::pluck('year', 'id');
+        }
         $student = Student::find($id);
+
         return view('student.edit', compact('student','institute','department','semester','year'));
     }
 

@@ -23,6 +23,12 @@
                         {{ Form::label('category',__('Category').':') }}<span class="mandatory">*</span>
                         {{ Form::text('name', null, ['class' => 'form-control','required','id'=>'category']) }}
                     </div>
+                    @if(Auth::user()->role==0)
+                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                            {{ Form::label(__('Institute Name').':') }} <span class="mandatory">*</span>
+                            {{ Form::select('institute_id', $institute,null, ['class' => 'form-control','required','id'=>'institute_id']) }}
+                        </div>
+                    @endif
                     <div class="form-group col-xl-6 col-md-6 col-sm-12">
                         {{ Form::label(__('Image').':') }}<span class="mandatory">*</span>
                         <div>
@@ -45,4 +51,11 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $("#institute_id").select2({
+            width: '100%',
+        });
+    </script>
 @endsection

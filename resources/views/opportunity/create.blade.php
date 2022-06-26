@@ -39,6 +39,12 @@
                             {{ Form::label(__('company overview').':') }} <span class="mandatory">*</span>
                             {{ Form::text('overview', null, ['class' => 'form-control','required']) }}
                         </div>
+                        @if(Auth::user()->role==0)
+                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                {{ Form::label(__('Institute Name').':') }} <span class="mandatory">*</span>
+                                {{ Form::select('institute_id', $institute,null, ['class' => 'form-control','required','id'=>'institute_id']) }}
+                            </div>
+                        @endif
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Image').':') }}<span class="mandatory">*</span>
                             <div>
@@ -62,6 +68,9 @@
 @endsection
 @section('scripts')
     <script>
+        $("#institute_id").select2({
+            width: '100%',
+        });
         $('.datepicker').daterangepicker({
             singleDatePicker: true,
             autoApply: true,

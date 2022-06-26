@@ -20,4 +20,11 @@ class Department extends Model
     public $fillable = [
       'department','institute_id',
     ];
+
+    protected $with = ['institute'];
+
+    public function institute()
+    {
+        return $this->belongsTo(Institute::class, 'institute_id');
+    }
 }

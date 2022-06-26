@@ -22,7 +22,8 @@ $(document).ready(function () {
             {
                 data: function data(row) {
                     let dateArr = [];
-                        $.each(JSON.parse(attendance.replace(/&quot;/g, '"')), function (key, val) {
+                    $.each(JSON.parse(attendance.replace(/\\/g, '\/').replace(/&quot;/g, '"')), function (key, val) {
+                            console.log(val)
                             if (val.student_id == row.id) {
                                 let dates = val.dates.split(',');
                                 dateArr.push({'student': row.id})

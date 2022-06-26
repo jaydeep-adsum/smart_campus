@@ -13,6 +13,12 @@
                         {{ Form::label('category',__('Category').':') }}<span class="mandatory">*</span>
                         {{ Form::select('category', ['Motivational'=>'Motivational','Behaviour'=>'Behaviour'],null, ['class' => 'form-control','required','id'=>'department_id']) }}
                     </div>
+                    @if(Auth::user()->role==0)
+                        <div class="form-group col-sm-12">
+                            {{ Form::label(__('Institute Name').':') }} <span class="mandatory">*</span>
+                            {{ Form::select('institute_id', $institute,null, ['class' => 'form-control','required','id'=>'institute_id']) }}
+                        </div>
+                    @endif
                     <div class="form-group col-sm-12">
                         {{ Form::label(__('Response').':') }} <span class="mandatory">*</span>
                         {{ Form::textarea('response', null, ['class' => 'form-control ckeditor','required','rows'=>'3','id'=>'response']) }}

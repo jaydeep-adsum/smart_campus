@@ -10,9 +10,7 @@
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    @if(Auth::user())
-                        {{Auth::user()->name}}
-                    @endif
+                        {{Auth::user()->role==0?Auth::user()->name:Auth::user()->institute->institute}}
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

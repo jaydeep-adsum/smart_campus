@@ -6,6 +6,7 @@ use App\Datatable\TextBooksDatatable;
 use App\Http\Requests\textbook\CreateTextBookRequest;
 use App\Http\Requests\textbook\UpdateTextBookRequest;
 use App\Models\Department;
+use App\Models\Institute;
 use App\Models\Stream;
 use App\Models\TextBook;
 use App\Models\Year;
@@ -49,9 +50,16 @@ class TextBookController extends AppBaseController
      */
     public function create()
     {
-        $department = Department::pluck('department', 'id');
-        $year = Year::pluck('year', 'id');
-        return view('textbooks.create', compact('department','year'));
+        if(Auth::user()->role==1) {
+            $department = Department::where('institute_id', Auth::user()->institute->id)->pluck('department', 'id');
+            $year = Year::where('institute_id', Auth::user()->institute->id)->pluck('year', 'id');
+        } else {
+            $department = Department::pluck('department', 'id');
+            $year = Year::pluck('year', 'id');
+        }
+        $institute = Institute::pluck('institute','id');
+
+        return view('textbooks.create', compact('department','year','institute'));
     }
 
     /**
@@ -61,7 +69,7 @@ class TextBookController extends AppBaseController
     public function store(CreateTextBookRequest $request)
     {
         $input = $request->all();
-        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
         $input['institute_id'] = $institute_id;
         $textBooks = $this->textBookRepository->create($input);
 
@@ -82,11 +90,17 @@ class TextBookController extends AppBaseController
      */
     public function edit($id)
     {
-        $department = Department::pluck('department', 'id');
-        $year = Year::pluck('year', 'id');
+        if(Auth::user()->role==1) {
+            $department = Department::where('institute_id', Auth::user()->institute->id)->pluck('department', 'id');
+            $year = Year::where('institute_id', Auth::user()->institute->id)->pluck('year', 'id');
+        } else {
+            $department = Department::pluck('department', 'id');
+            $year = Year::pluck('year', 'id');
+        }
         $textBooks = $this->textBookRepository->find($id);
+        $institute = Institute::pluck('institute','id');
 
-        return view('textbooks.edit', compact('textBooks', 'department','year'));
+        return view('textbooks.edit', compact('textBooks', 'department','year','institute'));
     }
 
     /**
@@ -97,7 +111,8 @@ class TextBookController extends AppBaseController
     public function update(UpdateTextBookRequest $request, $id)
     {
         $input = $request->all();
-
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
+        $input['institute_id'] = $institute_id;
         $textBooks = $this->textBookRepository->update($input, $id);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {

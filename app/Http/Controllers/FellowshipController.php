@@ -6,6 +6,7 @@ use App\Datatable\FellowshipDatatable;
 use App\Http\Requests\fellowship\CreateFellowshipRequest;
 use App\Http\Requests\fellowship\UpdateFellowshipRequest;
 use App\Models\Fellowship;
+use App\Models\Institute;
 use App\Repositories\FellowshipRepository;
 use Auth;
 use DataTables;
@@ -46,7 +47,9 @@ class FellowshipController extends AppBaseController
      */
     public function create()
     {
-        return view('fellowship.create');
+        $institute = Institute::pluck('institute','id');
+
+        return view('fellowship.create',compact('institute'));
     }
 
     /**
@@ -56,7 +59,7 @@ class FellowshipController extends AppBaseController
     public function store(CreateFellowshipRequest $request)
     {
         $input = $request->all();
-        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
         $input['institute_id'] = $institute_id;
         $this->fellowshipRepository->create($input);
 
@@ -71,9 +74,10 @@ class FellowshipController extends AppBaseController
      */
     public function edit($id)
     {
+        $institute = Institute::pluck('institute','id');
         $fellowship = $this->fellowshipRepository->find($id);
 
-        return view('fellowship.edit', compact('fellowship'));
+        return view('fellowship.edit', compact('fellowship','institute'));
     }
 
     /**
@@ -83,8 +87,10 @@ class FellowshipController extends AppBaseController
      */
     public function update(UpdateFellowshipRequest $request, $id)
     {
-
-        $fellowship = $this->fellowshipRepository->update($request->all(), $id);
+        $input = $request->all();
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
+        $input['institute_id'] = $institute_id;
+        $fellowship = $this->fellowshipRepository->update($input, $id);
 
         Flash::success('Fellowship updated successfully.');
 

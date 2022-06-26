@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Datatable\DepartmentDatatable;
+use App\Models\Institute;
 use App\Repositories\DepartmentRepository;
 use Auth;
 use DataTables;
@@ -31,10 +32,11 @@ class DepartmentController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $institute = Institute::pluck('institute','id');
         if ($request->ajax()) {
             return Datatables::of((new DepartmentDatatable())->get())->make(true);
         }
-        return view('department.index');
+        return view('department.index',compact('institute'));
     }
 
     /**
@@ -56,7 +58,7 @@ class DepartmentController extends AppBaseController
     public function store(Request $request)
     {
         $input = $request->all();
-        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
         $input['institute_id'] = $institute_id;
         $department = $this->departmentRepository->create($input);
 
@@ -96,7 +98,10 @@ class DepartmentController extends AppBaseController
      */
     public function update(Request $request, $id)
     {
-        $this->departmentRepository->update($request->all(), $id);
+        $input = $request->all();
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
+        $input['institute_id'] = $institute_id;
+        $this->departmentRepository->update($input, $id);
 
         return $this->sendSuccess('Department updated successfully.');
     }

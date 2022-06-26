@@ -77,6 +77,7 @@ $(document).ready(function () {
                     $('#editCategory').val(result.data.category);
                     CKEDITOR.instances['editResponse'].setData(result.data.response);
                     $('#questionId').val(result.data.id);
+                    $('#edit_institute_id').val(result.data.institute_id).trigger("change");
                     $('#editQuestionModal').appendTo('body').modal('show');
                 }
             },

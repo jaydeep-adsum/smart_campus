@@ -9,7 +9,7 @@ use Auth;
 class AttendanceDatatable
 {
     public function get(){
-        $query = Attendance::query()->select('attendances.*');
+        $query = Attendance::query()->select('attendances.*')->with('student');
 
         return $query;
     }

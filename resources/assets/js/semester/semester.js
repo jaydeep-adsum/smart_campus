@@ -79,6 +79,7 @@ $(document).ready(function () {
                 if (result.success) {
                     $('#editSemester').val(result.data.semester);
                     $('#semesterId').val(result.data.id);
+                    $('#edit_institute_id').val(result.data.institute_id).trigger("change");
                     $('#editSemesterModal').appendTo('body').modal('show');
                 }
             },

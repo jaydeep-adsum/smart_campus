@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Datatable\QuestionDatatable;
+use App\Models\Institute;
 use App\Models\Question;
 use App\Repositories\QuestionRepository;
 use Auth;
@@ -30,9 +31,16 @@ class QuestionController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $behaviour = Question::where('category','Behaviour')->get();
-        $motivational = Question::where('category','Motivational')->get();
-        return view('question.index',compact('behaviour','motivational'));
+        if(Auth::user()->role==1) {
+            $behaviour = Question::where('institute_id', Auth::user()->institute->id)->where('category', 'Behaviour')->get();
+            $motivational = Question::where('institute_id', Auth::user()->institute->id)->where('category', 'Motivational')->get();
+        } else {
+            $behaviour = Question::where('category', 'Behaviour')->get();
+            $motivational = Question::where('category', 'Motivational')->get();
+        }
+        $institute = Institute::pluck('institute','id');
+
+        return view('question.index',compact('behaviour','motivational','institute'));
     }
 
     /**
@@ -42,7 +50,7 @@ class QuestionController extends AppBaseController
     public function store(Request $request)
     {
         $input = $request->all();
-        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
         $input['institute_id'] = $institute_id;
         $question = $this->questionRepository->create($input);
 
@@ -64,7 +72,10 @@ class QuestionController extends AppBaseController
      */
     public function update(Request $request)
     {
-        $this->questionRepository->update($request->all(), $request->questionId);
+        $input = $request->all();
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
+        $input['institute_id'] = $institute_id;
+        $this->questionRepository->update($input, $request->questionId);
 
         return $this->sendSuccess('Question updated successfully.');
     }

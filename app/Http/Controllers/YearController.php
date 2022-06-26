@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Datatable\YearDatatable;
+use App\Models\Institute;
+use App\Models\Year;
 use App\Repositories\YearRepository;
 use Auth;
 use DataTables;
@@ -33,10 +35,11 @@ class YearController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $institute = Institute::pluck('institute','id');
         if ($request->ajax()) {
             return Datatables::of((new YearDatatable())->get())->make(true);
         }
-        return view('year.index');
+        return view('year.index',compact('institute'));
     }
 
     /**
@@ -58,7 +61,7 @@ class YearController extends AppBaseController
     public function store(Request $request)
     {
         $input = $request->all();
-        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
         $input['institute_id'] = $institute_id;
         $year = $this->yearRepository->create($input);
 
@@ -97,7 +100,10 @@ class YearController extends AppBaseController
      */
     public function update(Request $request, $id)
     {
-        $this->yearRepository->update($request->all(), $id);
+        $input = $request->all();
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
+        $input['institute_id'] = $institute_id;
+        $this->yearRepository->update($input, $id);
 
         return $this->sendSuccess('Year updated successfully.');
     }

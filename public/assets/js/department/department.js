@@ -75,6 +75,7 @@ $(document).ready(function () {
         if (result.success) {
           $('#editDepartment').val(result.data.department);
           $('#departmentId').val(result.data.id);
+          $('#edit_institute_id').val(result.data.institute_id).trigger("change");
           $('#editDepartmentModal').appendTo('body').modal('show');
         }
       },

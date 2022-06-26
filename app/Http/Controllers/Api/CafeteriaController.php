@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Repositories\CafeteriaRepository;
 use App\Repositories\CategoryRepository;
+use Auth;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -193,7 +194,7 @@ class CafeteriaController extends AppBaseController
     public function getCategoryWithCafeteria(Request $request)
     {
         try {
-            $category = Category::with('cafeteria')->get();
+            $category = Category::with('cafeteria')->where('institute_id',Auth::user()->institute_id)->get();
 
             if (!$category) {
                 return $this->sendError('Something went wrong');
@@ -263,7 +264,7 @@ class CafeteriaController extends AppBaseController
             if (!$request->category_id) {
                 return $this->sendError('Something went wrong');
             }
-            $category = Category::where('id', $request->category_id)->with('cafeteria')->get();
+            $category = Category::where('id', $request->category_id)->with('cafeteria')->where('institute_id',Auth::user()->institute_id)->get();
 
             return $this->sendResponse($category, ('Category with cafeteria fetch successfully'));
         } catch (Exception $ex) {

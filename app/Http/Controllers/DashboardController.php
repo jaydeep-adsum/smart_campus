@@ -23,13 +23,13 @@ class DashboardController extends Controller
     {
         if(Auth::user()->role==1) {
             $data['studentCount'] = Student::where('institute_id', Auth::user()->institute->id)->get()->count();
-            $data['eventCount'] = Event::all()->count();
-            $data['noteCount'] = Note::all()->count();
-            $data['textBookCount'] = TextBook::all()->count();
-            $data['departmentCount'] = Department::all()->count();
-            $data['cafeteriaCount'] = Cafeteria::all()->count();
-            $data['newsCount'] = News::all()->count();
-            $data['fellowshipCount'] = Fellowship::all()->count();
+            $data['eventCount'] = Event::where('institute_id', Auth::user()->institute->id)->get()->count();
+            $data['noteCount'] = Note::where('institute_id', Auth::user()->institute->id)->get()->count();
+            $data['textBookCount'] = TextBook::where('institute_id', Auth::user()->institute->id)->get()->count();
+            $data['departmentCount'] = Department::where('institute_id', Auth::user()->institute->id)->get()->count();
+            $data['cafeteriaCount'] = Cafeteria::where('institute_id', Auth::user()->institute->id)->get()->count();
+            $data['newsCount'] = News::where('institute_id', Auth::user()->institute->id)->get()->count();
+            $data['fellowshipCount'] = Fellowship::where('institute_id', Auth::user()->institute->id)->get()->count();
         } else {
             $data['studentCount'] = Student::all()->count();
             $data['eventCount'] = Event::all()->count();

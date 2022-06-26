@@ -79,6 +79,7 @@ $(document).ready(function () {
                 if (result.success) {
                     $('#editYear').val(result.data.year);
                     $('#yearId').val(result.data.id);
+                    $('#edit_institute_id').val(result.data.institute_id).trigger("change");
                     $('#editYearModal').appendTo('body').modal('show');
                 }
             },

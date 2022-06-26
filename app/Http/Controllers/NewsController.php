@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Datatable\NewsDatatable;
 use App\Http\Requests\news\CreateNewsRequest;
 use App\Http\Requests\news\UpdateNewsRequest;
+use App\Models\Institute;
 use App\Models\News;
 use App\Repositories\NewsRepository;
 use Auth;
@@ -45,7 +46,9 @@ class NewsController extends AppBaseController
      */
     public function create()
     {
-        return view('news.create');
+        $institute = Institute::pluck('institute','id');
+
+        return view('news.create',compact('institute'));
     }
 
     /**
@@ -55,7 +58,7 @@ class NewsController extends AppBaseController
     public function store(CreateNewsRequest $request)
     {
         $input = $request->all();
-        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
         $input['institute_id'] = $institute_id;
         $news = $this->newsRepository->create($input);
 
@@ -73,9 +76,10 @@ class NewsController extends AppBaseController
      */
     public function edit($id)
     {
+        $institute = Institute::pluck('institute','id');
         $news = $this->newsRepository->find($id);
 
-        return view('news.edit', compact('news'));
+        return view('news.edit', compact('news','institute'));
     }
 
     /**
@@ -85,7 +89,10 @@ class NewsController extends AppBaseController
      */
     public function update(UpdateNewsRequest $request, $id)
     {
-        $news = $this->newsRepository->update($request->all(), $id);
+        $input = $request->all();
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
+        $input['institute_id'] = $institute_id;
+        $news = $this->newsRepository->update($input, $id);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $news->clearMediaCollection(News::PATH);

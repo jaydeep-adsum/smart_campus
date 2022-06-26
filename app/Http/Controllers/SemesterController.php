@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Datatable\SemesterDatatable;
+use App\Models\Institute;
 use App\Repositories\SemesterRepository;
 use Auth;
 use DataTables;
@@ -27,10 +28,11 @@ class SemesterController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $institute = Institute::pluck('institute','id');
         if ($request->ajax()) {
             return Datatables::of((new SemesterDatatable())->get())->make(true);
         }
-        return view('semester.index');
+        return view('semester.index',compact('institute'));
     }
 
     /**
@@ -52,7 +54,7 @@ class SemesterController extends AppBaseController
     public function store(Request $request)
     {
         $input = $request->all();
-        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
         $input['institute_id'] = $institute_id;
         $semester = $this->semesterRepository->create($input);
 
@@ -91,7 +93,10 @@ class SemesterController extends AppBaseController
      */
     public function update(Request $request, $id)
     {
-        $this->semesterRepository->update($request->all(), $id);
+        $input = $request->all();
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
+        $input['institute_id'] = $institute_id;
+        $this->semesterRepository->update($input, $id);
 
         return $this->sendSuccess('Semester updated successfully.');
     }

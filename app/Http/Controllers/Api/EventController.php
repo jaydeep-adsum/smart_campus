@@ -6,6 +6,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Repositories\EventsRepository;
+use Auth;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -70,7 +71,8 @@ class EventController extends AppBaseController
     {
         try {
 //            $perPage = $request->page ?? 10;
-            $events = $this->eventsRepository->paginate(10);
+            $search['institute_id'] = Auth::user()->institute_id;
+            $events = $this->eventsRepository->all($search);
 
             return $this->sendResponse($events, ('Events Fetch Successfully.'));
         } catch (\Exception $ex) {

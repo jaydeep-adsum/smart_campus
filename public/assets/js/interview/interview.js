@@ -82,6 +82,7 @@ $(document).ready(function () {
           $('#editQuestion').val(result.data.question);
           CKEDITOR.instances['editAnswer'].setData(result.data.answer);
           $('#interviewId').val(result.data.id);
+          $('#edit_institute_id').val(result.data.institute_id).trigger("change");
           $('#editInterviewModal').appendTo('body').modal('show');
         }
       },

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Datatable\InterviewDatatable;
+use App\Models\Institute;
 use App\Models\Interview;
 use App\Repositories\InterviewRepository;
 use Auth;
@@ -29,10 +30,11 @@ class InterviewController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $institute = Institute::pluck('institute','id');
         if ($request->ajax()) {
             return Datatables::of((new InterviewDatatable())->get())->make(true);
         }
-        return view('interview.index');
+        return view('interview.index',compact('institute'));
     }
 
     /**
@@ -42,7 +44,7 @@ class InterviewController extends AppBaseController
     public function store(Request $request)
     {
         $input = $request->all();
-        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
         $input['institute_id'] = $institute_id;
         $interview = $this->interviewRepository->create($input);
 
@@ -64,7 +66,10 @@ class InterviewController extends AppBaseController
      */
     public function update(Request $request)
     {
-        $this->interviewRepository->update($request->all(), $request->interviewId);
+        $input = $request->all();
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
+        $input['institute_id'] = $institute_id;
+        $this->interviewRepository->update($input, $request->interviewId);
 
         return $this->sendSuccess('Interview updated successfully.');
     }

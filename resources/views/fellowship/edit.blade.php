@@ -33,12 +33,18 @@
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('End Date').':') }} <span class="mandatory">*</span>
-                            {{ Form::text('end_date', null, ['class' => 'form-control','required','id'=>'end_date','disabled']) }}
+                            {{ Form::text('end_date', null, ['class' => 'form-control','required','id'=>'end_date','readonly']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Description').':') }} <span class="mandatory">*</span>
                             {{ Form::textarea('description', null, ['class' => 'form-control ckeditor','required','rows'=>'3']) }}
                         </div>
+                        @if(Auth::user()->role==0)
+                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                {{ Form::label(__('Institute Name').':') }} <span class="mandatory">*</span>
+                                {{ Form::select('institute_id', $institute,null, ['class' => 'form-control','required','id'=>'institute_id']) }}
+                            </div>
+                        @endif
                         <div class="form-group col-sm-12 pt-4">
                             {{ Form::submit(__('Save'), ['class' => 'btn btn-primary saveNote']) }}
                             <a href="{{ route('fellowship') }}"
@@ -53,6 +59,9 @@
 @endsection
 @section('scripts')
     <script>
+        $("#institute_id").select2({
+            width: '100%',
+        });
         $('#start_date').daterangepicker({
             singleDatePicker: true,
             autoApply: true,
@@ -62,7 +71,7 @@
                 format: 'YYYY-MM-DD'
             }
         }, function(start) {
-            $('#end_date').removeAttr('disabled');
+            $('#end_date').removeAttr('readonly');
             $('#end_date').daterangepicker({
                 singleDatePicker: true,
                 autoApply: true,

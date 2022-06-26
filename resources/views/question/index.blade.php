@@ -106,6 +106,9 @@
 @endsection
 @section('scripts')
     <script>
+        $("#institute_id,#department_id,#editCategory,#edit_institute_id").select2({
+            width: '100%',
+        });
         let questionUrl = "{{route('question')}}";
         let questionSaveUrl = "{{ route('question.store') }}";
     </script>

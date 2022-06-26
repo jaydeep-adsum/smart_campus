@@ -7,6 +7,7 @@ use App\Http\Requests\cafeteria\CreateCafeteriaRequest;
 use App\Http\Requests\cafeteria\UpdateCafeteriaRequest;
 use App\Models\Cafeteria;
 use App\Models\Category;
+use App\Models\Institute;
 use App\Repositories\CafeteriaRepository;
 use Auth;
 use DataTables;
@@ -46,8 +47,13 @@ class CafeteriaController extends AppBaseController
      */
     public function create()
     {
-        $category = Category::pluck('name', 'id');
-        return view('cafeteria.create', compact('category'));
+        $institute = Institute::pluck('institute','id');
+        if(Auth::user()->role==1) {
+            $category = Category::where('institute_id', Auth::user()->institute->id)->pluck('name', 'id');
+        } else {
+            $category = Category::pluck('name', 'id');
+        }
+        return view('cafeteria.create', compact('category','institute'));
     }
 
     /**
@@ -57,7 +63,7 @@ class CafeteriaController extends AppBaseController
     public function store(CreateCafeteriaRequest $request)
     {
         $input = $request->all();
-        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
         $input['institute_id'] = $institute_id;
         $cafeteria = $this->cafeteriaRepository->create($input);
 
@@ -76,10 +82,15 @@ class CafeteriaController extends AppBaseController
      */
     public function edit($id)
     {
-        $category = Category::pluck('name', 'id');
+        $institute = Institute::pluck('institute','id');
+        if(Auth::user()->role==1) {
+            $category = Category::where('institute_id', Auth::user()->institute->id)->pluck('name', 'id');
+        } else {
+            $category = Category::pluck('name', 'id');
+        }
         $cafeteria = $this->cafeteriaRepository->find($id);
 
-        return view('cafeteria.edit', compact('cafeteria', 'category'));
+        return view('cafeteria.edit', compact('cafeteria', 'category','institute'));
     }
 
     /**
@@ -90,7 +101,8 @@ class CafeteriaController extends AppBaseController
     public function update(UpdateCafeteriaRequest $request, $id)
     {
         $input = $request->all();
-
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
+        $input['institute_id'] = $institute_id;
         $cafeteria = $this->cafeteriaRepository->update($input, $id);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {

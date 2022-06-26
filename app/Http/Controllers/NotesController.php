@@ -6,6 +6,7 @@ use App\Datatable\NotesDatatable;
 use App\Http\Requests\note\CreateNoteRequest;
 use App\Http\Requests\note\UpdateNoteRequest;
 use App\Models\Department;
+use App\Models\Institute;
 use App\Models\Note;
 use App\Models\Stream;
 use App\Models\Year;
@@ -49,9 +50,16 @@ class NotesController extends AppBaseController
      */
     public function create()
     {
-        $department = Department::pluck('department', 'id');
-        $year = Year::pluck('year', 'id');
-        return view('note.create', compact('department','year'));
+        $institute = Institute::pluck('institute','id');
+        if(Auth::user()->role==1) {
+            $department = Department::where('institute_id', Auth::user()->institute->id)->pluck('department', 'id');
+            $year = Year::where('institute_id', Auth::user()->institute->id)->pluck('year', 'id');
+        } else {
+            $department = Department::pluck('department', 'id');
+            $year = Year::pluck('year', 'id');
+        }
+
+        return view('note.create', compact('department','year','institute'));
     }
 
     /**
@@ -61,7 +69,7 @@ class NotesController extends AppBaseController
     public function store(CreateNoteRequest $request)
     {
         $input = $request->all();
-        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
         $input['institute_id'] = $institute_id;
         $notes = $this->noteRepository->create($input);
 
@@ -82,11 +90,17 @@ class NotesController extends AppBaseController
      */
     public function edit($id)
     {
-        $department = Department::pluck('department', 'id');
-        $year = Year::pluck('year', 'id');
+        if(Auth::user()->role==1) {
+            $department = Department::where('institute_id', Auth::user()->institute->id)->pluck('department', 'id');
+            $year = Year::where('institute_id', Auth::user()->institute->id)->pluck('year', 'id');
+        } else {
+            $department = Department::pluck('department', 'id');
+            $year = Year::pluck('year', 'id');
+        }
+        $institute = Institute::pluck('institute','id');
         $notes = $this->noteRepository->find($id);
 
-        return view('note.edit', compact('notes', 'department','year'));
+        return view('note.edit', compact('notes', 'department','year','institute'));
     }
 
     /**
@@ -97,7 +111,8 @@ class NotesController extends AppBaseController
     public function update(UpdateNoteRequest $request, $id)
     {
         $input = $request->all();
-
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
+        $input['institute_id'] = $institute_id;
         $notes = $this->noteRepository->update($input, $id);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {

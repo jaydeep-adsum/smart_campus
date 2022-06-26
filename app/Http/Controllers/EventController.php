@@ -6,6 +6,7 @@ use App\Datatable\EventsDatatable;
 use App\Http\Requests\event\createEventRequest;
 use App\Http\Requests\event\UpdateEventRequest;
 use App\Models\Event;
+use App\Models\Institute;
 use App\Repositories\EventsRepository;
 use Auth;
 use DataTables;
@@ -46,7 +47,9 @@ class EventController extends AppBaseController
      */
     public function create()
     {
-        return view('events.create');
+        $institute = Institute::pluck('institute','id');
+
+        return view('events.create',compact('institute'));
     }
 
     /**
@@ -57,7 +60,7 @@ class EventController extends AppBaseController
     {
         $input = $request->all();
         $input['created_by'] = Auth::user()->name;
-        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
         $input['institute_id'] = $institute_id;
         $event = $this->eventsRepository->create($input);
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -75,7 +78,9 @@ class EventController extends AppBaseController
     public function edit($id)
     {
         $event = Event::find($id);
-        return view('events.edit', compact('event'));
+        $institute = Institute::pluck('institute','id');
+
+        return view('events.edit', compact('event','institute'));
     }
 
     /**
@@ -86,7 +91,8 @@ class EventController extends AppBaseController
     public function update(UpdateEventRequest $request, $id)
     {
         $input = $request->all();
-
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
+        $input['institute_id'] = $institute_id;
         $event = $this->eventsRepository->update($input, $id);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Datatable\OpportunityDatatable;
 use App\Http\Requests\opportunity\CreateOpportunityRequest;
 use App\Http\Requests\opportunity\UpdateOpportunityRequest;
+use App\Models\Institute;
 use App\Models\Opportunity;
 use App\Repositories\OpportunityRepository;
 use Auth;
@@ -46,7 +47,9 @@ class OpportunityController extends AppBaseController
      */
     public function create()
     {
-        return view('opportunity.create');
+        $institute = Institute::pluck('institute','id');
+
+        return view('opportunity.create',compact('institute'));
     }
 
     /**
@@ -56,7 +59,7 @@ class OpportunityController extends AppBaseController
     public function store(CreateOpportunityRequest $request)
     {
         $input = $request->all();
-        $institute_id = (Auth::check()&&Auth::user()->role==1)?Auth::user()->institute->id:null;
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
         $input['institute_id'] = $institute_id;
         $opportunity = $this->opportunityRepository->create($input);
 
@@ -74,9 +77,10 @@ class OpportunityController extends AppBaseController
      */
     public function edit($id)
     {
+        $institute = Institute::pluck('institute','id');
         $opportunity = $this->opportunityRepository->find($id);
 
-        return view('opportunity.edit', compact('opportunity'));
+        return view('opportunity.edit', compact('opportunity','institute'));
     }
 
     /**
@@ -86,7 +90,10 @@ class OpportunityController extends AppBaseController
      */
     public function update(UpdateOpportunityRequest $request, $id)
     {
-        $opportunity = $this->opportunityRepository->update($request->all(), $id);
+        $input = $request->all();
+        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
+        $input['institute_id'] = $institute_id;
+        $opportunity = $this->opportunityRepository->update($input, $id);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $opportunity->clearMediaCollection(Opportunity::PATH);

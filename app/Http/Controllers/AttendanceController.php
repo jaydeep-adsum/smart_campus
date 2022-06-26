@@ -6,6 +6,7 @@ use App\Datatable\AttendanceDatatable;
 use App\Models\Attendance;
 use App\Models\Department;
 use App\Models\Semester;
+use App\Models\Student;
 use App\Models\Year;
 use App\Repositories\AttendanceRepository;
 use Auth;
@@ -34,7 +35,17 @@ class AttendanceController extends Controller
     {
         $month = session('month');
         $year = session('year');
-        $attendance = Attendance::select('student_id','dates')->where('month',$month)->where('year',$year)->get();
+        $department = session('department');
+        $student_year = session('student_year');
+        $semester = session('semester');
+        $studentId = Student::where('institute_id', Auth::user()->institute->id)->where('department_id',$department)->where('semester_id',$semester)->where('year_id',$student_year)->pluck('id')->toArray();
+        $attendanceData = Attendance::with('student')->select('student_id','dates')->where('month',$month)->where('year',$year)->whereIn('student_id',$studentId)->get()->toArray();
+        $attend =[];
+        foreach ($attendanceData as $att){
+            unset($att['student']['institute'],$att['student']['semester'],$att['student']['department'],$att['student']['year'],$att['student']['media']);
+            $attend[] = $att;
+        }
+        $attendance = collect($attend);
         if(count($attendance)==0){
             $attendance = 0;
         }
@@ -55,6 +66,15 @@ class AttendanceController extends Controller
 
     public function store(Request $request)
     {
+        $validator = $request->validate([
+            'calender' => 'required',
+        ],
+        [
+            'calender.required'=>'Select almost one date',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['status' => "false", 'messages' => array(implode(', ', $validator->errors()->all()))]);
+        }
         $this->attendanceRepository->store($request->all());
 
         Flash::success('Attendance added successfully.');

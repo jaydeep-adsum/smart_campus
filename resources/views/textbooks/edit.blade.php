@@ -37,12 +37,6 @@
                             {{ Form::select('department_id', $department,null, ['class' => 'form-control','required','id'=>'department']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Description').':') }} <span class="mandatory">*</span>
-                            {{ Form::textarea('description', null, ['class' => 'form-control ckeditor','required','rows'=>'3']) }}
-                        </div>
-                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            <div class="row">
-                                <div class="col-md-6">
                                     {{ Form::label(__('Image').':') }}<span class="mandatory">*</span>
                                     <div>
                                         <label class='file-label btn btn-primary mr-2'><i
@@ -55,7 +49,7 @@
                                              class="rounded shadow" id="imgSrc"/>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
                                     {{ Form::label(__('Pdf').':') }}<span class="mandatory">*</span>
                                     <div>
                                         <label class='file-label btn btn-primary mr-2'><i
@@ -73,8 +67,16 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>
+                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                            {{ Form::label(__('Description').':') }} <span class="mandatory">*</span>
+                            {{ Form::textarea('description', null, ['class' => 'form-control ckeditor','required','rows'=>'3']) }}
                         </div>
+                        @if(Auth::user()->role==0)
+                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                {{ Form::label(__('Institute Name').':') }} <span class="mandatory">*</span>
+                                {{ Form::select('institute_id', $institute,null, ['class' => 'form-control','required','id'=>'institute_id']) }}
+                            </div>
+                        @endif
                         <div class="form-group col-sm-12 pt-4">
                             {{ Form::submit(__('Save'), ['class' => 'btn btn-primary saveTextBook']) }}
                             <a href="{{ route('textbooks') }}"
@@ -89,7 +91,7 @@
 @endsection
 @section('scripts')
     <script>
-        $("#year,#department").select2({
+        $("#year,#department,#institute_id").select2({
             width: '100%',
         });
     </script>

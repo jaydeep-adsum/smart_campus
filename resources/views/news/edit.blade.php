@@ -18,6 +18,12 @@
             <div class="card card-default">
                 <div class="card-body">
                     {{ Form::model($news, ['route' => ['news.update',$news->id], 'files' => 'true']) }}
+                    @if(Auth::user()->role==0)
+                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                            {{ Form::label(__('Institute Name').':') }} <span class="mandatory">*</span>
+                            {{ Form::select('institute_id', $institute,null, ['class' => 'form-control','required','id'=>'institute_id']) }}
+                        </div>
+                    @endif
                     <div class="form-group col-xl-6 col-md-6 col-sm-12">
                         {{ Form::label(__('Title').':') }} <span class="mandatory">*</span>
                         {{ Form::text('title', null, ['class' => 'form-control','required']) }}
@@ -49,4 +55,11 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $("#institute_id").select2({
+            width: '100%',
+        });
+    </script>
 @endsection

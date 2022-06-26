@@ -20,6 +20,9 @@
 @endsection
 @section('scripts')
     <script>
+        $("#institute_id,#edit_institute_id").select2({
+            width: '100%',
+        });
         let yearUrl = "{{route('year.index')}}";
         let yearSaveUrl = "{{ route('year.store') }}";
     </script>

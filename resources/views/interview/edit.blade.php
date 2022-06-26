@@ -10,6 +10,12 @@
             <div class="modal-body">
                 {{ Form::hidden('interviewId',null,['id'=>'interviewId']) }}
                 <div class="row">
+                    @if(Auth::user()->role==0)
+                        <div class="form-group col-sm-12">
+                            {{ Form::label(__('Institute Name').':') }} <span class="mandatory">*</span>
+                            {{ Form::select('institute_id', $institute,null, ['class' => 'form-control','required','id'=>'edit_institute_id']) }}
+                        </div>
+                    @endif
                     <div class="form-group col-sm-12">
                         {{ Form::label('question',__('Question').':') }}<span class="mandatory">*</span>
                         {{ Form::text('question', null, ['class' => 'form-control','required','id'=>'editQuestion']) }}
