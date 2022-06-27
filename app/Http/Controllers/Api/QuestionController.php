@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Controllers\Controller;
 use App\Repositories\QuestionRepository;
+use Auth;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -63,7 +64,8 @@ class QuestionController extends AppBaseController
     public function index(Request $request)
     {
         try {
-            $question = $this->questionRepository->paginate(10);
+            $search['institute_id'] = Auth::user()->institute_id;
+            $question = $this->questionRepository->all($search);
 
             return $this->sendResponse($question, ('Questions fetch successfully.'));
         } catch (Exception $ex) {

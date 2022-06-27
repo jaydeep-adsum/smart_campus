@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Controllers\Controller;
 use App\Repositories\OpportunityRepository;
+use Auth;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -68,7 +69,8 @@ class OpportunityController extends AppBaseController
     public function index(Request $request)
     {
         try {
-            $opportunity = $this->opportunityRepository->paginate(10);
+            $search['institute_id'] = Auth::user()->institute_id;
+            $opportunity = $this->opportunityRepository->all($search);
 
             return $this->sendResponse($opportunity, ('Opportunity fetch successfully.'));
         } catch (Exception $ex) {

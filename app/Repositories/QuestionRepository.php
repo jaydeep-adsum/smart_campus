@@ -9,12 +9,12 @@ use App\Models\Question;
 class QuestionRepository extends BaseRepository
 {
     protected $fieldSearchable = [
-        'category','response'
+        'category','response','institute_id',
     ];
 
     public function getFieldsSearchable()
     {
-        return $this->fieldsSearchable;
+        return $this->fieldSearchable;
     }
 
     public function model()

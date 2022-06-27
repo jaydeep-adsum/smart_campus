@@ -15,6 +15,7 @@ class NoteRepository extends BaseRepository
         'description',
         'year_id',
         'department_id',
+        'institute_id',
     ];
 
     /**

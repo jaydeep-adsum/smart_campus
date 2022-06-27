@@ -11,6 +11,7 @@ class InterviewRepository extends BaseRepository
     protected $fieldSearchable = [
         'question',
         'answer',
+        'institute_id',
     ];
     public function getFieldsSearchable()
     {

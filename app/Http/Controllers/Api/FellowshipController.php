@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Controllers\Controller;
 use App\Repositories\FellowshipRepository;
+use Auth;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -68,7 +69,8 @@ class FellowshipController extends AppBaseController
     public function index(Request $request)
     {
         try {
-            $fellowship = $this->fellowshipRepository->paginate(10);
+            $search['institute_id'] = Auth::user()->institute_id;
+            $fellowship = $this->fellowshipRepository->all($search);
 
             return $this->sendResponse($fellowship, ('Fellowship fetch successfully.'));
         } catch (Exception $ex) {

@@ -17,6 +17,7 @@ class OpportunityRepository extends BaseRepository
         'location',
         'criteria',
         'overview',
+        'institute_id',
     ];
 
     /**
@@ -24,7 +25,7 @@ class OpportunityRepository extends BaseRepository
      */
     public function getFieldsSearchable()
     {
-        return $this->fieldsSearchable;
+        return $this->fieldSearchable;
     }
 
     /**

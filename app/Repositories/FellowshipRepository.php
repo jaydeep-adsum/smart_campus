@@ -12,6 +12,7 @@ class FellowshipRepository extends BaseRepository
         'end_date',
         'description',
         'web_url',
+        'institute_id',
     ];
 
     public function getFieldsSearchable()

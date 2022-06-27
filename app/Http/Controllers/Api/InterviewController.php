@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Controllers\Controller;
 use App\Repositories\InterviewRepository;
+use Auth;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -68,7 +69,8 @@ class InterviewController extends AppBaseController
     public function index(Request $request)
     {
         try {
-            $interview = $this->interviewRepository->paginate(10);
+            $search['institute_id'] = Auth::user()->institute_id;
+            $interview = $this->interviewRepository->all($search);
 
             return $this->sendResponse($interview, ('Interview fetch successfully.'));
         } catch (Exception $ex) {

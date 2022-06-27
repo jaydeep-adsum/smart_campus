@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Controllers\Controller;
 use App\Repositories\NoteRepository;
+use Auth;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -65,8 +66,8 @@ class NoteController extends AppBaseController
     public function index(Request $request)
     {
         try {
-//            $perPage = $request->page ?? 10;
-            $notes = $this->noteRepository->paginate(10);
+            $search['institute_id'] = Auth::user()->institute_id;
+            $notes = $this->noteRepository->all($search);
 
             return $this->sendResponse($notes, ('Notes fetch successfully.'));
         } catch (Exception $ex) {

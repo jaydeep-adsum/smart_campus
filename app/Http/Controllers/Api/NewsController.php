@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Controllers\Controller;
 use App\Repositories\NewsRepository;
+use Auth;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -65,7 +66,8 @@ class NewsController extends AppBaseController
     public function index(Request $request)
     {
         try {
-            $news = $this->newsRepository->paginate(10);
+            $search['institute_id'] = Auth::user()->institute_id;
+            $news = $this->newsRepository->all($search);
 
             return $this->sendResponse($news, ('News fetch successfully.'));
         } catch (Exception $ex) {

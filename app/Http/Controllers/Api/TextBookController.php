@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Controllers\Controller;
 use App\Repositories\TextBookRepository;
+use Auth;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -64,7 +65,8 @@ class TextBookController extends AppBaseController
     public function index(Request $request)
     {
         try {
-            $textBooks = $this->textBookRepository->paginate(10);
+            $search['institute_id'] = Auth::user()->institute_id;
+            $textBooks = $this->textBookRepository->all($search);
 
             return $this->sendResponse($textBooks, ('Text Books fetch successfully.'));
         } catch (Exception $ex) {

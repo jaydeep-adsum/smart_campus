@@ -12,6 +12,7 @@ class NewsRepository extends BaseRepository
     protected $fieldsSearchable = [
         'title',
         'description',
+        'institute_id',
     ];
 
     /**

@@ -18,6 +18,7 @@ class EventsRepository extends BaseRepository
         'to',
         'registration_link',
         'created_by',
+        'institute_id',
     ];
 
     /**
