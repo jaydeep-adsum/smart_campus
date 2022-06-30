@@ -30,7 +30,7 @@ class AttendanceRepository extends BaseRepository
             $inputArr['student_id'] = $student_id;
             $inputArr['dates'] = implode(',',$calender);
 
-            if ($attendance){
+            if ($attendance->month==$month&&$attendance->year==$year){
                 $attendance->update(['dates'=>'']);
                 $attendance->update($inputArr);
             } else{

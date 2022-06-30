@@ -72,9 +72,7 @@ class AttendanceController extends Controller
         [
             'calender.required'=>'Select almost one date',
         ]);
-        if ($validator->fails()) {
-            return response()->json(['status' => "false", 'messages' => array(implode(', ', $validator->errors()->all()))]);
-        }
+
         $this->attendanceRepository->store($request->all());
 
         Flash::success('Attendance added successfully.');
