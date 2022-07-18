@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 class InstituteRepository extends BaseRepository
 {
     protected $fieldSearchable = [
-        'institute', 'user_id',
+        'institute','user_id','address','contact',
     ];
 
     public function getFieldsSearchable()
@@ -93,7 +93,6 @@ class InstituteRepository extends BaseRepository
             return true;
         } catch (Exception $e) {
             DB::rollBack();
-
             throw new UnprocessableEntityHttpException($e->getMessage());
         }
     }

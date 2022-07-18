@@ -16,6 +16,24 @@
     </div>
 @endsection
 @section('content')
+    <div class="bg-white pt-3 px-3 mb-1 rounded">
+        <div class="row">
+            @if(Auth::user()->role!=1)
+        <div class="form-group col-xl-3 col-md-3 col-sm-12">
+            {{ Form::select('institute_id', $institute,null, ['class' => 'form-control','required','id'=>'institute_id','placeholder'=>'select Institute']) }}
+        </div>
+            @endif
+        <div class="form-group col-xl-3 col-md-3 col-sm-12">
+            {{ Form::select('year_id', $year,null, ['class' => 'form-control','required','id'=>'year_id','placeholder'=>'select Year']) }}
+        </div>
+        <div class="form-group col-xl-3 col-md-3 col-sm-12">
+            {{ Form::select('department_id', $department,null, ['class' => 'form-control','required','id'=>'department_id','placeholder'=>'select Department']) }}
+        </div>
+        <div class="form-group col-xl-3 col-md-3 col-sm-12">
+            {{ Form::select('semester_id', $semester,null, ['class' => 'form-control','required','id'=>'semester_id','placeholder'=>'select Semester']) }}
+        </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="card card-default">
@@ -28,6 +46,9 @@
 @endsection
 @section('scripts')
     <script>
+        $("#year_id,#institute_id,#semester_id,#department_id").select2({
+            width: '100%',
+        });
         let studentUrl = "{{route('student')}}";
     </script>
     <script src="{{asset('public/assets/js/student/student.js')}}"></script>

@@ -16,7 +16,7 @@ $(document).ready(function () {
                 'orderable': false
             },
             {
-                'targets': [7],
+                'targets': [4],
                 'className': 'text-center',
                 'orderable': false,
                 'width': '8%'
@@ -40,18 +40,18 @@ $(document).ready(function () {
                 data: 'chapter',
                 name: 'chapter'
             },
-            {
-                data: function data(row) {
-                    return row.year.year;
-                },
-                name: 'year_id'
-            },
-            {
-                data: function data(row) {
-                    return row.department.department;
-                },
-                name: 'department_id'
-            },
+            // {
+            //     data: function data(row) {
+            //         return row.year.year;
+            //     },
+            //     name: 'year_id'
+            // },
+            // {
+            //     data: function data(row) {
+            //         return row.department.department;
+            //     },
+            //     name: 'department_id'
+            // },
             {
                 data: function data(row) {
                     let pdf = 'N/A';
@@ -66,18 +66,12 @@ $(document).ready(function () {
             },
             {
                 data: function data(row) {
-                    return moment(row.created_at, 'YYYY-MM-DD hh:mm:ss').format('Do MMM, YYYY');
-                },
-                name: 'created_at'
-            },
-            {
-                data: function data(row) {
                     var url = notesUrl + '/' + row.id;
-                    return `<a title="Edit" class="btn btn-sm edit-btn" data-id="${row.id}" href="${url}/edit">
+                    return `<div class="d-flex"><a title="Edit" class="btn btn-sm edit-btn" data-id="${row.id}" href="${url}/edit">
             <i class="fa fa-edit"></i>
-                </a>  <a title="Delete" class="btn btn-sm delete-btn" data-id="${row.id}" href="#">
+                </a>&nbsp;<a title="Delete" class="btn btn-sm delete-btn" data-id="${row.id}" href="#">
            <i class="fa-solid fa-trash"></i>
-                </a>`
+                </a></div>`
                 },
                 name: 'id',
             }]

@@ -61,7 +61,7 @@
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Detail').':') }} <span class="mandatory">*</span>
-                            {{ Form::textarea('detail', null, ['class' => 'form-control ckeditor','required','rows'=>'3']) }}
+                            {{ Form::textarea('detail', null, ['class' => 'form-control','required','rows'=>'5']) }}
                         </div>
                         <div class="form-group col-sm-12 pt-4">
                             {{ Form::submit(__('Save'), ['class' => 'btn btn-primary']) }}

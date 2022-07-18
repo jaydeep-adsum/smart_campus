@@ -3,7 +3,7 @@
     <tr>
         <th scope="col">{{ __('Id') }}</th>
         <th scope="col">{{ __('Institute') }}</th>
-        <th scope="col">{{ __('Created At') }}</th>
+        <th scope="col">{{ __('Contact') }}</th>
         <th scope="col">{{ __('Action') }}</th>
     </tr>
     </thead>

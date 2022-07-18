@@ -52,14 +52,14 @@ class TextBookController extends AppBaseController
     {
         if(Auth::user()->role==1) {
             $department = Department::where('institute_id', Auth::user()->institute->id)->pluck('department', 'id');
-            $year = Year::where('institute_id', Auth::user()->institute->id)->pluck('year', 'id');
+//            $year = Year::where('institute_id', Auth::user()->institute->id)->pluck('year', 'id');
         } else {
             $department = Department::pluck('department', 'id');
-            $year = Year::pluck('year', 'id');
+//            $year = Year::pluck('year', 'id');
         }
         $institute = Institute::pluck('institute','id');
 
-        return view('textbooks.create', compact('department','year','institute'));
+        return view('textbooks.create', compact('department','institute'));
     }
 
     /**
@@ -92,15 +92,15 @@ class TextBookController extends AppBaseController
     {
         if(Auth::user()->role==1) {
             $department = Department::where('institute_id', Auth::user()->institute->id)->pluck('department', 'id');
-            $year = Year::where('institute_id', Auth::user()->institute->id)->pluck('year', 'id');
+//            $year = Year::where('institute_id', Auth::user()->institute->id)->pluck('year', 'id');
         } else {
             $department = Department::pluck('department', 'id');
-            $year = Year::pluck('year', 'id');
+//            $year = Year::pluck('year', 'id');
         }
         $textBooks = $this->textBookRepository->find($id);
         $institute = Institute::pluck('institute','id');
 
-        return view('textbooks.edit', compact('textBooks', 'department','year','institute'));
+        return view('textbooks.edit', compact('textBooks', 'department','institute'));
     }
 
     /**

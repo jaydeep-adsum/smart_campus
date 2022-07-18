@@ -65,6 +65,7 @@
             width: 98vw;
             height: 100vh;
             overflow-x: auto;
+            background-image: linear-gradient(to bottom right, #1E4080, #d94b09);
         }
         .tbcell {
             display: table-cell;
@@ -185,8 +186,8 @@
 <!-- Main Content -->
 <div class="tbcell">
     <div class="container">
-        <div>
-            <img src="{{asset('public/phlippedlogo.png')}}" alt="" class="logo py-4">
+        <div class="d-flex justify-content-center">
+            <img src="{{asset('public/logo.png')}}" alt="" class="" width="25%">
         </div>
         <div class="row text-center">
 {{--            <div class="col-md-4 text-center company__info">--}}

@@ -16,6 +16,7 @@ use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\StreamController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TextBookController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\YearController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
@@ -133,6 +134,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('interview/{interview}/edit', [InterviewController::class, 'edit'])->name('interview.edit');
     Route::post('interview/update', [InterviewController::class, 'update'])->name('interview.update');
     Route::delete('interview/{interview}', [InterviewController::class, 'destroy'])->name('interview.destroy');
+
+    Route::get('cafeteriaUser', [UserController::class, 'index'])->name('cafeteria_user');
+    Route::post('cafeteriaUser/store',[UserController::class,'store'])->name('cafeteria_user.store');
+    Route::get('cafeteriaUser/{user}/edit', [UserController::class, 'edit'])->name('cafeteria_user.edit');
+    Route::post('cafeteriaUser/update', [UserController::class, 'update'])->name('cafeteria_user.update');
+    Route::delete('cafeteriaUser/{user}', [UserController::class, 'destroy'])->name('cafeteria_user.destroy');
 
     Route::resource('semester', SemesterController::class);
     Route::resource('department', DepartmentController::class);

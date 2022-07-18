@@ -49,10 +49,21 @@ class StudentController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $input = [
+          'institute_id'=>$request->institute_id,
+          'department_id'=>$request->department_id,
+          'semester_id'=>$request->semester_id,
+          'year_id'=>$request->year_id,
+        ];
+
+        $institute = Institute::pluck('institute', 'id');
+        $year = Year::pluck('year', 'id');
+        $department = Department::pluck('department', 'id');
+        $semester = Semester::pluck('semester', 'id');
         if ($request->ajax()) {
-            return Datatables::of((new StudentDatatable())->get())->make(true);
+            return Datatables::of((new StudentDatatable())->get($input))->make(true);
         }
-        return view('student.index');
+        return view('student.index',compact('institute','year','department','semester'));
     }
 
     /**

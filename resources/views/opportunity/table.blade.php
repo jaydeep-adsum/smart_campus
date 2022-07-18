@@ -7,7 +7,6 @@
         <th scope="col">{{ __('Location') }}</th>
         <th scope="col">{{ __('Criteria') }}</th>
         <th scope="col">{{ __('Overview') }}</th>
-        <th scope="col">{{ __('Created At') }}</th>
         <th scope="col">{{ __('Action') }}</th>
     </tr>
     </thead>

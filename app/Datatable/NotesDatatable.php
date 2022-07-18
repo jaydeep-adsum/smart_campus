@@ -12,7 +12,7 @@ class NotesDatatable
         /** @var Note $query */
         $query = Note::query()->select('notes.*');
         if (Auth::user()->role==1) {
-            $query->where('institute_id', Auth::user()->institute->id);
+            $query->where('institute_id', Auth::user()->institute->id)->orWhere('institute_id', null);
         }
 
         return $query;

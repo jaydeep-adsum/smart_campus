@@ -109,3 +109,24 @@ li.user-header {
 .page-link{
     color: #1e4080;
 }
+.profile-tab{
+    background: #112142;
+    padding: 10px 20px;
+    margin: 0 15px 0 0;
+    border-radius: 5px 5px 0 0;
+}
+.profile-tab.active{
+    background: #f97b40;
+}
+.profile-tab-div a.active{
+    color: #ffffff;
+}
+.profile-tab-div a.active:hover{
+    color: #ffffff;
+}
+.profile-tab-div a{
+    color: #f97b40;
+}
+.profile-tab-div a:hover{
+    color: #f97b40;
+}

@@ -16,6 +16,8 @@ class CreateInstitutesTable extends Migration
         Schema::create('institutes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('institute');
+            $table->string('address');
+            $table->string('contact');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
         });

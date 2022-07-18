@@ -21,6 +21,7 @@
                     <p>Dashboard</p>
                 </a>
             </li>
+            @if(Auth::user()->role!=2)
             @if(Auth::user()->role==0)
                 <li class="nav-item">
                     <a href="{{route('institute')}}" class="nav-link {{ Request::is('institute*')? 'active1':''}}">
@@ -29,34 +30,36 @@
                     </a>
                 </li>
             @endif
-            <li class="nav-item has-treeview {{ Request::is('year*','semester*','department*')? 'menu-open':''}}">
-                <a href="#" class="nav-link">
+            @if(Auth::user()->role==1)
+            <li class="nav-item">
+                <a href="{{route('year.index')}}" class="nav-link {{ Request::is('year*','semester*','department*')? 'active1':''}}">
                     <i class="fa-solid fa-user-graduate nav-icon"></i>
-                    <p>Student Detail<i class="right fas fa-angle-left"></i></p>
+                    <p>Institute Profile</p>
                 </a>
-                <ul class="nav nav-treeview ml-4">
-                    <li class="nav-item">
-                        <a href="{{route('year.index')}}" class="nav-link {{ Request::is('year*')? 'active1':''}}">
-                            <i class="fa-solid fa-calendar-week nav-icon"></i>
-                            <p>Year</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('semester.index')}}"
-                           class="nav-link {{ Request::is('semester*')? 'active1':''}}">
-                            <i class="fas fa-graduation-cap nav-icon"></i>
-                            <p>Semester</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('department.index')}}"
-                           class="nav-link {{ Request::is('department*')? 'active1':''}}">
-                            <i class="fa-solid fa-list-check nav-icon"></i>
-                            <p>Department</p>
-                        </a>
-                    </li>
-                </ul>
             </li>
+            @endif
+{{--                <ul class="nav nav-treeview ml-4">--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route('year.index')}}" class="nav-link {{ Request::is('year*')? 'active1':''}}">--}}
+{{--                            <i class="fa-solid fa-calendar-week nav-icon"></i>--}}
+{{--                            <p>Year</p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route('semester.index')}}"--}}
+{{--                           class="nav-link {{ Request::is('semester*')? 'active':''}}">--}}
+{{--                            <i class="fas fa-graduation-cap nav-icon"></i>--}}
+{{--                            <p>Semester</p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route('department.index')}}"--}}
+{{--                           class="nav-link {{ Request::is('department*')? 'active1':''}}">--}}
+{{--                            <i class="fa-solid fa-list-check nav-icon"></i>--}}
+{{--                            <p>Department</p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
             <li class="nav-item">
                 <a href="{{route('student')}}" class="nav-link {{ Request::is('student*')? 'active1':''}}">
                     <i class="fa-solid fa-users nav-icon"></i>
@@ -96,6 +99,8 @@
                     </li>
                 </ul>
             </li>
+            @endif
+            @if(Auth::user()->role==2)
             <li class="nav-item">
                 <a href="{{route('category')}}" class="nav-link {{ Request::is('category*')? 'active1':''}}">
                     <i class="fa-solid fa-list nav-icon"></i>
@@ -108,6 +113,16 @@
                     <p>Cafeteria</p>
                 </a>
             </li>
+            @endif
+            @if(Auth::user()->role!=2)
+                @if(Auth::user()->role==0)
+            <li class="nav-item">
+                <a href="{{route('cafeteria_user')}}" class="nav-link {{ Request::is('cafeteriaUser')? 'active1':''}}">
+                    <i class="fa-solid fa-user nav-icon"></i>
+                    <p>Cafeteria User</p>
+                </a>
+            </li>
+                @endif
             <li class="nav-item has-treeview {{ Request::is('question*','opportunity*','interview*')? 'menu-open':''}}">
                 <a href="#" class="nav-link">
                     <i class="fa-solid fa-handshake nav-icon"></i>
@@ -155,6 +170,7 @@
                     </a>
                 </li>
             @endif
+                @endif
         </ul>
     </nav>
 </div>

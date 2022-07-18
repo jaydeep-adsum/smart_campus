@@ -6,6 +6,7 @@ use App\Datatable\CafeteriaDatatable;
 use App\Http\Requests\cafeteria\CreateCafeteriaRequest;
 use App\Http\Requests\cafeteria\UpdateCafeteriaRequest;
 use App\Models\Cafeteria;
+use App\Models\CafeteriaUser;
 use App\Models\Category;
 use App\Models\Institute;
 use App\Repositories\CafeteriaRepository;
@@ -63,8 +64,8 @@ class CafeteriaController extends AppBaseController
     public function store(CreateCafeteriaRequest $request)
     {
         $input = $request->all();
-        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
-        $input['institute_id'] = $institute_id;
+        $cafeUser = CafeteriaUser::where('user_id',Auth::id())->first();
+        $input['institute_id'] = $cafeUser->institute_id;
         $cafeteria = $this->cafeteriaRepository->create($input);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -101,8 +102,8 @@ class CafeteriaController extends AppBaseController
     public function update(UpdateCafeteriaRequest $request, $id)
     {
         $input = $request->all();
-        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
-        $input['institute_id'] = $institute_id;
+        $cafeUser = CafeteriaUser::where('user_id',Auth::id())->first();
+        $input['institute_id'] = $cafeUser->institute_id;
         $cafeteria = $this->cafeteriaRepository->update($input, $id);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {

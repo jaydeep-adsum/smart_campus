@@ -11,8 +11,12 @@ $(document).ready(function () {
             {
                 'targets': [3],
                 'orderable': false,
-                'width': '8%'
+                'width': '15%'
             },
+            {
+                "defaultContent": "-",
+                "targets": "_all"
+            }
         ],
         columns: [
             {
@@ -24,19 +28,17 @@ $(document).ready(function () {
                 name: 'institute'
             },
             {
-                data: function data(row) {
-                    return moment(row.created_at, 'YYYY-MM-DD hh:mm:ss').format('Do MMM, YYYY');
-                },
-                name: 'created_at'
+                data: 'contact',
+                name: 'contact'
             },
             {
                 data: function data(row) {
                     var url = instituteUrl + '/' + row.id;
-                    return `<a title="Edit" class="btn btn-sm edit-btn" data-id="${row.id}" href="${url}/edit">
+                    return `<div class="d-flex"><a title="Edit" class="btn btn-sm edit-btn" data-id="${row.id}" href="${url}/edit">
             <i class="fa fa-edit"></i>
-                </a>  <a title="Delete" class="btn btn-sm delete-btn" data-id="${row.id}" href="#">
+                </a>&nbsp;<a title="Delete" class="btn btn-sm delete-btn" data-id="${row.id}" href="#">
            <i class="fa-solid fa-trash"></i>
-                </a>`
+                </a></div>`
                 },
                 name: 'id',
             }]

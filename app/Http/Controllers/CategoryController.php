@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Datatable\CategoryDatatable;
 use App\Http\Requests\category\CreateCategoryRequest;
 use App\Http\Requests\category\UpdateCategoryRequest;
+use App\Models\CafeteriaUser;
 use App\Models\Category;
 use App\Models\Institute;
 use App\Repositories\CategoryRepository;
@@ -53,8 +54,9 @@ class CategoryController extends AppBaseController
     public function store(CreateCategoryRequest $request)
     {
         $input = $request->all();
-        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
-        $input['institute_id'] = $institute_id;
+        $cafeUser = CafeteriaUser::where('user_id',Auth::id())->first();
+//        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
+        $input['institute_id'] = $cafeUser->institute_id;
         $category = $this->categoryRepository->create($input);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -85,8 +87,8 @@ class CategoryController extends AppBaseController
     public function update(UpdateCategoryRequest $request,$id)
     {
         $input = $request->all();
-        $institute_id = $request->institute_id ?? Auth::user()->institute->id;
-        $input['institute_id'] = $institute_id;
+        $cafeUser = CafeteriaUser::where('user_id',Auth::id())->first();
+        $input['institute_id'] = $cafeUser->institute_id;
         $category = $this->categoryRepository->update($input, $id);
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $category->clearMediaCollection(Category::PATH);

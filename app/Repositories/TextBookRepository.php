@@ -10,7 +10,6 @@ class TextBookRepository extends BaseRepository
         'title',
         'written_by',
         'description',
-        'year_id',
         'department_id',
         'institute_id',
     ];

@@ -3,6 +3,7 @@
 namespace App\Datatable;
 
 use App\Models\Cafeteria;
+use App\Models\CafeteriaUser;
 use Auth;
 
 class CafeteriaDatatable
@@ -11,8 +12,9 @@ class CafeteriaDatatable
     {
         /** @var Cafeteria $query */
         $query = Cafeteria::query()->select('cafeterias.*');
-        if (Auth::user()->role==1) {
-            $query->where('institute_id', Auth::user()->institute->id);
+        if (Auth::user()->role==2) {
+            $cafeUser = CafeteriaUser::where('user_id',Auth::id())->first();
+            $query->where('institute_id', $cafeUser->institute_id);
         }
 
         return $query;

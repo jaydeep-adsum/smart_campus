@@ -18,7 +18,7 @@ class CreateTextBooksTable extends Migration
             $table->string('title');
             $table->string('written_by');
             $table->text('description');
-            $table->unsignedInteger('year_id');
+//            $table->unsignedInteger('year_id');
             $table->unsignedInteger('department_id');
             $table->unsignedInteger('institute_id')->nullable();
             $table->timestamps();
@@ -26,9 +26,9 @@ class CreateTextBooksTable extends Migration
             $table->foreign('department_id')->references('id')->on('departments')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreign('year_id')->references('id')->on('years')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+//            $table->foreign('year_id')->references('id')->on('years')
+//                ->onUpdate('cascade')
+//                ->onDelete('cascade');
 
             $table->foreign('institute_id')->references('id')->on('institutes')
                 ->onUpdate('cascade')

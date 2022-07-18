@@ -21,7 +21,7 @@
                     {{ Form::open(['route' => 'institute.store', 'files' => 'true', 'id' => 'addCompanyForm']) }}
                     <div class="row">
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('User Name').':') }} <span class="mandatory">*</span>
+                            {{ Form::label(__('Point Of Contact').':') }} <span class="mandatory">*</span>
                             {{ Form::text('name', null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
@@ -35,6 +35,14 @@
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Password').':') }} <span class="mandatory">*</span>
                             {{ Form::text('password', null, ['class' => 'form-control','required']) }}
+                        </div>
+                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                            {{ Form::label(__('Contact').':') }} <span class="mandatory">*</span>
+                            {{ Form::number('contact', null, ['class' => 'form-control','required']) }}
+                        </div>
+                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                            {{ Form::label(__('Address').':') }} <span class="mandatory">*</span>
+                            {{ Form::text('address', null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Image').':') }}

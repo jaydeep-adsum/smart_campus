@@ -8,7 +8,6 @@
 {{--        <th scope="col">{{ __('Detail') }}</th>--}}
         {{--        <th scope="col">{{ //__('Registration Link') }}</th>--}}
         <th scope="col">{{ __('Created By') }}</th>
-        <th scope="col">{{ __('Created At') }}</th>
         <th scope="col">{{ __('Action') }}</th>
     </tr>
     </thead>

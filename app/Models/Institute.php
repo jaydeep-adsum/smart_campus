@@ -17,7 +17,7 @@ class Institute extends Model implements HasMedia
     public $table = 'institutes';
 
     public $fillable = [
-        'institute','user_id',
+        'institute','user_id','address','contact',
     ];
 
     protected $appends = ['image_url'];

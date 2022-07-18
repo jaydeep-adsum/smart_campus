@@ -25,13 +25,13 @@
                             {{ Form::text('title', null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Written By').':') }} <span class="mandatory">*</span>
+                            {{ Form::label(__('Author').':') }} <span class="mandatory">*</span>
                             {{ Form::text('written_by', null, ['class' => 'form-control','required']) }}
                         </div>
-                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                            {{ Form::label(__('Year').':') }} <span class="mandatory">*</span>
-                            {{ Form::select('year_id', $year,null, ['class' => 'form-control','required','id'=>'year']) }}
-                        </div>
+{{--                        <div class="form-group col-xl-6 col-md-6 col-sm-12">--}}
+{{--                            {{ Form::label(__('Year').':') }} <span class="mandatory">*</span>--}}
+{{--                            {{ Form::select('year_id', $year,null, ['class' => 'form-control','required','id'=>'year']) }}--}}
+{{--                        </div>--}}
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Department').':') }} <span class="mandatory">*</span>
                                 {{ Form::select('department_id', $department,null, ['class' => 'form-control','required','id'=>'department']) }}

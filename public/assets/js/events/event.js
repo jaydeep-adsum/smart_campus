@@ -19,7 +19,7 @@ $(document).ready(function () {
       'targets': [0],
       'orderable': false
     }, {
-      'targets': [6],
+      'targets': [5],
       'orderable': false,
       'className': 'text-center',
       'width': '9%'
@@ -55,13 +55,8 @@ $(document).ready(function () {
       name: 'created_by'
     }, {
       data: function data(row) {
-        return moment(row.created_at, 'YYYY-MM-DD hh:mm:ss').format('Do MMM, YYYY');
-      },
-      name: 'created_at'
-    }, {
-      data: function data(row) {
         var url = eventUrl + '/' + row.id;
-        return "<a title=\"Edit\" class=\"btn btn-sm edit-btn\" data-id=\"".concat(row.id, "\" href=\"").concat(url, "/edit\">\n            <i class=\"fa fa-edit\"></i>\n                </a>  <a title=\"Delete\" class=\"btn btn-sm delete-btn\" data-id=\"").concat(row.id, "\" href=\"#\">\n           <i class=\"fa-solid fa-trash\"></i>\n                </a>");
+        return "<div class=\"d-flex\"><a title=\"Edit\" class=\"btn btn-sm edit-btn\" data-id=\"".concat(row.id, "\" href=\"").concat(url, "/edit\">\n            <i class=\"fa fa-edit\"></i>\n                </a>&nbsp;<a title=\"Delete\" class=\"btn btn-sm delete-btn\" data-id=\"").concat(row.id, "\" href=\"#\">\n           <i class=\"fa-solid fa-trash\"></i>\n                </a></div>");
       },
       name: 'id'
     }]

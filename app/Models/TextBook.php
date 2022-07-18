@@ -23,7 +23,6 @@ class TextBook extends Model implements HasMedia
         'title' => 'required',
         'written_by' => 'required',
         'description' => 'required',
-        'year_id' => 'required',
         'department_id' => 'required',
     ];
 
@@ -40,7 +39,7 @@ class TextBook extends Model implements HasMedia
     /**
      * @var string[]
      */
-    protected $with = ['department','year'];
+    protected $with = ['department'];
 
     /**
      * @var string[]
@@ -49,7 +48,6 @@ class TextBook extends Model implements HasMedia
         'title',
         'written_by',
         'description',
-        'year_id',
         'department_id',
         'institute_id',
     ];
@@ -60,14 +58,6 @@ class TextBook extends Model implements HasMedia
     public function department()
     {
         return $this->belongsTo(Department::class, 'department_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function year()
-    {
-        return $this->belongsTo(Year::class, 'year_id');
     }
 
     /**

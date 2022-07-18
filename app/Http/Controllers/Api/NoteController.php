@@ -67,6 +67,7 @@ class NoteController extends AppBaseController
     {
         try {
             $search['institute_id'] = Auth::user()->institute_id;
+            $search['institute_id'] = null;
             $notes = $this->noteRepository->all($search);
 
             return $this->sendResponse($notes, ('Notes fetch successfully.'));

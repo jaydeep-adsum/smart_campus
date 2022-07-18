@@ -7,6 +7,7 @@
     {{--    <div class="col-md-12">--}}
     <div class="container">
         <div class="row">
+            @if(Auth::user()->role!=2)
             <div class="col-md-3">
                 <div class="card bg-success">
                     <a href="{{route('student')}}">
@@ -62,6 +63,8 @@
                     </a>
                 </div>
             </div>
+            @endif
+                @if(Auth::user()->role==2)
             <div class="col-md-3">
                 <div class="card bg-dark">
                     <a href="{{route('cafeteria')}}">
@@ -73,6 +76,8 @@
                     </a>
                 </div>
             </div>
+                @endif
+                @if(Auth::user()->role!=2)
             <div class="col-md-3">
                 <div class="card bg-success">
                     <a href="{{route('news')}}">
@@ -95,6 +100,7 @@
                     </a>
                 </div>
             </div>
+                    @endif
         </div>
     </div>
     {{--                </div>--}}
