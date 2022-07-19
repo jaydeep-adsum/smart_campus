@@ -52,55 +52,56 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card bg-info">
-                    <a href="{{route('department.index')}}">
-                        <div class="card-body py-4 px-4">
-                            <span style="font-size: 40px;"> <i class="fa-solid fa-list-check"></i></span>
-                            <h2 class="fw">{{$data['departmentCount']?$data['departmentCount']:0}}</h2>
-                            <p>Department</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
+                {{--            <div class="col-md-3">--}}
+                {{--                <div class="card bg-info">--}}
+                {{--                    <a href="{{route('department.index')}}">--}}
+                {{--                        <div class="card-body py-4 px-4">--}}
+                {{--                            <span style="font-size: 40px;"> <i class="fa-solid fa-list-check"></i></span>--}}
+                {{--                            <h2 class="fw">{{$data['departmentCount']?$data['departmentCount']:0}}</h2>--}}
+                {{--                            <p>Department</p>--}}
+                {{--                        </div>--}}
+                {{--                    </a>--}}
+                {{--                </div>--}}
+                {{--            </div>--}}
             @endif
-                @if(Auth::user()->role==2)
-            <div class="col-md-3">
-                <div class="card bg-dark">
-                    <a href="{{route('cafeteria')}}">
-                        <div class="card-body py-4 px-4">
-                            <span style="font-size: 40px;"><i class="fa-solid fa-hotel"></i></span>
-                            <h2 class="fw">{{$data['cafeteriaCount']?$data['cafeteriaCount']:0}}</h2>
-                            <p>Cafeteria</p>
-                        </div>
-                    </a>
+            @if(Auth::user()->role!=2)
+                <div class="col-md-3">
+                    <div class="card bg-dark">
+                        <a href="{{route('news')}}">
+                            <div class="card-body py-4 px-4">
+                                <span style="font-size: 40px;"><i class="fa-solid fa-newspaper"></i></span>
+                                <h2 class="fw">{{$data['newsCount']?$data['newsCount']:0}}</h2>
+                                <p>News</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
-                @endif
-                @if(Auth::user()->role!=2)
-            <div class="col-md-3">
-                <div class="card bg-success">
-                    <a href="{{route('news')}}">
-                        <div class="card-body py-4 px-4">
-                            <span style="font-size: 40px;"><i class="fa-solid fa-newspaper"></i></span>
-                            <h2 class="fw">{{$data['newsCount']?$data['newsCount']:0}}</h2>
-                            <p>News</p>
-                        </div>
-                    </a>
+                <div class="col-md-3">
+                    <div class="card bg-info">
+                        <a href="{{route('fellowship')}}">
+                            <div class="card-body py-4 px-4">
+                                <span style="font-size: 40px;"><i
+                                        class="fa-solid fa-people-arrows-left-right"></i></span>
+                                <h2 class="fw">{{$data['fellowshipCount']?$data['fellowshipCount']:0}}</h2>
+                                <p>Fellowship</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card bg-warning">
-                    <a href="{{route('fellowship')}}">
-                        <div class="card-body py-4 px-4">
-                            <span style="font-size: 40px;"><i class="fa-solid fa-people-arrows-left-right"></i></span>
-                            <h2 class="fw">{{$data['fellowshipCount']?$data['fellowshipCount']:0}}</h2>
-                            <p>Fellowship</p>
-                        </div>
-                    </a>
+            @endif
+            @if(Auth::user()->role==2)
+                <div class="col-md-3">
+                    <div class="card bg-success">
+                        <a href="{{route('cafeteria')}}">
+                            <div class="card-body py-4 px-4">
+                                <span style="font-size: 40px;"><i class="fa-solid fa-hotel"></i></span>
+                                <h2 class="fw">{{$data['cafeteriaCount']?$data['cafeteriaCount']:0}}</h2>
+                                <p>Cafeteria</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
-                    @endif
+            @endif
         </div>
     </div>
     {{--                </div>--}}
