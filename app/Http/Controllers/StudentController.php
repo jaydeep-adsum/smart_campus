@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Datatable\StudentDatatable;
+use App\Exports\StudentExport;
 use App\Http\Requests\StudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Imports\StudentsImport;
@@ -27,6 +28,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class StudentController extends AppBaseController
 {
@@ -165,9 +167,20 @@ class StudentController extends AppBaseController
         return $this->sendSuccess('Student deleted successfully.');
     }
 
+    /**
+     * @return RedirectResponse
+     */
     public function import()
     {
         Excel::import(new StudentsImport(), request()->file('file'));
         return back();
+    }
+
+    /**
+     * @return BinaryFileResponse
+     */
+    public function export()
+    {
+        return Excel::download(new StudentExport(), 'student.xlsx');
     }
 }

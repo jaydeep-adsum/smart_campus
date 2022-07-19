@@ -4,6 +4,8 @@
 @endsection
 @section('header')
     <div class="d-flex px-4 px-sm-0 pt-2 pt-sm-0">
+        <a href="{{route('student.export')}}" class="btn btn-primary mr-2"><i class="fa-solid fa-file-excel"></i> Export
+            Student</a>
         <a href="{{asset('public/sample.xlsx')}}" class="btn btn-primary mr-2">Sample Excel File</a>
         {{ Form::open(['route' => 'import', 'files' => 'true', 'enctype' => 'multipart/form-data']) }}
         <label class='file-label btn btn-primary mb-0 mr-2'><i

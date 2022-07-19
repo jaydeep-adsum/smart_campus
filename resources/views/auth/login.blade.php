@@ -76,7 +76,6 @@
             border-radius: 20px;
             box-shadow: 0px 0px 20px #1e408085;
             margin: 5em auto;
-            display: flex;
         }
         .company__info {
             background-color: whitesmoke;
@@ -198,7 +197,7 @@
             <div class="main-content login_form">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="pt-4">Sign in to your account</h2>
+                        <h2 class="pt-4">Sign In</h2>
                     </div>
                     <div class="col-12">
                         <form class="form-group" method="POST" action="{{ route('login') }}">

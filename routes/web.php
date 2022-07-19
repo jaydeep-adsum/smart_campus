@@ -66,6 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('student/update/{id}', [StudentController::class, 'update'])->name('student.update');
     Route::delete('student/{student}', [StudentController::class, 'destroy'])->name('student.destroy');
     Route::post('import', [StudentController::class, 'import'])->name('import');
+    Route::get('student/export', [StudentController::class, 'export'])->name('student.export');
 
     Route::get('events', [EventController::class, 'index'])->name('events');
     Route::get('events/create', [EventController::class, 'create'])->name('events.create');
