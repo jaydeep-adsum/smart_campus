@@ -195,7 +195,7 @@ class QuestionController extends AppBaseController
     public function getCategoryQuestion(Request $request)
     {
         try {
-            $question = Question::where('category',$request->category)->get();
+            $question = Question::where('category',$request->category)->where('institute_id',Auth::user()->institute_id)->get();
 
             if (!$question) {
                 return $this->sendError('Something went wrong');
