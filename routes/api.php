@@ -60,6 +60,7 @@ Route::namespace('Api')->group(
 
             Route::get('questions', [QuestionController::class, 'index']);
             Route::post('getQuestion', [QuestionController::class, 'getQuestion']);
+            Route::post('getCategoryQuestion', [QuestionController::class, 'getCategoryQuestion']);
 
             Route::get('opportunity', [OpportunityController::class, 'index']);
             Route::post('getOpportunity', [OpportunityController::class, 'getOpportunity']);

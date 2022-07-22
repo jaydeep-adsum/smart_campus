@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Controllers\Controller;
+use App\Models\Note;
 use App\Repositories\NoteRepository;
 use Auth;
 use Exception;
@@ -66,9 +67,7 @@ class NoteController extends AppBaseController
     public function index(Request $request)
     {
         try {
-            $search['institute_id'] = Auth::user()->institute_id;
-            $search['institute_id'] = null;
-            $notes = $this->noteRepository->all($search);
+            $notes = Note::where('institute_id',Auth::user()->institute_id)->orWhere('institute_id',null)->get();
 
             return $this->sendResponse($notes, ('Notes fetch successfully.'));
         } catch (Exception $ex) {

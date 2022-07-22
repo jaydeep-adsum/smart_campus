@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Controllers\Controller;
+use App\Models\Question;
 use App\Repositories\QuestionRepository;
 use Auth;
 use Exception;
@@ -129,6 +130,73 @@ class QuestionController extends AppBaseController
     {
         try {
             $question = $this->questionRepository->find($request->question_id);
+            if (!$question) {
+                return $this->sendError('Something went wrong');
+            }
+
+            return $this->sendResponse($question, ('Question fetch successfully'));
+        } catch (Exception $ex) {
+            return $this->sendError($ex);
+        }
+    }
+
+    /**
+     * Swagger defination got category Question
+     *
+     * @OA\Post(
+     *     tags={"Questions"},
+     *     path="/getCategoryQuestion",
+     *     description="Get Category Question",
+     *     summary="Get category Question",
+     *     operationId="getCategoryQuestion",
+     * @OA\Parameter(
+     *     name="Content-Language",
+     *     in="header",
+     *     description="Content-Language",
+     *     required=false,@OA\Schema(type="string")
+     *     ),
+     * @OA\RequestBody(
+     *     required=true,
+     * @OA\MediaType(
+     *     mediaType="multipart/form-data",
+     * @OA\JsonContent(
+     * @OA\Property(
+     *     property="category",
+     *     type="string"
+     *     ),
+     *    )
+     *   ),
+     *  ),
+     * @OA\Response(
+     *     response=200,
+     *     description="User response",@OA\JsonContent
+     *     (ref="#/components/schemas/SuccessResponse")
+     * ),
+     * @OA\Response(
+     *     response="400",
+     *     description="Validation error",@OA\JsonContent
+     *     (ref="#/components/schemas/ErrorResponse")
+     * ),
+     * @OA\Response(
+     *     response="403",
+     *     description="Not Authorized Invalid or missing Authorization header",@OA\
+     *     JsonContent(ref="#/components/schemas/ErrorResponse")
+     * ),
+     * @OA\Response(
+     *     response=500,
+     *     description="Unexpected error",@OA\JsonContent
+     *     (ref="#/components/schemas/ErrorResponse")
+     * ),
+     * security={
+     *     {"API-Key": {}}
+     * }
+     * )
+     */
+    public function getCategoryQuestion(Request $request)
+    {
+        try {
+            $question = Question::where('category',$request->category)->get();
+
             if (!$question) {
                 return $this->sendError('Something went wrong');
             }
