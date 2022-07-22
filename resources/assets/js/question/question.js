@@ -163,6 +163,7 @@ $(document).ready(function () {
 
     $('#addQuestionModal').on('hidden.bs.modal', function () {
         CKEDITOR.instances['response'].setData('');
+        $("#department_id").val("Motivational").trigger("change");
         $('#addQuestionForm')[0].reset();
     });
 
