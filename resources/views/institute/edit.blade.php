@@ -20,6 +20,7 @@
                 <div class="card-body">
                     {{ Form::model($institute, ['route' => ['institute.update',$institute->id], 'files' => 'true']) }}
                     <div class="row">
+                        {{ Form::hidden('user_id',$institute->user?$institute->user->id:null) }}
                         <div class="form-group col-xl-6 col-md-6 col-sm-12">
                             {{ Form::label(__('Point Of Contact').':') }} <span class="mandatory">*</span>
                             {{ Form::text('name',$institute->user?$institute->user->name:null, ['class' => 'form-control','required']) }}

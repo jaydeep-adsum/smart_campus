@@ -15,6 +15,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Validator;
 
 class UserController extends AppBaseController
 {
@@ -43,13 +44,20 @@ class UserController extends AppBaseController
      * @param Request $request
      * @return JsonResponse
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $input = $request->all();
+        $validator = Validator::make($input, [
+            'email' => 'required|email|unique:users',
+        ]);
+        if ($validator->fails()) {
+            return $this->sendError('The email has already been taken.');
+        }
         $user = User::create([
-            'name'=>$input['name'],
-            'email'=>$input['email'],
-            'password'=>Hash::make($input['password']),
-            'role'=>'2',
+            'name' => $input['name'],
+            'email' => $input['email'],
+            'password' => Hash::make($input['password']),
+            'role' => '2',
         ]);
         $institute_id = $request->institute_id ?? Auth::user()->institute->id;
         $cafe['institute_id'] = $institute_id;
@@ -78,6 +86,11 @@ class UserController extends AppBaseController
     {
         $input = $request->all();
         $user = User::find($request->user_id);
+        $checkUser = User::where('email', $request->email)->first();
+
+        if ($user->id != $checkUser->id) {
+            return $this->sendError('The email has already been taken.');
+        }
         $user->name = $input['name'];
         $user->email = $input['email'];
         $user->save();
